@@ -1,0 +1,13 @@
+syntax = "proto3";
+package kynno.nameservice;
+
+option go_package = "github.com/ahmedoubadi/core/x/nameservice/types";
+
+message Whois {
+  string index = 1; 
+  string name = 2; 
+  string value = 3; 
+  string owner = 4; 
+  
+}
+

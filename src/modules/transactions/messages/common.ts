@@ -1,0 +1,50 @@
+import { protoTxNamespace } from '../proto'
+export type TypedDataTypes = { [key: string]: TypedDataArgument[] }
+
+export interface TypedDataArgument {
+  name: string
+  type: string
+}
+
+export interface EIPToSign {
+  types: TypedDataTypes
+  primaryType: string
+  domain: {
+    name: string
+    version: string
+    chainId: number
+    verifyingContract: string
+    salt: string
+  }
+  message: object
+}
+export interface Fee {
+  amount: string
+  denom: string
+  gas: string
+}
+
+export interface Sender {
+  accountAddress: string
+  sequence: number
+  accountNumber: number
+  pubkey: string
+}
+
+export interface Chain {
+  chainId: number
+  cosmosChainId: string
+}
+export interface TxGenerated {
+  signDirect: {
+    body: protoTxNamespace.txn.TxBody
+    authInfo: protoTxNamespace.txn.AuthInfo
+    signBytes: string
+  }
+  legacyAmino: {
+    body: protoTxNamespace.txn.TxBody
+    authInfo: protoTxNamespace.txn.AuthInfo
+    signBytes: string
+  }
+  eipToSign: EIPToSign
+}

@@ -1,0 +1,1 @@
+docker build -t kynno/kynno-sdk-test .
