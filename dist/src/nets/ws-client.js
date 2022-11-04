@@ -33,7 +33,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 /**
  * kynno Websocket Client
- * @since v0.17
+ * @since v0.1
  */
 var WsClient = /*#__PURE__*/function () {
   /** @hidden */
@@ -51,7 +51,7 @@ var WsClient = /*#__PURE__*/function () {
   }
   /**
    * Initialize ws client
-   * @since v0.17
+   * @since v0.1
    */
 
 
@@ -60,7 +60,7 @@ var WsClient = /*#__PURE__*/function () {
     value: function connect() {
       var _this = this;
 
-      this.ws = new _isomorphicWs["default"](this.url + '/websocket');
+      this.ws = new _isomorphicWs["default"](this.url);
 
       if (!this.ws) {
         throw new _errors.SdkError('Websocket client not initialized', _errors.CODES.Internal); // Should not happen
@@ -82,7 +82,8 @@ var WsClient = /*#__PURE__*/function () {
         var data = JSON.parse(resp.data.toString());
 
         if (!data.id) {
-          _this.eventEmitter.emit('error', 'Unexpected response: ' + JSON.stringify(data));
+          _this.eventEmitter.emit('error', 'Unexpected response: ' //+ JSON.stringify(data)
+          );
         } // Route the data to the specified subscriber based on the request ID
 
 
@@ -97,7 +98,7 @@ var WsClient = /*#__PURE__*/function () {
     }
     /**
      * Disconnect from server
-     * @since v0.17
+     * @since v0.1
      */
 
   }, {
@@ -153,7 +154,7 @@ var WsClient = /*#__PURE__*/function () {
     }()
     /**
      * Check if the ws client is connected or not
-     * @since v0.17
+     * @since v0.1
      */
 
   }, {
@@ -168,7 +169,7 @@ var WsClient = /*#__PURE__*/function () {
      * @param method The tendermint rpc method
      * @param id The request id which is the same as the incoming response
      * @param query The tendermint query string
-     * @since v0.17
+     * @since v0.1
      */
 
   }, {

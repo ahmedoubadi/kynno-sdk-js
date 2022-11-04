@@ -6,7 +6,7 @@ import { SdkError, CODES } from '../errors';
  * ProtobufModel module allows you to deserialize protobuf serialize string
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 export class Protobuf {
   /** @hidden */

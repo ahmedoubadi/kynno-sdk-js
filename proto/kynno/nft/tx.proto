@@ -3,7 +3,7 @@ package kynno.nft;
 
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/ahmedoubadi/core/x/nft/types";
+option go_package = "github.com/kynnoenterprise/core/x/nft/types";
 option (gogoproto.goproto_getters_all) = false;
 
 // Msg defines the nft Msg service.

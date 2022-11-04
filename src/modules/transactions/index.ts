@@ -16,12 +16,12 @@ import * as is from 'is_js';
 import { SdkError, CODES } from '../../errors';
 import { generatePostBodyBroadcast, TxToSend } from '../../nets/broadcast';
 import { generateEndpointBroadcast } from '../../nets/endpoint';
-import { MsgIssueNameParams,createTxMsgIssueName } from './messages/nameservice';
+import { MessageTypes, recoverTypedSignature, signTypedData, SignTypedDataVersion, TypedDataV1, TypedMessage } from '../../helper/sign-typed-data';
 /**
  * This module implements Transaction related functions
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 export class Transaction {
     /** @hidden */
@@ -55,7 +55,7 @@ export class Transaction {
      * @param authInfo AuthInfo
      * @param extension MessageGenerated
      * @returns
-     * @since v0.17
+     * @since v0.1
      */
     _createTxRawEIP712(
         body: protoTxNamespace.txn.TxBody,
@@ -133,16 +133,6 @@ export class Transaction {
         return createTxMsgEditeNft(chain,sender,fee,memo,params)
     }
 
-    //issue new kynno id
-    _createTxMsgIssueName(
-        chain: Chain,
-        sender: Sender,
-        fee: Fee,
-        memo: string,
-        params: MsgIssueNameParams,
-    ){
-        return createTxMsgIssueName(chain,sender,fee,memo,params)
-    }
 
     // stacking txs
     _createTxMsgDelegate(
@@ -234,6 +224,7 @@ export class Transaction {
           .post<any>(this.client.config.api+endpoint,data,this.config)
           .then(response => {
             const res = response.data;
+            
             // Internal error
             if (res.error) {
               throw new SdkError(res.error.message, res.error.code, `api_broadcastTx`);
@@ -241,5 +232,35 @@ export class Transaction {
     
             return res;
           });
+    }
+    _signTypedData<V extends SignTypedDataVersion,T extends MessageTypes,>({
+        privateKey,
+        data,
+        version,
+    }: {
+        privateKey: Buffer;
+        data: V extends 'V1' ? TypedDataV1 : TypedMessage<T>;
+        version: V;
+    }): string {
+        return signTypedData({
+            privateKey,
+            data,
+            version,
+        })
+    }
+    _recoverTypedSignature<V extends SignTypedDataVersion,T extends MessageTypes,>({
+        data,
+        signature,
+        version,
+    }: {
+        data: V extends 'V1' ? TypedDataV1 : TypedMessage<T>;
+        signature: string;
+        version: V;
+    }): string {
+        return recoverTypedSignature({
+            data,
+            signature,
+            version,
+        })
     }
 }

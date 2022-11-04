@@ -14,7 +14,7 @@ import { SdkError, CODES } from '../errors';
  * [More Details](https://www.kynno.io/docs/features/distribution.html)
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 export class Distribution {
   /** @hidden */
@@ -25,103 +25,6 @@ export class Distribution {
     this.client = client;
   }
 
-  /**
-   * Set another address to receive the rewards instead of using the delegator address
-   * @param withdrawAddress Bech32 account address
-   * @param baseTx
-   * @returns
-   * @since v0.17
-   */
-  async setWithdrawAddr(
-    withdrawAddress: string,
-    baseTx: types.BaseTx
-  ): Promise<types.TxResult> {
-    const from = this.client.keys.show(baseTx.from);
-    const msgs: any[] = [
-      {
-        type: types.TxType.MsgSetWithdrawAddress,
-        value: {
-          delegator_address: from,
-          withdraw_address: withdrawAddress,
-        }
-      }
-    ];
-
-    return this.client.tx.buildAndSend(msgs, baseTx);
-  }
-
-  /**
-   * Withdraw rewards to the withdraw-address(default to the delegator address, you can set to another address via [[setWithdrawAddr]])
-   * @param baseTx { types.BaseTx }
-   * @param validatorAddr withdraw from this validator address
-   * @returns { Promise<types.TxResult> }
-   * @since v0.17
-   */
-  async withdrawRewards(
-    validatorAddr: string,
-    baseTx: types.BaseTx,
-  ): Promise<types.TxResult> {
-    const delegatorAddr = this.client.keys.show(baseTx.from);
-    const msgs: any[] = [
-      {
-        type: types.TxType.MsgWithdrawDelegatorReward,
-        value: {
-          delegator_address:delegatorAddr,
-          validator_address:validatorAddr,
-        }
-      }
-    ];
-    return this.client.tx.buildAndSend(msgs, baseTx);
-  }
-
-  /**
-   * withdraws the full commission to the validator
-   * @param validatorAddr withdraw from this validator address
-   * @param baseTx { types.BaseTx }
-   * @returns { Promise<types.TxResult> }
-   * @since v0.17
-   */
-  async withdrawValidatorCommission(
-    validator_address: string,
-    baseTx: types.BaseTx,
-  ): Promise<types.TxResult> {
-    if (!Crypto.checkAddress(validator_address, this.client.config.bech32Prefix.ValAddr)) {
-      throw new SdkError('Invalid bech32 address');
-    }
-    const msgs: any[] = [
-      {
-        type: types.TxType.MsgWithdrawValidatorCommission,
-        value: {
-          validator_address:validator_address,
-        }
-      }
-    ];
-    return this.client.tx.buildAndSend(msgs, baseTx);
-  }
-
-  /**
-   * fundCommunityPool allows an account to directly fund the community pool
-   * @param amount Coins to be fund
-   * @param baseTx { types.BaseTx }
-   * @returns { Promise<types.TxResult> }
-   * @since v0.17
-   */
-  async fundCommunityPool(
-    amount: types.Coin[],
-    baseTx: types.BaseTx,
-  ): Promise<types.TxResult> {
-    const depositor = this.client.keys.show(baseTx.from);
-    const msgs: any[] = [
-      {
-        type: types.TxType.MsgFundCommunityPool,
-        value: {
-          depositor:depositor,
-          amount:amount
-        }
-      }
-    ];
-    return this.client.tx.buildAndSend(msgs, baseTx);
-  }
 
   /**
    * Params queries params of the distribution module.

@@ -9,6 +9,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ibc = void 0;
 
+var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
@@ -28,6 +32,8 @@ var dependency_2 = _interopRequireWildcard(require("./../../../../cosmos/base/qu
 var dependency_3 = _interopRequireWildcard(require("./transfer"));
 
 var pb_1 = _interopRequireWildcard(require("google-protobuf"));
+
+var grpc_1 = _interopRequireWildcard(require("@grpc/grpc-js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -879,6 +885,112 @@ exports.ibc = ibc;
         }(pb_1.Message);
 
         _v.QueryDenomHashResponse = QueryDenomHashResponse;
+
+        var UnimplementedQueryService = function UnimplementedQueryService() {
+          (0, _classCallCheck2["default"])(this, UnimplementedQueryService);
+        };
+
+        (0, _defineProperty2["default"])(UnimplementedQueryService, "definition", {
+          DenomTrace: {
+            path: "/ibc.applications.transfer.v1.Query/DenomTrace",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return QueryDenomTraceRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return QueryDenomTraceResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          DenomTraces: {
+            path: "/ibc.applications.transfer.v1.Query/DenomTraces",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return QueryDenomTracesRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return QueryDenomTracesResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          Params: {
+            path: "/ibc.applications.transfer.v1.Query/Params",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return QueryParamsRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return QueryParamsResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          DenomHash: {
+            path: "/ibc.applications.transfer.v1.Query/DenomHash",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return QueryDenomHashRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return QueryDenomHashResponse.deserialize(new Uint8Array(bytes));
+            }
+          }
+        });
+        _v.UnimplementedQueryService = UnimplementedQueryService;
+
+        var QueryClient = /*#__PURE__*/function (_grpc_1$makeGenericCl) {
+          (0, _inherits2["default"])(QueryClient, _grpc_1$makeGenericCl);
+
+          var _super9 = _createSuper(QueryClient);
+
+          function QueryClient(address, credentials, _options) {
+            var _thisSuper, _thisSuper2, _thisSuper3, _thisSuper4, _this13;
+
+            (0, _classCallCheck2["default"])(this, QueryClient);
+            _this13 = _super9.call(this, address, credentials, _options);
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this13), "DenomTrace", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper = (0, _assertThisInitialized2["default"])(_this13), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "DenomTrace", _thisSuper).call(_thisSuper, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this13), "DenomTraces", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper2 = (0, _assertThisInitialized2["default"])(_this13), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "DenomTraces", _thisSuper2).call(_thisSuper2, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this13), "Params", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper3 = (0, _assertThisInitialized2["default"])(_this13), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "Params", _thisSuper3).call(_thisSuper3, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this13), "DenomHash", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper4 = (0, _assertThisInitialized2["default"])(_this13), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "DenomHash", _thisSuper4).call(_thisSuper4, message, metadata, options, callback);
+            });
+            return _this13;
+          }
+
+          return QueryClient;
+        }(grpc_1.makeGenericClientConstructor(UnimplementedQueryService.definition, "Query", {}));
+
+        _v.QueryClient = QueryClient;
       })(v1 || (v1 = _transfer.v1 || (_transfer.v1 = {})));
     })(transfer || (transfer = _applications.transfer || (_applications.transfer = {})));
   })(applications || (applications = _ibc.applications || (_ibc.applications = {})));

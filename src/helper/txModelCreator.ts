@@ -6,6 +6,7 @@ import { SdkError, CODES } from '../errors';
 export class TxModelCreator {
     static createBodyModel(msgs:types.Msg[], memo:string, timeoutHeight:number):any{
         let body = new types.tx_tx_pb.TxBody();
+        
         msgs.forEach((msg)=>{
             body.addMessages(msg.pack());
         });

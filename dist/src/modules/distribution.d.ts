@@ -1,5 +1,4 @@
 import { Client } from '../client';
-import * as types from '../types';
 /**
  * This module is in charge of distributing collected transaction fee and inflated token to all validators and delegators.
  * To reduce computation stress, a lazy distribution strategy is brought in. lazy means that the benefit won't be paid directly to contributors automatically.
@@ -8,45 +7,13 @@ import * as types from '../types';
  * [More Details](https://www.kynno.io/docs/features/distribution.html)
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 export declare class Distribution {
     /** @hidden */
     private client;
     /** @hidden */
     constructor(client: Client);
-    /**
-     * Set another address to receive the rewards instead of using the delegator address
-     * @param withdrawAddress Bech32 account address
-     * @param baseTx
-     * @returns
-     * @since v0.17
-     */
-    setWithdrawAddr(withdrawAddress: string, baseTx: types.BaseTx): Promise<types.TxResult>;
-    /**
-     * Withdraw rewards to the withdraw-address(default to the delegator address, you can set to another address via [[setWithdrawAddr]])
-     * @param baseTx { types.BaseTx }
-     * @param validatorAddr withdraw from this validator address
-     * @returns { Promise<types.TxResult> }
-     * @since v0.17
-     */
-    withdrawRewards(validatorAddr: string, baseTx: types.BaseTx): Promise<types.TxResult>;
-    /**
-     * withdraws the full commission to the validator
-     * @param validatorAddr withdraw from this validator address
-     * @param baseTx { types.BaseTx }
-     * @returns { Promise<types.TxResult> }
-     * @since v0.17
-     */
-    withdrawValidatorCommission(validator_address: string, baseTx: types.BaseTx): Promise<types.TxResult>;
-    /**
-     * fundCommunityPool allows an account to directly fund the community pool
-     * @param amount Coins to be fund
-     * @param baseTx { types.BaseTx }
-     * @returns { Promise<types.TxResult> }
-     * @since v0.17
-     */
-    fundCommunityPool(amount: types.Coin[], baseTx: types.BaseTx): Promise<types.TxResult>;
     /**
      * Params queries params of the distribution module.
      */

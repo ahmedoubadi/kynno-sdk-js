@@ -31,23 +31,16 @@ export class BaseTest {
 
   static getClient(): Client {
     let config = {
-        api :'http://127.0.0.1:1317',
-        node: 'http://127.0.0.1:26657',
+        api :'https://api.kynno.dev',
+        node: 'https://tendermint.kynno.dev',
         chainNetwork: kynno.types.ChainNetwork.Kynno,
         chainId: 'kynno_9700-1',
-        gas: '20000000',
-        fee: { denom: 'akynno', amount: '200' },
+        gas: '2000000',
+        fee: { denom: 'akynno', amount: '20000' },
+        wsUrl:"wss://testnet.kynno.dev/ws",
+        rpcUrl:"https://testnet.kynno.dev"
     };
     let privateKey = 'AFEE388E14C70319E397566866FF68D8E5D43D93942B7FEAAD4CE9B377036193'
-
-    // let config = {
-    //     node: 'http://34.80.22.255:26657',
-    //     network: kynno.types.Network.Mainnet,
-    //     chainId: 'bifrost-1',
-    //     gas: '200000',
-    //     fee: { denom: 'ubif', amount: '5000' },
-    // };
-    // let privateKey = '80A69946ADD77EF0C17F43E72E759164F6F0A2A7E9D5D3E0966A3BCA8DE3D177'
 
     const client = kynno
       .newClient(config)

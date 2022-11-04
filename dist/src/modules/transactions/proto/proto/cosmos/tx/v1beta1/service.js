@@ -9,6 +9,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.cosmos = void 0;
 
+var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
@@ -34,6 +38,8 @@ var dependency_6 = _interopRequireWildcard(require("./../../../tendermint/types/
 var dependency_7 = _interopRequireWildcard(require("./../../../tendermint/types/types"));
 
 var pb_1 = _interopRequireWildcard(require("google-protobuf"));
+
+var grpc_1 = _interopRequireWildcard(require("@grpc/grpc-js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -1498,6 +1504,132 @@ exports.cosmos = cosmos;
       }(pb_1.Message);
 
       _v1beta.GetBlockWithTxsResponse = GetBlockWithTxsResponse;
+
+      var UnimplementedServiceService = function UnimplementedServiceService() {
+        (0, _classCallCheck2["default"])(this, UnimplementedServiceService);
+      };
+
+      (0, _defineProperty2["default"])(UnimplementedServiceService, "definition", {
+        Simulate: {
+          path: "/cosmos.tx.v1beta1.Service/Simulate",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return SimulateRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return SimulateResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        GetTx: {
+          path: "/cosmos.tx.v1beta1.Service/GetTx",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return GetTxRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return GetTxResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        BroadcastTx: {
+          path: "/cosmos.tx.v1beta1.Service/BroadcastTx",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return BroadcastTxRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return BroadcastTxResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        GetTxsEvent: {
+          path: "/cosmos.tx.v1beta1.Service/GetTxsEvent",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return GetTxsEventRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return GetTxsEventResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        GetBlockWithTxs: {
+          path: "/cosmos.tx.v1beta1.Service/GetBlockWithTxs",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return GetBlockWithTxsRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return GetBlockWithTxsResponse.deserialize(new Uint8Array(bytes));
+          }
+        }
+      });
+      _v1beta.UnimplementedServiceService = UnimplementedServiceService;
+
+      var ServiceClient = /*#__PURE__*/function (_grpc_1$makeGenericCl) {
+        (0, _inherits2["default"])(ServiceClient, _grpc_1$makeGenericCl);
+
+        var _super11 = _createSuper(ServiceClient);
+
+        function ServiceClient(address, credentials, _options) {
+          var _thisSuper, _thisSuper2, _thisSuper3, _thisSuper4, _thisSuper5, _this19;
+
+          (0, _classCallCheck2["default"])(this, ServiceClient);
+          _this19 = _super11.call(this, address, credentials, _options);
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this19), "Simulate", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper = (0, _assertThisInitialized2["default"])(_this19), (0, _getPrototypeOf2["default"])(ServiceClient.prototype)), "Simulate", _thisSuper).call(_thisSuper, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this19), "GetTx", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper2 = (0, _assertThisInitialized2["default"])(_this19), (0, _getPrototypeOf2["default"])(ServiceClient.prototype)), "GetTx", _thisSuper2).call(_thisSuper2, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this19), "BroadcastTx", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper3 = (0, _assertThisInitialized2["default"])(_this19), (0, _getPrototypeOf2["default"])(ServiceClient.prototype)), "BroadcastTx", _thisSuper3).call(_thisSuper3, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this19), "GetTxsEvent", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper4 = (0, _assertThisInitialized2["default"])(_this19), (0, _getPrototypeOf2["default"])(ServiceClient.prototype)), "GetTxsEvent", _thisSuper4).call(_thisSuper4, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this19), "GetBlockWithTxs", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper5 = (0, _assertThisInitialized2["default"])(_this19), (0, _getPrototypeOf2["default"])(ServiceClient.prototype)), "GetBlockWithTxs", _thisSuper5).call(_thisSuper5, message, metadata, options, callback);
+          });
+          return _this19;
+        }
+
+        return ServiceClient;
+      }(grpc_1.makeGenericClientConstructor(UnimplementedServiceService.definition, "Service", {}));
+
+      _v1beta.ServiceClient = ServiceClient;
     })(v1beta1 || (v1beta1 = _tx.v1beta1 || (_tx.v1beta1 = {})));
   })(tx || (tx = _cosmos.tx || (_cosmos.tx = {})));
 })(cosmos || (exports.cosmos = cosmos = {}));

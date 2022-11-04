@@ -9,6 +9,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.cosmos = void 0;
 
+var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
@@ -30,6 +34,8 @@ var dependency_2 = _interopRequireWildcard(require("./gov"));
 var dependency_5 = _interopRequireWildcard(require("./../../../google/protobuf/any"));
 
 var pb_1 = _interopRequireWildcard(require("google-protobuf"));
+
+var grpc_1 = _interopRequireWildcard(require("@grpc/grpc-js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -987,6 +993,112 @@ exports.cosmos = cosmos;
       }(pb_1.Message);
 
       _v1beta.MsgDepositResponse = MsgDepositResponse;
+
+      var UnimplementedMsgService = function UnimplementedMsgService() {
+        (0, _classCallCheck2["default"])(this, UnimplementedMsgService);
+      };
+
+      (0, _defineProperty2["default"])(UnimplementedMsgService, "definition", {
+        SubmitProposal: {
+          path: "/cosmos.gov.v1beta1.Msg/SubmitProposal",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return MsgSubmitProposal.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return MsgSubmitProposalResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        Vote: {
+          path: "/cosmos.gov.v1beta1.Msg/Vote",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return MsgVote.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return MsgVoteResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        VoteWeighted: {
+          path: "/cosmos.gov.v1beta1.Msg/VoteWeighted",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return MsgVoteWeighted.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return MsgVoteWeightedResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        Deposit: {
+          path: "/cosmos.gov.v1beta1.Msg/Deposit",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return MsgDeposit.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return MsgDepositResponse.deserialize(new Uint8Array(bytes));
+          }
+        }
+      });
+      _v1beta.UnimplementedMsgService = UnimplementedMsgService;
+
+      var MsgClient = /*#__PURE__*/function (_grpc_1$makeGenericCl) {
+        (0, _inherits2["default"])(MsgClient, _grpc_1$makeGenericCl);
+
+        var _super9 = _createSuper(MsgClient);
+
+        function MsgClient(address, credentials, _options) {
+          var _thisSuper, _thisSuper2, _thisSuper3, _thisSuper4, _this10;
+
+          (0, _classCallCheck2["default"])(this, MsgClient);
+          _this10 = _super9.call(this, address, credentials, _options);
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this10), "SubmitProposal", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper = (0, _assertThisInitialized2["default"])(_this10), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "SubmitProposal", _thisSuper).call(_thisSuper, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this10), "Vote", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper2 = (0, _assertThisInitialized2["default"])(_this10), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "Vote", _thisSuper2).call(_thisSuper2, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this10), "VoteWeighted", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper3 = (0, _assertThisInitialized2["default"])(_this10), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "VoteWeighted", _thisSuper3).call(_thisSuper3, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this10), "Deposit", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper4 = (0, _assertThisInitialized2["default"])(_this10), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "Deposit", _thisSuper4).call(_thisSuper4, message, metadata, options, callback);
+          });
+          return _this10;
+        }
+
+        return MsgClient;
+      }(grpc_1.makeGenericClientConstructor(UnimplementedMsgService.definition, "Msg", {}));
+
+      _v1beta.MsgClient = MsgClient;
     })(v1beta1 || (v1beta1 = _gov.v1beta1 || (_gov.v1beta1 = {})));
   })(gov || (gov = _cosmos.gov || (_cosmos.gov = {})));
 })(cosmos || (exports.cosmos = cosmos = {}));

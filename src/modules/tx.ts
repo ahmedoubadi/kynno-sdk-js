@@ -9,7 +9,7 @@ import { ethers } from 'ethers';
  * Tx module allows you to sign or broadcast transactions
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 export class Tx {
   /** @hidden */
@@ -25,7 +25,7 @@ export class Tx {
    * @param msgs Msgs to be sent
    * @param baseTx
    * @returns unsignedTx
-   * @since v0.17
+   * @since v0.1
    */
   buildTx(
     msgs: any[],
@@ -62,7 +62,7 @@ export class Tx {
    * @param msgs Msgs to be sent
    * @param baseTx
    * @returns
-   * @since v0.17
+   * @since v0.1
    */
   async buildAndSend(
     msgs: any[],
@@ -82,7 +82,7 @@ export class Tx {
    * @param signedTx The tx object with signatures
    * @param mode Broadcast mode
    * @returns
-   * @since v0.17
+   * @since v0.1
    */
   broadcast(
     signedTx: types.ProtoTx,
@@ -110,7 +110,7 @@ export class Tx {
    * @param stdTx StdTx with no signatures
    * @param baseTx baseTx.from && baseTx.password is requred
    * @returns The signed tx
-   * @since v0.17
+   * @since v0.1
    */
   async sign(
     stdTx: types.ProtoTx,
@@ -162,7 +162,7 @@ export class Tx {
    * @param password Password of the key
    * @param type pubkey Type
    * @returns signature
-   * @since v0.17
+   * @since v0.1
    */
   sign_signDoc(
     signDoc: Uint8Array,
@@ -309,6 +309,7 @@ export class Tx {
    * @return {[type]} message instance of types.Msg
    */
   createMsg(txMsg: { type: string, value: any }) {
+    
     let msg: any = {};
     switch (txMsg.type) {
       //bank

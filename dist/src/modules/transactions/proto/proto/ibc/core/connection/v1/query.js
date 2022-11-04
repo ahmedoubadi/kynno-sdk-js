@@ -9,6 +9,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ibc = void 0;
 
+var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
@@ -32,6 +36,8 @@ var dependency_4 = _interopRequireWildcard(require("./connection"));
 var dependency_6 = _interopRequireWildcard(require("./../../../../google/protobuf/any"));
 
 var pb_1 = _interopRequireWildcard(require("google-protobuf"));
+
+var grpc_1 = _interopRequireWildcard(require("@grpc/grpc-js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -1448,6 +1454,132 @@ exports.ibc = ibc;
         }(pb_1.Message);
 
         _v.QueryConnectionConsensusStateResponse = QueryConnectionConsensusStateResponse;
+
+        var UnimplementedQueryService = function UnimplementedQueryService() {
+          (0, _classCallCheck2["default"])(this, UnimplementedQueryService);
+        };
+
+        (0, _defineProperty2["default"])(UnimplementedQueryService, "definition", {
+          Connection: {
+            path: "/ibc.core.connection.v1.Query/Connection",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return QueryConnectionRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return QueryConnectionResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          Connections: {
+            path: "/ibc.core.connection.v1.Query/Connections",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return QueryConnectionsRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return QueryConnectionsResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          ClientConnections: {
+            path: "/ibc.core.connection.v1.Query/ClientConnections",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return QueryClientConnectionsRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return QueryClientConnectionsResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          ConnectionClientState: {
+            path: "/ibc.core.connection.v1.Query/ConnectionClientState",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return QueryConnectionClientStateRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return QueryConnectionClientStateResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          ConnectionConsensusState: {
+            path: "/ibc.core.connection.v1.Query/ConnectionConsensusState",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return QueryConnectionConsensusStateRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return QueryConnectionConsensusStateResponse.deserialize(new Uint8Array(bytes));
+            }
+          }
+        });
+        _v.UnimplementedQueryService = UnimplementedQueryService;
+
+        var QueryClient = /*#__PURE__*/function (_grpc_1$makeGenericCl) {
+          (0, _inherits2["default"])(QueryClient, _grpc_1$makeGenericCl);
+
+          var _super11 = _createSuper(QueryClient);
+
+          function QueryClient(address, credentials, _options) {
+            var _thisSuper, _thisSuper2, _thisSuper3, _thisSuper4, _thisSuper5, _this17;
+
+            (0, _classCallCheck2["default"])(this, QueryClient);
+            _this17 = _super11.call(this, address, credentials, _options);
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this17), "Connection", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper = (0, _assertThisInitialized2["default"])(_this17), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "Connection", _thisSuper).call(_thisSuper, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this17), "Connections", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper2 = (0, _assertThisInitialized2["default"])(_this17), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "Connections", _thisSuper2).call(_thisSuper2, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this17), "ClientConnections", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper3 = (0, _assertThisInitialized2["default"])(_this17), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "ClientConnections", _thisSuper3).call(_thisSuper3, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this17), "ConnectionClientState", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper4 = (0, _assertThisInitialized2["default"])(_this17), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "ConnectionClientState", _thisSuper4).call(_thisSuper4, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this17), "ConnectionConsensusState", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper5 = (0, _assertThisInitialized2["default"])(_this17), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "ConnectionConsensusState", _thisSuper5).call(_thisSuper5, message, metadata, options, callback);
+            });
+            return _this17;
+          }
+
+          return QueryClient;
+        }(grpc_1.makeGenericClientConstructor(UnimplementedQueryService.definition, "Query", {}));
+
+        _v.QueryClient = QueryClient;
       })(v1 || (v1 = _connection.v1 || (_connection.v1 = {})));
     })(connection || (connection = _core.connection || (_core.connection = {})));
   })(core || (core = _ibc.core || (_ibc.core = {})));

@@ -9,10 +9,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Ibc = void 0;
 
-var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
-
-var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
-
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
@@ -34,7 +30,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
  *
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 var Ibc = /*#__PURE__*/function () {
   /** @hidden */
@@ -46,73 +42,12 @@ var Ibc = /*#__PURE__*/function () {
     this.client = client;
   }
   /**
-   * ibc transfer
-   * @param param:{
-      source_port: string;
-      source_channel: string;
-      token: Coin;
-      receiver: string;
-      timeout_height?: {revision_number:number, revision_height:number},
-      timeout_timestamp?:number,
-    }
-   * @param baseTx { types.BaseTx }
-   * @returns
-   * @since v0.17
+   * DenomTrace queries a denomination trace information.
+   * @param hash (in hex format) of the denomination trace information.
    */
 
 
   (0, _createClass2["default"])(Ibc, [{
-    key: "transfer",
-    value: function () {
-      var _transfer = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(param, baseTx) {
-        var from, msgs;
-        return _regenerator["default"].wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                if (!(!param.timeout_height && !param.timeout_timestamp)) {
-                  _context.next = 2;
-                  break;
-                }
-
-                throw new _errors.SdkError("there must be one timeout_height or timeout_timestamp");
-
-              case 2:
-                from = this.client.keys.show(baseTx.from);
-                msgs = [{
-                  type: types.TxType.MsgTransfer,
-                  value: {
-                    source_port: param.source_port,
-                    source_channel: param.source_channel,
-                    token: param.token,
-                    sender: from,
-                    receiver: param.receiver,
-                    timeout_height: param.timeout_height,
-                    timeout_timestamp: param.timeout_timestamp
-                  }
-                }];
-                return _context.abrupt("return", this.client.tx.buildAndSend(msgs, baseTx));
-
-              case 5:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function transfer(_x, _x2) {
-        return _transfer.apply(this, arguments);
-      }
-
-      return transfer;
-    }()
-    /**
-     * DenomTrace queries a denomination trace information.
-     * @param hash (in hex format) of the denomination trace information.
-     */
-
-  }, {
     key: "queryDenomTrace",
     value: function queryDenomTrace(hash) {
       if (!hash) {

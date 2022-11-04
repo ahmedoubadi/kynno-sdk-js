@@ -9,6 +9,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ibc = void 0;
 
+var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
@@ -28,6 +32,8 @@ var dependency_2 = _interopRequireWildcard(require("./../../client/v1/client"));
 var dependency_3 = _interopRequireWildcard(require("./channel"));
 
 var pb_1 = _interopRequireWildcard(require("google-protobuf"));
+
+var grpc_1 = _interopRequireWildcard(require("@grpc/grpc-js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -2870,6 +2876,232 @@ exports.ibc = ibc;
         }(pb_1.Message);
 
         _v.MsgAcknowledgementResponse = MsgAcknowledgementResponse;
+
+        var UnimplementedMsgService = function UnimplementedMsgService() {
+          (0, _classCallCheck2["default"])(this, UnimplementedMsgService);
+        };
+
+        (0, _defineProperty2["default"])(UnimplementedMsgService, "definition", {
+          ChannelOpenInit: {
+            path: "/ibc.core.channel.v1.Msg/ChannelOpenInit",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return MsgChannelOpenInit.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return MsgChannelOpenInitResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          ChannelOpenTry: {
+            path: "/ibc.core.channel.v1.Msg/ChannelOpenTry",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return MsgChannelOpenTry.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return MsgChannelOpenTryResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          ChannelOpenAck: {
+            path: "/ibc.core.channel.v1.Msg/ChannelOpenAck",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return MsgChannelOpenAck.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return MsgChannelOpenAckResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          ChannelOpenConfirm: {
+            path: "/ibc.core.channel.v1.Msg/ChannelOpenConfirm",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return MsgChannelOpenConfirm.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return MsgChannelOpenConfirmResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          ChannelCloseInit: {
+            path: "/ibc.core.channel.v1.Msg/ChannelCloseInit",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return MsgChannelCloseInit.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return MsgChannelCloseInitResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          ChannelCloseConfirm: {
+            path: "/ibc.core.channel.v1.Msg/ChannelCloseConfirm",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return MsgChannelCloseConfirm.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return MsgChannelCloseConfirmResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          RecvPacket: {
+            path: "/ibc.core.channel.v1.Msg/RecvPacket",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return MsgRecvPacket.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return MsgRecvPacketResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          Timeout: {
+            path: "/ibc.core.channel.v1.Msg/Timeout",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return MsgTimeout.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return MsgTimeoutResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          TimeoutOnClose: {
+            path: "/ibc.core.channel.v1.Msg/TimeoutOnClose",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return MsgTimeoutOnClose.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return MsgTimeoutOnCloseResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          Acknowledgement: {
+            path: "/ibc.core.channel.v1.Msg/Acknowledgement",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return MsgAcknowledgement.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return MsgAcknowledgementResponse.deserialize(new Uint8Array(bytes));
+            }
+          }
+        });
+        _v.UnimplementedMsgService = UnimplementedMsgService;
+
+        var MsgClient = /*#__PURE__*/function (_grpc_1$makeGenericCl) {
+          (0, _inherits2["default"])(MsgClient, _grpc_1$makeGenericCl);
+
+          var _super21 = _createSuper(MsgClient);
+
+          function MsgClient(address, credentials, _options) {
+            var _thisSuper, _thisSuper2, _thisSuper3, _thisSuper4, _thisSuper5, _thisSuper6, _thisSuper7, _thisSuper8, _thisSuper9, _thisSuper10, _this30;
+
+            (0, _classCallCheck2["default"])(this, MsgClient);
+            _this30 = _super21.call(this, address, credentials, _options);
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this30), "ChannelOpenInit", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper = (0, _assertThisInitialized2["default"])(_this30), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "ChannelOpenInit", _thisSuper).call(_thisSuper, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this30), "ChannelOpenTry", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper2 = (0, _assertThisInitialized2["default"])(_this30), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "ChannelOpenTry", _thisSuper2).call(_thisSuper2, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this30), "ChannelOpenAck", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper3 = (0, _assertThisInitialized2["default"])(_this30), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "ChannelOpenAck", _thisSuper3).call(_thisSuper3, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this30), "ChannelOpenConfirm", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper4 = (0, _assertThisInitialized2["default"])(_this30), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "ChannelOpenConfirm", _thisSuper4).call(_thisSuper4, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this30), "ChannelCloseInit", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper5 = (0, _assertThisInitialized2["default"])(_this30), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "ChannelCloseInit", _thisSuper5).call(_thisSuper5, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this30), "ChannelCloseConfirm", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper6 = (0, _assertThisInitialized2["default"])(_this30), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "ChannelCloseConfirm", _thisSuper6).call(_thisSuper6, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this30), "RecvPacket", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper7 = (0, _assertThisInitialized2["default"])(_this30), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "RecvPacket", _thisSuper7).call(_thisSuper7, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this30), "Timeout", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper8 = (0, _assertThisInitialized2["default"])(_this30), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "Timeout", _thisSuper8).call(_thisSuper8, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this30), "TimeoutOnClose", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper9 = (0, _assertThisInitialized2["default"])(_this30), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "TimeoutOnClose", _thisSuper9).call(_thisSuper9, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this30), "Acknowledgement", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper10 = (0, _assertThisInitialized2["default"])(_this30), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "Acknowledgement", _thisSuper10).call(_thisSuper10, message, metadata, options, callback);
+            });
+            return _this30;
+          }
+
+          return MsgClient;
+        }(grpc_1.makeGenericClientConstructor(UnimplementedMsgService.definition, "Msg", {}));
+
+        _v.MsgClient = MsgClient;
       })(v1 || (v1 = _channel.v1 || (_channel.v1 = {})));
     })(channel || (channel = _core.channel || (_core.channel = {})));
   })(core || (core = _ibc.core || (_ibc.core = {})));

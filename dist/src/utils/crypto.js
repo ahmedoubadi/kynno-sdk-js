@@ -19,7 +19,7 @@ var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/de
 
 var csprng = _interopRequireWildcard(require("secure-random"));
 
-var bech32 = _interopRequireWildcard(require("bech32"));
+var _bech = require("bech32");
 
 var cryp = _interopRequireWildcard(require("crypto-browserify"));
 
@@ -38,6 +38,8 @@ var _utils = require("./utils");
 var types = _interopRequireWildcard(require("../types"));
 
 var _errors = require("../errors");
+
+var _ethers = require("ethers");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -74,8 +76,9 @@ var Crypto = /*#__PURE__*/function () {
      * @returns The decoded address buffer
      */
     function decodeAddress(address) {
-      var decodeAddress = bech32.decode(address);
-      return Buffer.from(bech32.fromWords(decodeAddress.words));
+      var decodeAddress = _bech.bech32.decode(address);
+
+      return Buffer.from(_bech.bech32.fromWords(decodeAddress.words));
     }
     /**
      * Checks whether an address is valid.
@@ -92,7 +95,8 @@ var Crypto = /*#__PURE__*/function () {
           return false;
         }
 
-        var decodedAddress = bech32.decode(address);
+        var decodedAddress = _bech.bech32.decode(address);
+
         var decodedAddressLength = Crypto.decodeAddress(address).length;
 
         if (decodedAddressLength === Crypto.DECODED_ADDRESS_LEN && decodedAddress.prefix === hrp) {
@@ -117,8 +121,12 @@ var Crypto = /*#__PURE__*/function () {
     value: function encodeAddress(pubkeyHash) {
       var hrp = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'kynno';
       var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'hex';
-      var words = bech32.toWords(Buffer.from(pubkeyHash));
-      return bech32.encode(hrp, words);
+
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      var words = _bech.bech32.toWords(Buffer.from(pubkeyHash, type));
+
+      return _bech.bech32.encode(hrp, words);
     }
     /**
      * ConvertAndEncode converts from a base64 encoded byte array to bach32 encoded byte string and then to bech32
@@ -131,7 +139,7 @@ var Crypto = /*#__PURE__*/function () {
     key: "convertAndEncode",
     value: function convertAndEncode(hrp, data) {
       var converted = Crypto.convertBits(data, 8, 5, true);
-      return bech32.encode(hrp, converted);
+      return _bech.bech32.encode(hrp, converted);
     }
     /**
      * DecodeAndConvert decodes a bech32 encoded string and converts to base64 encoded bytes
@@ -142,7 +150,8 @@ var Crypto = /*#__PURE__*/function () {
   }, {
     key: "decodeAndConvert",
     value: function decodeAndConvert(address) {
-      var decodeAddress = bech32.decode(address);
+      var decodeAddress = _bech.bech32.decode(address);
+
       return Crypto.convertBits(decodeAddress.words, 5, 8, false);
     }
     /**
@@ -234,8 +243,8 @@ var Crypto = /*#__PURE__*/function () {
 
         case types.PubkeyType.secp256k1:
         default:
-          var secp256k1pubkey = new _elliptic.ec('secp256k1').keyFromPrivate(privateKeyHex, 'hex').getPublic();
-          pubKey = Buffer.from(secp256k1pubkey.encodeCompressed()).toString('hex');
+          var walletObj = new _ethers.ethers.Wallet(privateKeyHex);
+          pubKey = walletObj.publicKey;
           break;
       }
 
@@ -260,7 +269,7 @@ var Crypto = /*#__PURE__*/function () {
 
       switch (type) {
         case types.PubkeyType.secp256k1:
-          pubKeyType = 'tendermint/PubKeySecp256k1';
+          pubKeyType = "/ethermint.crypto.v1.ethsecp256k1.PubKey";
           break;
 
         case types.PubkeyType.ed25519:
@@ -392,7 +401,7 @@ var Crypto = /*#__PURE__*/function () {
           }));
           var prikeyArr = Buffer.from(private_key, 'hex');
           var Secp256k1Sig = Secp256k1.sign(msghash, prikeyArr);
-          signature = Secp256k1Sig.signature.toString('base64');
+          signature = Secp256k1Sig.signature.toString('hex');
           break;
       }
 
@@ -401,6 +410,12 @@ var Crypto = /*#__PURE__*/function () {
       }
 
       return signature;
+    }
+  }, {
+    key: "generateAddressFromPk",
+    value: function generateAddressFromPk(pk) {
+      var wallet = new _ethers.ethers.Wallet(pk);
+      return wallet.address;
     }
     /**
      * Generates a keystore object (web3 secret storage format) given a private key to store and a password.
@@ -415,6 +430,7 @@ var Crypto = /*#__PURE__*/function () {
     key: "generateKeyStore",
     value: function generateKeyStore(privateKeyHex, password, prefix) {
       var iterations = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 262144;
+      var address = Crypto.generateAddressFromPk(privateKeyHex);
       var salt = cryp.randomBytes(32);
       var iv = cryp.randomBytes(16);
       var cipherAlg = 'aes-128-ctr';
@@ -439,7 +455,7 @@ var Crypto = /*#__PURE__*/function () {
         id: uuid.v4({
           random: cryp.randomBytes(16)
         }),
-        address: Crypto.getAddressFromPrivateKey(privateKeyHex, prefix),
+        address: address,
         crypto: {
           ciphertext: ciphertext.toString('hex'),
           cipherparams: {
@@ -664,5 +680,5 @@ exports.Crypto = Crypto;
 (0, _defineProperty2["default"])(Crypto, "PRIVKEY_LEN", 32);
 (0, _defineProperty2["default"])(Crypto, "MNEMONIC_LEN", 256);
 (0, _defineProperty2["default"])(Crypto, "DECODED_ADDRESS_LEN", 20);
-(0, _defineProperty2["default"])(Crypto, "HDPATH", "44'/118'/0'/0/");
+(0, _defineProperty2["default"])(Crypto, "HDPATH", "m/44'/60'/0'/0/0");
 (0, _defineProperty2["default"])(Crypto, "validateMnemonic", bip39.validateMnemonic);

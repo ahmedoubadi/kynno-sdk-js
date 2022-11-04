@@ -9,6 +9,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ibc = void 0;
 
+var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
@@ -26,6 +30,8 @@ var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/ge
 var dependency_1 = _interopRequireWildcard(require("./controller"));
 
 var pb_1 = _interopRequireWildcard(require("google-protobuf"));
+
+var grpc_1 = _interopRequireWildcard(require("@grpc/grpc-js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -229,6 +235,52 @@ exports.ibc = ibc;
           }(pb_1.Message);
 
           _v.QueryParamsResponse = QueryParamsResponse;
+
+          var UnimplementedQueryService = function UnimplementedQueryService() {
+            (0, _classCallCheck2["default"])(this, UnimplementedQueryService);
+          };
+
+          (0, _defineProperty2["default"])(UnimplementedQueryService, "definition", {
+            Params: {
+              path: "/ibc.applications.interchain_accounts.controller.v1.Query/Params",
+              requestStream: false,
+              responseStream: false,
+              requestSerialize: function requestSerialize(message) {
+                return Buffer.from(message.serialize());
+              },
+              requestDeserialize: function requestDeserialize(bytes) {
+                return QueryParamsRequest.deserialize(new Uint8Array(bytes));
+              },
+              responseSerialize: function responseSerialize(message) {
+                return Buffer.from(message.serialize());
+              },
+              responseDeserialize: function responseDeserialize(bytes) {
+                return QueryParamsResponse.deserialize(new Uint8Array(bytes));
+              }
+            }
+          });
+          _v.UnimplementedQueryService = UnimplementedQueryService;
+
+          var QueryClient = /*#__PURE__*/function (_grpc_1$makeGenericCl) {
+            (0, _inherits2["default"])(QueryClient, _grpc_1$makeGenericCl);
+
+            var _super3 = _createSuper(QueryClient);
+
+            function QueryClient(address, credentials, _options) {
+              var _thisSuper, _this4;
+
+              (0, _classCallCheck2["default"])(this, QueryClient);
+              _this4 = _super3.call(this, address, credentials, _options);
+              (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this4), "Params", function (message, metadata, options, callback) {
+                return (0, _get2["default"])((_thisSuper = (0, _assertThisInitialized2["default"])(_this4), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "Params", _thisSuper).call(_thisSuper, message, metadata, options, callback);
+              });
+              return _this4;
+            }
+
+            return QueryClient;
+          }(grpc_1.makeGenericClientConstructor(UnimplementedQueryService.definition, "Query", {}));
+
+          _v.QueryClient = QueryClient;
         })(v1 || (v1 = _controller.v1 || (_controller.v1 = {})));
       })(controller || (controller = _interchain_accounts.controller || (_interchain_accounts.controller = {})));
     })(interchain_accounts || (interchain_accounts = _applications.interchain_accounts || (_applications.interchain_accounts = {})));

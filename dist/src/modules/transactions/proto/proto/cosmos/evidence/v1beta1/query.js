@@ -9,6 +9,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.cosmos = void 0;
 
+var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
@@ -28,6 +32,8 @@ var dependency_1 = _interopRequireWildcard(require("./../../base/query/v1beta1/p
 var dependency_3 = _interopRequireWildcard(require("./../../../google/protobuf/any"));
 
 var pb_1 = _interopRequireWildcard(require("google-protobuf"));
+
+var grpc_1 = _interopRequireWildcard(require("@grpc/grpc-js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -507,6 +513,72 @@ exports.cosmos = cosmos;
       }(pb_1.Message);
 
       _v1beta.QueryAllEvidenceResponse = QueryAllEvidenceResponse;
+
+      var UnimplementedQueryService = function UnimplementedQueryService() {
+        (0, _classCallCheck2["default"])(this, UnimplementedQueryService);
+      };
+
+      (0, _defineProperty2["default"])(UnimplementedQueryService, "definition", {
+        Evidence: {
+          path: "/cosmos.evidence.v1beta1.Query/Evidence",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return QueryEvidenceRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return QueryEvidenceResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        AllEvidence: {
+          path: "/cosmos.evidence.v1beta1.Query/AllEvidence",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return QueryAllEvidenceRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return QueryAllEvidenceResponse.deserialize(new Uint8Array(bytes));
+          }
+        }
+      });
+      _v1beta.UnimplementedQueryService = UnimplementedQueryService;
+
+      var QueryClient = /*#__PURE__*/function (_grpc_1$makeGenericCl) {
+        (0, _inherits2["default"])(QueryClient, _grpc_1$makeGenericCl);
+
+        var _super5 = _createSuper(QueryClient);
+
+        function QueryClient(address, credentials, _options) {
+          var _thisSuper, _thisSuper2, _this8;
+
+          (0, _classCallCheck2["default"])(this, QueryClient);
+          _this8 = _super5.call(this, address, credentials, _options);
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this8), "Evidence", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper = (0, _assertThisInitialized2["default"])(_this8), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "Evidence", _thisSuper).call(_thisSuper, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this8), "AllEvidence", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper2 = (0, _assertThisInitialized2["default"])(_this8), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "AllEvidence", _thisSuper2).call(_thisSuper2, message, metadata, options, callback);
+          });
+          return _this8;
+        }
+
+        return QueryClient;
+      }(grpc_1.makeGenericClientConstructor(UnimplementedQueryService.definition, "Query", {}));
+
+      _v1beta.QueryClient = QueryClient;
     })(v1beta1 || (v1beta1 = _evidence.v1beta1 || (_evidence.v1beta1 = {})));
   })(evidence || (evidence = _cosmos.evidence || (_cosmos.evidence = {})));
 })(cosmos || (exports.cosmos = cosmos = {}));

@@ -39,7 +39,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
  * **NOTE:** You need to implement the [[KeyDAO]] Interface first.
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 var Keys = /*#__PURE__*/function () {
   /** @hidden */
@@ -57,7 +57,7 @@ var Keys = /*#__PURE__*/function () {
    * @param password Password for encrypting the keystore
    * @param type Pubkey Type
    * @returns Bech32 address and mnemonic
-   * @since v0.17
+   * @since v0.1
    */
 
 
@@ -86,16 +86,13 @@ var Keys = /*#__PURE__*/function () {
 
       var privKey = _crypto.Crypto.getPrivateKeyFromMnemonic(mnemonic);
 
-      var pubKey = _crypto.Crypto.getPublicKeyFromPrivateKey(privKey, type);
-
-      var address = _crypto.Crypto.getAddressFromPublicKey(pubKey, this.client.config.bech32Prefix.AccAddr);
-
+      var walletObj = new _ethers.ethers.Wallet(privKey);
       var encryptedPrivKey = this.client.config.keyDAO.encrypt(privKey, password);
       var encryptedMnemonic = this.client.config.keyDAO.encrypt(mnemonic, password);
       var wallet = {
-        address: address,
+        address: this.client.utils.toKynno(walletObj.address),
         privateKey: encryptedPrivKey,
-        publicKey: _crypto.Crypto.aminoMarshalPubKey(pubKey),
+        publicKey: walletObj.publicKey,
         mnemonic: encryptedMnemonic
       }; // Save the key to app
 
@@ -113,7 +110,7 @@ var Keys = /*#__PURE__*/function () {
      * @param derive Derive a private key using the default HD path (default: true)
      * @param saltPassword A passphrase for generating the salt, according to bip39
      * @returns Bech32 address
-     * @since v0.17
+     * @since v0.1
      */
 
   }, {
@@ -170,7 +167,7 @@ var Keys = /*#__PURE__*/function () {
      * @param keystore Keystore json or object
      * @param type Pubkey Type
      * @returns types.Wallet
-     * @since v0.17
+     * @since v0.1
      */
 
   }, {
@@ -200,15 +197,12 @@ var Keys = /*#__PURE__*/function () {
 
       var privKey = _crypto.Crypto.getPrivateKeyFromKeyStore(keystore, password);
 
-      var pubKey = _crypto.Crypto.getPublicKeyFromPrivateKey(privKey, type);
-
-      var address = _crypto.Crypto.getAddressFromPublicKey(pubKey, this.client.config.bech32Prefix.AccAddr);
-
+      var walletObj = new _ethers.ethers.Wallet(privKey);
       var encryptedPrivKey = this.client.config.keyDAO.encrypt(privKey, password);
       var wallet = {
-        address: address,
+        address: this.client.utils.toKynno(walletObj.address),
         privateKey: encryptedPrivKey,
-        publicKey: _crypto.Crypto.aminoMarshalPubKey(pubKey)
+        publicKey: walletObj.publicKey
       }; // Save the key to app
 
       this.client.config.keyDAO.write(name, wallet);
@@ -221,7 +215,7 @@ var Keys = /*#__PURE__*/function () {
      * @param password Password of the keystore
      * @param keystore Keystore v1.0
      * @returns types.Wallet
-     * @since v0.17
+     * @since v0.1
      */
 
   }, {
@@ -245,16 +239,15 @@ var Keys = /*#__PURE__*/function () {
 
       var pk = _crypto.Crypto.getPrivateKeyFromKeystoreV1(keystore, password);
 
-      var pubKey = _crypto.Crypto.getPublicKeyFromPrivateKey(pk.privKey, pk.type);
-
-      var address = _crypto.Crypto.getAddressFromPublicKey(pubKey, this.client.config.bech32Prefix.AccAddr);
-
+      var walletObj = new _ethers.ethers.Wallet(pk.privKey);
       var encryptedPrivKey = this.client.config.keyDAO.encrypt(pk.privKey, password);
       var wallet = {
-        address: address,
+        address: this.client.utils.toKynno(walletObj.address),
         privateKey: encryptedPrivKey,
-        publicKey: _crypto.Crypto.aminoMarshalPubKey(pubKey)
+        publicKey: walletObj.publicKey
       }; // Save the key to app
+
+      this.client.config.keyDAO.write(name, wallet); // Save the key to app
 
       this.client.config.keyDAO.write(name, wallet);
       return wallet;
@@ -267,21 +260,16 @@ var Keys = /*#__PURE__*/function () {
      * @param privateKey privateKey hex
      * @param type Pubkey Type
      * @returns Bech32 address
-     * @since v0.17
+     * @since v0.1
      */
 
   }, {
     key: "importPrivateKey",
     value: function () {
       var _importPrivateKey = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(name, password, privateKey) {
-        var _accountData$account$;
-
         var type,
-            walletObj,
-            address,
-            kynnoAddress,
-            accountData,
             pubKey,
+            address,
             encryptedPrivKey,
             wallet,
             _args = arguments;
@@ -323,31 +311,19 @@ var Keys = /*#__PURE__*/function () {
                 throw new _errors.SdkError("Decrypt method of KeyDAO not implemented", _errors.CODES.Panic);
 
               case 9:
-                walletObj = new _ethers.ethers.Wallet(privateKey, this.client.config.provider);
-                _context.next = 12;
-                return walletObj.getAddress();
-
-              case 12:
-                address = _context.sent;
-                kynnoAddress = this.client.utils.toKynno(address); // Query account info from block chain
-
-                _context.next = 16;
-                return this.client.account.queryAccount(kynnoAddress);
-
-              case 16:
-                accountData = _context.sent;
                 pubKey = _crypto.Crypto.getPublicKeyFromPrivateKey(privateKey, type);
+                address = _crypto.Crypto.getAddressFromPublicKey(pubKey, this.client.config.bech32Prefix.AccAddr);
                 encryptedPrivKey = this.client.config.keyDAO.encrypt(privateKey, password);
                 wallet = {
                   address: address,
                   privateKey: encryptedPrivKey,
-                  publicKey: (_accountData$account$ = accountData.account.base_account.pub_key) === null || _accountData$account$ === void 0 ? void 0 : _accountData$account$.key
+                  publicKey: _crypto.Crypto.aminoMarshalPubKey(pubKey)
                 }; // Save the key to app
 
                 this.client.config.keyDAO.write(name, wallet);
                 return _context.abrupt("return", wallet);
 
-              case 22:
+              case 15:
               case "end":
                 return _context.stop();
             }
@@ -369,7 +345,7 @@ var Keys = /*#__PURE__*/function () {
      * @param keystorePassword Password for encrypting the keystore
      * @param iterations
      * @returns Keystore json
-     * @since v0.17
+     * @since v0.1
      */
 
   }, {
@@ -404,7 +380,7 @@ var Keys = /*#__PURE__*/function () {
      *
      * @param name Name of the key
      * @param password Password of the key
-     * @since v0.17
+     * @since v0.1
      */
 
   }, {
@@ -438,7 +414,7 @@ var Keys = /*#__PURE__*/function () {
      *
      * @param name Name of the key
      * @returns Bech32 address
-     * @since v0.17
+     * @since v0.1
      */
 
   }, {

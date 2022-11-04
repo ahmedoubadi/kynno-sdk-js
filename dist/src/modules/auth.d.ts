@@ -4,7 +4,7 @@ import * as types from '../types';
  * Auth module is only used to build `StdTx`
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 export declare class Auth {
     /** @hidden */
@@ -24,7 +24,7 @@ export declare class Auth {
      * @param memo Memo of the transaction
      *
      * @returns
-     * @since v0.17
+     * @since v0.1
      */
     newStdTx(msgs: types.Msg[], baseTx: types.BaseTx): types.ProtoTx;
     /**

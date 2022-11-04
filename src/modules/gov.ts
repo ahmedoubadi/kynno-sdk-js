@@ -9,7 +9,7 @@ import { SdkError, CODES } from '../errors';
  * [More Details](https://www.kynno.io/docs/features/governance.html)
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 export class Gov {
   /** @hidden */
@@ -19,89 +19,7 @@ export class Gov {
     this.client = client;
   }
 
-  /**
-   * submit Proposal
-   * @param proposal_id 
-   * @param option
-   * @param baseTx { types.BaseTx }
-   * @returns
-   * @since v0.17
-   */
-  async submitProposal(
-    content: {
-      type: types.ProposalType,
-      value: types.TextProposal | types.CommunityPoolSpendProposal | types.ParameterChangeProposal | types.CancelSoftwareUpgradeProposal | types.SoftwareUpgradeProposal
-    },
-    initial_deposit:types.Coin[],
-    baseTx: types.BaseTx
-  ): Promise<types.TxResult> {
-    const from = this.client.keys.show(baseTx.from);
-    const msgs: any[] = [
-      {
-        type:types.TxType.MsgSubmitProposal,
-        value:{
-          content: content,
-          initial_deposit: initial_deposit,
-          proposer: from
-        }
-      }
-    ];
-    return this.client.tx.buildAndSend(msgs, baseTx);
-  }
 
-  /**
-   * vote
-   * @param proposal_id 
-   * @param option
-   * @param baseTx { types.BaseTx }
-   * @returns
-   * @since v0.17
-   */
-  async vote(
-    proposal_id: number,
-    option: types.VoteOption,
-    baseTx: types.BaseTx
-  ): Promise<types.TxResult> {
-    const from = this.client.keys.show(baseTx.from);
-    const msgs: any[] = [
-      {
-        type:types.TxType.MsgVote,
-        value:{
-          proposal_id: proposal_id,
-          voter: from,
-          option: option,
-        }
-      }
-    ];
-    return this.client.tx.buildAndSend(msgs, baseTx);
-  }
-
-  /**
-   * deposit
-   * @param proposal_id 
-   * @param amount
-   * @param baseTx { types.BaseTx }
-   * @returns
-   * @since v0.17
-   */
-  async deposit(
-    proposal_id: number,
-    amount: types.Coin[],
-    baseTx: types.BaseTx
-  ): Promise<types.TxResult> {
-    const from = this.client.keys.show(baseTx.from);
-    const msgs: any[] = [
-      {
-        type:types.TxType.MsgDeposit,
-        value:{
-          proposal_id: proposal_id,
-          depositor: from,
-          amount: amount,
-        }
-      }
-    ];
-    return this.client.tx.buildAndSend(msgs, baseTx);
-  }
 
   /**
    * Proposal queries proposal details based on ProposalID.

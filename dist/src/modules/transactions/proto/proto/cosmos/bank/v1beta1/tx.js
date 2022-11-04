@@ -9,6 +9,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.cosmos = void 0;
 
+var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
@@ -28,6 +32,8 @@ var dependency_2 = _interopRequireWildcard(require("./../../base/v1beta1/coin"))
 var dependency_3 = _interopRequireWildcard(require("./bank"));
 
 var pb_1 = _interopRequireWildcard(require("google-protobuf"));
+
+var grpc_1 = _interopRequireWildcard(require("@grpc/grpc-js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -491,6 +497,72 @@ exports.cosmos = cosmos;
       }(pb_1.Message);
 
       _v1beta.MsgMultiSendResponse = MsgMultiSendResponse;
+
+      var UnimplementedMsgService = function UnimplementedMsgService() {
+        (0, _classCallCheck2["default"])(this, UnimplementedMsgService);
+      };
+
+      (0, _defineProperty2["default"])(UnimplementedMsgService, "definition", {
+        Send: {
+          path: "/cosmos.bank.v1beta1.Msg/Send",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return MsgSend.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return MsgSendResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        MultiSend: {
+          path: "/cosmos.bank.v1beta1.Msg/MultiSend",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return MsgMultiSend.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return MsgMultiSendResponse.deserialize(new Uint8Array(bytes));
+          }
+        }
+      });
+      _v1beta.UnimplementedMsgService = UnimplementedMsgService;
+
+      var MsgClient = /*#__PURE__*/function (_grpc_1$makeGenericCl) {
+        (0, _inherits2["default"])(MsgClient, _grpc_1$makeGenericCl);
+
+        var _super5 = _createSuper(MsgClient);
+
+        function MsgClient(address, credentials, _options) {
+          var _thisSuper, _thisSuper2, _this5;
+
+          (0, _classCallCheck2["default"])(this, MsgClient);
+          _this5 = _super5.call(this, address, credentials, _options);
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this5), "Send", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper = (0, _assertThisInitialized2["default"])(_this5), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "Send", _thisSuper).call(_thisSuper, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this5), "MultiSend", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper2 = (0, _assertThisInitialized2["default"])(_this5), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "MultiSend", _thisSuper2).call(_thisSuper2, message, metadata, options, callback);
+          });
+          return _this5;
+        }
+
+        return MsgClient;
+      }(grpc_1.makeGenericClientConstructor(UnimplementedMsgService.definition, "Msg", {}));
+
+      _v1beta.MsgClient = MsgClient;
     })(v1beta1 || (v1beta1 = _bank.v1beta1 || (_bank.v1beta1 = {})));
   })(bank || (bank = _cosmos.bank || (_cosmos.bank = {})));
 })(cosmos || (exports.cosmos = cosmos = {}));

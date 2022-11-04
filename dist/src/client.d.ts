@@ -1,6 +1,7 @@
 import * as consts from './types/constants';
 import * as modules from './modules';
 import { RpcClient } from './nets/rpc-client';
+import { WsClient } from './nets/ws-client';
 import { AxiosRequestConfig } from 'axios';
 import * as types from './types';
 import { Wallet } from "./types";
@@ -11,6 +12,9 @@ export declare class Client {
     /** Axios client for tendermint rpc requests */
     private _rpcClient?;
     get rpcClient(): RpcClient;
+    /** Axios client for tendermint rpc requests */
+    private _wsClient?;
+    get wsClient(): WsClient;
     /** Auth module */
     private _auth?;
     get auth(): modules.Auth;
@@ -26,9 +30,6 @@ export declare class Client {
     /** Staking module */
     private _staking?;
     get staking(): modules.Staking;
-    /** Tx module */
-    private _tx?;
-    get tx(): modules.Tx;
     /** Gov module */
     private _gov?;
     get gov(): modules.Gov;
@@ -119,6 +120,20 @@ export declare class Client {
      * @returns The SDK itself
      */
     withRpcConfig(rpcConfig: AxiosRequestConfig): this;
+    /**
+     * Set default websocket Url
+     *
+     * @param wsUrl Default websocket Url
+     * @returns The SDK itself
+     */
+    withWebsocket(wsUrl: string): this;
+    /**
+     * Set default websocket Url
+     *
+     * @param wsUrl Default websocket Url
+     * @returns The SDK itself
+     */
+    withRpcUrl(rpcUrl: string): this;
 }
 /** KYNNO SDK Config */
 export interface ClientConfig {
@@ -126,7 +141,7 @@ export interface ClientConfig {
     node: string;
     /** KYNNO node api url */
     api: string;
-    nameContractAddress: string;
+    nameContractAddress?: string;
     /** KYNNO network type, mainnet / testnet */
     network?: consts.Network;
     /** KYNNO chain-id */
@@ -141,6 +156,8 @@ export interface ClientConfig {
     bech32Prefix?: types.Bech32Prefix;
     /** Axios request config for tendermint rpc requests */
     rpcConfig?: AxiosRequestConfig;
+    wsUrl?: string;
+    rpcUrl?: string;
 }
 /** Default KYNNO Client Config */
 export declare class DefaultClientConfig implements ClientConfig {
@@ -156,6 +173,8 @@ export declare class DefaultClientConfig implements ClientConfig {
     keyDAO: KeyDAO;
     bech32Prefix: types.Bech32Prefix;
     rpcConfig: AxiosRequestConfig;
+    wsUrl: string;
+    rpcUrl: string;
     constructor();
 }
 /**

@@ -2,7 +2,7 @@
 import EventEmitter from 'events';
 /**
  * kynno Websocket Client
- * @since v0.17
+ * @since v0.1
  */
 export declare class WsClient {
     /** @hidden */
@@ -14,17 +14,17 @@ export declare class WsClient {
     constructor(url: string);
     /**
      * Initialize ws client
-     * @since v0.17
+     * @since v0.1
      */
     connect(): void;
     /**
      * Disconnect from server
-     * @since v0.17
+     * @since v0.1
      */
     disconnect(): Promise<void>;
     /**
      * Check if the ws client is connected or not
-     * @since v0.17
+     * @since v0.1
      */
     isReady(): boolean;
     /**
@@ -32,7 +32,7 @@ export declare class WsClient {
      * @param method The tendermint rpc method
      * @param id The request id which is the same as the incoming response
      * @param query The tendermint query string
-     * @since v0.17
+     * @since v0.1
      */
-    send(method: string, id: string, query?: string): void;
+    send(method: string, id: string | number, query?: string): void;
 }

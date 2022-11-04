@@ -31,7 +31,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
  * Account module is only used to query `Account data`
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 var Account = /*#__PURE__*/function () {
   /** @hidden */
@@ -74,7 +74,7 @@ var Account = /*#__PURE__*/function () {
    * @param url Rpc address of kynno node
    *
    * @returns
-   * @since v0.17
+   * @since v0.1
    */
 
   /**

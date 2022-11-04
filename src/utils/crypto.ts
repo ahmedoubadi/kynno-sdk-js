@@ -1,5 +1,5 @@
 import * as csprng from 'secure-random';
-import * as bech32 from 'bech32';
+import { bech32 } from 'bech32'
 import * as cryp from 'crypto-browserify';
 import * as uuid from 'uuid';
 import * as is from 'is_js';
@@ -10,7 +10,7 @@ import * as ecc from 'tiny-secp256k1';
 import { Utils } from './utils';
 import * as types from '../types';
 import { SdkError, CODES } from '../errors';
-
+import { ethers } from 'ethers';
 const Sha256 = require('sha256');
 const Secp256k1 = require('secp256k1');
 const SM2 = require('sm-crypto').sm2;
@@ -29,7 +29,7 @@ export class Crypto {
   static DECODED_ADDRESS_LEN = 20;
 
   //hdpath
-  static HDPATH = "44'/118'/0'/0/";
+  static HDPATH = "m/44'/60'/0'/0/0";
 
   /**
    * Decodes an address in bech32 format.
@@ -75,9 +75,13 @@ export class Crypto {
    * @param type The output type (default: hex)
    * @returns Bech32 address
    */
+  
   static encodeAddress(pubkeyHash: string, hrp = 'kynno', type = 'hex') {
-    const words = bech32.toWords(Buffer.from(pubkeyHash));
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+    const words = bech32.toWords(Buffer.from(pubkeyHash, type));
     return bech32.encode(hrp, words);
+    
   }
 
   /**
@@ -169,9 +173,10 @@ export class Crypto {
       pubKey =  SM2.getPublicKeyFromPrivateKey(privateKeyHex, 'compress');
       break;
       case types.PubkeyType.secp256k1:
+        
       default:
-      const secp256k1pubkey = new EC('secp256k1').keyFromPrivate(privateKeyHex, 'hex').getPublic();
-      pubKey = Buffer.from(secp256k1pubkey.encodeCompressed()).toString('hex');
+        let walletObj = new ethers.Wallet(privateKeyHex);
+        pubKey = walletObj.publicKey
       break;
     }
     return { type:type, value:pubKey }
@@ -190,16 +195,16 @@ export class Crypto {
     let pubKeyType = '';
     switch (type){
       case types.PubkeyType.secp256k1:
-      pubKeyType = 'tendermint/PubKeySecp256k1';
+        pubKeyType = "/ethermint.crypto.v1.ethsecp256k1.PubKey"
       break;
       case types.PubkeyType.ed25519:
-      pubKeyType = 'tendermint/PubKeyEd25519';
+        pubKeyType = 'tendermint/PubKeyEd25519';
       break;
       case types.PubkeyType.sm2:
-      pubKeyType = 'tendermint/PubKeySm2';
+        pubKeyType = 'tendermint/PubKeySm2';
       break;
       default:
-      pubKeyType = type;
+        pubKeyType = type;
       break;
     }
     let pk:any = Utils.getAminoPrefix(pubKeyType);
@@ -219,7 +224,6 @@ export class Crypto {
    * @returns The address
    */
   static getAddressFromPublicKey(publicKey: string|types.Pubkey, prefix: string): string {
-    
     if (typeof publicKey == 'string') {
       publicKey = {type:types.PubkeyType.secp256k1, value:publicKey};
     }
@@ -232,10 +236,11 @@ export class Crypto {
       hash = Utils.sha256(publicKey.value).substr(0,40);
       break;
       case types.PubkeyType.secp256k1:
+
       default:
       hash = Utils.sha256ripemd160(publicKey.value);
       break;
-    }    
+    }
     return Crypto.encodeAddress(hash, prefix);;
   }
 
@@ -306,14 +311,17 @@ export class Crypto {
         default:
         const msghash:Buffer = Buffer.from(Sha256(signDocSerialize,{ asBytes: true }));
         let prikeyArr:Buffer = Buffer.from(private_key,'hex');
-        let Secp256k1Sig = Secp256k1.sign(msghash, prikeyArr);
-        signature = Secp256k1Sig.signature.toString('base64');
+        let Secp256k1Sig = Secp256k1.sign(msghash, prikeyArr);        
+        signature = Secp256k1Sig.signature.toString('hex');
         break;
       }
       if (!signature) { throw Error(' generate Signature error ') }
       return signature;
   }
-
+  static generateAddressFromPk(pk:string) {    
+    const wallet = new ethers.Wallet(pk)
+    return wallet.address
+  }
   /**
    * Generates a keystore object (web3 secret storage format) given a private key to store and a password.
    * @param privateKeyHex The private key hexstring.
@@ -328,6 +336,7 @@ export class Crypto {
     prefix: string,
     iterations: number = 262144
   ): types.Keystore {
+    const address = Crypto.generateAddressFromPk(privateKeyHex)
     const salt = cryp.randomBytes(32);
     const iv = cryp.randomBytes(16);
     const cipherAlg = 'aes-128-ctr';
@@ -357,13 +366,12 @@ export class Crypto {
       cipher.final(),
     ]);
     const bufferValue = Buffer.concat([derivedKey.slice(16, 32), ciphertext]);
-
     return {
       version: 1,
       id: uuid.v4({
         random: cryp.randomBytes(16),
       }),
-      address: Crypto.getAddressFromPrivateKey(privateKeyHex, prefix),
+      address,
       crypto: {
         ciphertext: ciphertext.toString('hex'),
         cipherparams: {

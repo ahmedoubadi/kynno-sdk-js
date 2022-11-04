@@ -1,7 +1,7 @@
 import * as consts from './types/constants';
 import * as modules from './modules';
 import { RpcClient } from './nets/rpc-client';
-import { EventListener } from './nets/event-listener';
+import {WsClient} from './nets/ws-client';
 import { AxiosRequestConfig } from 'axios';
 import * as types from './types';
 import { SdkError, CODES } from './errors';
@@ -20,6 +20,13 @@ export class Client {
   get rpcClient():RpcClient{
     if (!this._rpcClient) {this._rpcClient = new RpcClient(this.config.rpcConfig)}
     return this._rpcClient;
+  }
+
+  /** Axios client for tendermint rpc requests */
+  private _wsClient?: WsClient;
+  get wsClient():WsClient{
+    if (!this._wsClient) {this._wsClient = new WsClient(this.config.wsUrl)}
+    return this._wsClient;
   }
 
   /** Auth module */
@@ -56,13 +63,6 @@ export class Client {
   get staking():modules.Staking{
     if (!this._staking) {this._staking = new modules.Staking(this)}
     return this._staking;
-  }
-
-  /** Tx module */
-  private _tx?: modules.Tx;
-  get tx():modules.Tx{
-    if (!this._tx) {this._tx = new modules.Tx(this)}
-    return this._tx;
   }
 
   /** Gov module */
@@ -268,6 +268,26 @@ export class Client {
     this._rpcClient = new RpcClient(this.config.rpcConfig);
     return this;
   }
+  /**
+   * Set default websocket Url
+   *
+   * @param wsUrl Default websocket Url
+   * @returns The SDK itself
+   */
+  withWebsocket(wsUrl: string) {
+    this.config.wsUrl = wsUrl;
+    return this;
+  }
+  /**
+   * Set default websocket Url
+   *
+   * @param wsUrl Default websocket Url
+   * @returns The SDK itself
+   */
+  withRpcUrl(rpcUrl: string) {
+    this.config.rpcUrl = rpcUrl;
+    return this;
+  }
 }
 
 /** KYNNO SDK Config */
@@ -278,7 +298,7 @@ export interface ClientConfig {
   api:string;
 
   /* nameservice contract address */
-  nameContractAddress:string;
+  nameContractAddress?:string;
 
   /** KYNNO network type, mainnet / testnet */
   network?: consts.Network;
@@ -300,6 +320,8 @@ export interface ClientConfig {
 
   /** Axios request config for tendermint rpc requests */
   rpcConfig?: AxiosRequestConfig;
+  wsUrl?:string;
+  rpcUrl?:string
 }
 
 /** Default KYNNO Client Config */
@@ -316,6 +338,8 @@ export class DefaultClientConfig implements ClientConfig {
   keyDAO: KeyDAO;
   bech32Prefix: types.Bech32Prefix;
   rpcConfig: AxiosRequestConfig;
+  wsUrl:string;
+  rpcUrl:string
 
   constructor() {
     this.node = '';
@@ -330,6 +354,8 @@ export class DefaultClientConfig implements ClientConfig {
     this.keyDAO = new DefaultKeyDAOImpl();
     this.bech32Prefix = {} as types.Bech32Prefix;
     this.rpcConfig = { timeout: 2000 };
+    this.wsUrl = ""
+    this.rpcUrl = ""
   }
 }
 

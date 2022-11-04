@@ -2,16 +2,10 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _typeof = require("@babel/runtime/helpers/typeof");
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.Slashing = void 0;
-
-var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
-
-var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
@@ -19,17 +13,9 @@ var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/creat
 
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
-var _slashing = require("../types/slashing");
-
 var _errors = require("../errors");
 
 var _utils = require("../utils");
-
-var Bech32 = _interopRequireWildcard(require("bech32"));
-
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 /**
  * In Proof-of-Stake blockchain, validators will get block provisions by staking their token.
@@ -70,7 +56,7 @@ var Slashing = /*#__PURE__*/function () {
      * @param bech32ConsAddress Bech32 prefixed validator consensus address
      * @param height Block height to query, omit to get most recent provable block
      * @returns
-     * @since v0.17
+     * @since v0.1
      */
 
   }, {
@@ -88,42 +74,6 @@ var Slashing = /*#__PURE__*/function () {
         return _this.client.protobuf.deserializeSigningInfo(res.response.value);
       });
     }
-    /**
-     * Unjail a validator previously jailed
-     * @param baseTx
-     * @returns
-     * @since v0.17
-     */
-
-  }, {
-    key: "unjail",
-    value: function () {
-      var _unjail = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(baseTx) {
-        var val, words, validatorAddr, msgs;
-        return _regenerator["default"].wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                val = this.client.keys.show(baseTx.from);
-                words = Bech32.decode(val).words;
-                validatorAddr = Bech32.encode(this.client.config.bech32Prefix.ValAddr, words);
-                msgs = [new _slashing.MsgUnjail(validatorAddr)];
-                return _context.abrupt("return", this.client.tx.buildAndSend(msgs, baseTx));
-
-              case 5:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function unjail(_x) {
-        return _unjail.apply(this, arguments);
-      }
-
-      return unjail;
-    }()
   }]);
   return Slashing;
 }();

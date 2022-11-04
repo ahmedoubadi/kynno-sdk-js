@@ -9,6 +9,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.cosmos = void 0;
 
+var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
@@ -32,6 +36,8 @@ var dependency_5 = _interopRequireWildcard(require("./../../base/v1beta1/coin"))
 var dependency_6 = _interopRequireWildcard(require("./staking"));
 
 var pb_1 = _interopRequireWildcard(require("google-protobuf"));
+
+var grpc_1 = _interopRequireWildcard(require("@grpc/grpc-js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -1443,6 +1449,132 @@ exports.cosmos = cosmos;
       }(pb_1.Message);
 
       _v1beta.MsgUndelegateResponse = MsgUndelegateResponse;
+
+      var UnimplementedMsgService = function UnimplementedMsgService() {
+        (0, _classCallCheck2["default"])(this, UnimplementedMsgService);
+      };
+
+      (0, _defineProperty2["default"])(UnimplementedMsgService, "definition", {
+        CreateValidator: {
+          path: "/cosmos.staking.v1beta1.Msg/CreateValidator",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return MsgCreateValidator.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return MsgCreateValidatorResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        EditValidator: {
+          path: "/cosmos.staking.v1beta1.Msg/EditValidator",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return MsgEditValidator.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return MsgEditValidatorResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        Delegate: {
+          path: "/cosmos.staking.v1beta1.Msg/Delegate",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return MsgDelegate.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return MsgDelegateResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        BeginRedelegate: {
+          path: "/cosmos.staking.v1beta1.Msg/BeginRedelegate",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return MsgBeginRedelegate.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return MsgBeginRedelegateResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        Undelegate: {
+          path: "/cosmos.staking.v1beta1.Msg/Undelegate",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return MsgUndelegate.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return MsgUndelegateResponse.deserialize(new Uint8Array(bytes));
+          }
+        }
+      });
+      _v1beta.UnimplementedMsgService = UnimplementedMsgService;
+
+      var MsgClient = /*#__PURE__*/function (_grpc_1$makeGenericCl) {
+        (0, _inherits2["default"])(MsgClient, _grpc_1$makeGenericCl);
+
+        var _super11 = _createSuper(MsgClient);
+
+        function MsgClient(address, credentials, _options) {
+          var _thisSuper, _thisSuper2, _thisSuper3, _thisSuper4, _thisSuper5, _this18;
+
+          (0, _classCallCheck2["default"])(this, MsgClient);
+          _this18 = _super11.call(this, address, credentials, _options);
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this18), "CreateValidator", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper = (0, _assertThisInitialized2["default"])(_this18), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "CreateValidator", _thisSuper).call(_thisSuper, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this18), "EditValidator", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper2 = (0, _assertThisInitialized2["default"])(_this18), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "EditValidator", _thisSuper2).call(_thisSuper2, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this18), "Delegate", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper3 = (0, _assertThisInitialized2["default"])(_this18), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "Delegate", _thisSuper3).call(_thisSuper3, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this18), "BeginRedelegate", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper4 = (0, _assertThisInitialized2["default"])(_this18), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "BeginRedelegate", _thisSuper4).call(_thisSuper4, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this18), "Undelegate", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper5 = (0, _assertThisInitialized2["default"])(_this18), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "Undelegate", _thisSuper5).call(_thisSuper5, message, metadata, options, callback);
+          });
+          return _this18;
+        }
+
+        return MsgClient;
+      }(grpc_1.makeGenericClientConstructor(UnimplementedMsgService.definition, "Msg", {}));
+
+      _v1beta.MsgClient = MsgClient;
     })(v1beta1 || (v1beta1 = _staking.v1beta1 || (_staking.v1beta1 = {})));
   })(staking || (staking = _cosmos.staking || (_cosmos.staking = {})));
 })(cosmos || (exports.cosmos = cosmos = {}));

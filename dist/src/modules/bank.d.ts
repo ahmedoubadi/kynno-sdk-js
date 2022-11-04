@@ -1,5 +1,4 @@
 import { Client } from '../client';
-import * as types from '../types';
 /**
  * This module is mainly used to transfer coins between accounts,
  * query account balances, and provide common offline transaction signing and broadcasting methods.
@@ -7,31 +6,13 @@ import * as types from '../types';
  * [More Details](https://www.kynno.io/docs/features/bank.html)
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 export declare class Bank {
     /** @hidden */
     private client;
     /** @hidden */
     constructor(client: Client);
-    /**
-     * Send coins
-     * @param to Recipient bech32 address
-     * @param amount Coins to be sent
-     * @param baseTx { types.BaseTx }
-     * @returns
-     * @since v0.17
-     */
-    send(to: string, amount: types.Coin[], baseTx: types.BaseTx): Promise<types.TxResult>;
-    /**
-     * multiSend coins
-     * @param to Recipient bech32 address
-     * @param amount Coins to be sent
-     * @param baseTx { types.BaseTx }
-     * @returns
-     * @since v0.17
-     */
-    multiSend(to: string, amount: types.Coin[], baseTx: types.BaseTx): Promise<types.TxResult>;
     /**
      * Balance queries the balance of a single coin for a single account.
      * @param address is the address to query balances for.

@@ -5,7 +5,7 @@ import "google/api/annotations.proto";
 import "gogoproto/gogo.proto";
 import "kynno/recovery/v1/genesis.proto";
 
-option go_package = "github.com/ahmedoubadi/core/x/recovery/types";
+option go_package = "github.com/kynnoenterprise/core/x/recovery/types";
 
 // Query defines the gRPC querier service.
 service Query {

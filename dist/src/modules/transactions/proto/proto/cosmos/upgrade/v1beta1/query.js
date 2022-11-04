@@ -9,6 +9,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.cosmos = void 0;
 
+var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
@@ -23,9 +27,11 @@ var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime
 
 var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
 
-var dependency_2 = _interopRequireWildcard(require("./upgrade"));
+var dependency_3 = _interopRequireWildcard(require("./upgrade"));
 
 var pb_1 = _interopRequireWildcard(require("google-protobuf"));
+
+var grpc_1 = _interopRequireWildcard(require("@grpc/grpc-js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -137,7 +143,7 @@ exports.cosmos = cosmos;
         (0, _createClass2["default"])(QueryCurrentPlanResponse, [{
           key: "plan",
           get: function get() {
-            return pb_1.Message.getWrapperField(this, dependency_2.cosmos.upgrade.v1beta1.Plan, 1);
+            return pb_1.Message.getWrapperField(this, dependency_3.cosmos.upgrade.v1beta1.Plan, 1);
           },
           set: function set(value) {
             pb_1.Message.setWrapperField(this, 1, value);
@@ -185,7 +191,7 @@ exports.cosmos = cosmos;
             var message = new QueryCurrentPlanResponse({});
 
             if (data.plan != null) {
-              message.plan = dependency_2.cosmos.upgrade.v1beta1.Plan.fromObject(data.plan);
+              message.plan = dependency_3.cosmos.upgrade.v1beta1.Plan.fromObject(data.plan);
             }
 
             return message;
@@ -202,7 +208,7 @@ exports.cosmos = cosmos;
               switch (reader.getFieldNumber()) {
                 case 1:
                   reader.readMessage(message.plan, function () {
-                    return message.plan = dependency_2.cosmos.upgrade.v1beta1.Plan.deserialize(reader);
+                    return message.plan = dependency_3.cosmos.upgrade.v1beta1.Plan.deserialize(reader);
                   });
                   break;
 
@@ -723,7 +729,7 @@ exports.cosmos = cosmos;
         (0, _createClass2["default"])(QueryModuleVersionsResponse, [{
           key: "module_versions",
           get: function get() {
-            return pb_1.Message.getRepeatedWrapperField(this, dependency_2.cosmos.upgrade.v1beta1.ModuleVersion, 1);
+            return pb_1.Message.getRepeatedWrapperField(this, dependency_3.cosmos.upgrade.v1beta1.ModuleVersion, 1);
           },
           set: function set(value) {
             pb_1.Message.setRepeatedWrapperField(this, 1, value);
@@ -772,7 +778,7 @@ exports.cosmos = cosmos;
 
             if (data.module_versions != null) {
               message.module_versions = data.module_versions.map(function (item) {
-                return dependency_2.cosmos.upgrade.v1beta1.ModuleVersion.fromObject(item);
+                return dependency_3.cosmos.upgrade.v1beta1.ModuleVersion.fromObject(item);
               });
             }
 
@@ -790,7 +796,7 @@ exports.cosmos = cosmos;
               switch (reader.getFieldNumber()) {
                 case 1:
                   reader.readMessage(message.module_versions, function () {
-                    return pb_1.Message.addToRepeatedWrapperField(message, 1, dependency_2.cosmos.upgrade.v1beta1.ModuleVersion.deserialize(reader), dependency_2.cosmos.upgrade.v1beta1.ModuleVersion);
+                    return pb_1.Message.addToRepeatedWrapperField(message, 1, dependency_3.cosmos.upgrade.v1beta1.ModuleVersion.deserialize(reader), dependency_3.cosmos.upgrade.v1beta1.ModuleVersion);
                   });
                   break;
 
@@ -811,6 +817,112 @@ exports.cosmos = cosmos;
       }(pb_1.Message);
 
       _v1beta.QueryModuleVersionsResponse = QueryModuleVersionsResponse;
+
+      var UnimplementedQueryService = function UnimplementedQueryService() {
+        (0, _classCallCheck2["default"])(this, UnimplementedQueryService);
+      };
+
+      (0, _defineProperty2["default"])(UnimplementedQueryService, "definition", {
+        CurrentPlan: {
+          path: "/cosmos.upgrade.v1beta1.Query/CurrentPlan",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return QueryCurrentPlanRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return QueryCurrentPlanResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        AppliedPlan: {
+          path: "/cosmos.upgrade.v1beta1.Query/AppliedPlan",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return QueryAppliedPlanRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return QueryAppliedPlanResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        UpgradedConsensusState: {
+          path: "/cosmos.upgrade.v1beta1.Query/UpgradedConsensusState",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return QueryUpgradedConsensusStateRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return QueryUpgradedConsensusStateResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        ModuleVersions: {
+          path: "/cosmos.upgrade.v1beta1.Query/ModuleVersions",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return QueryModuleVersionsRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return QueryModuleVersionsResponse.deserialize(new Uint8Array(bytes));
+          }
+        }
+      });
+      _v1beta.UnimplementedQueryService = UnimplementedQueryService;
+
+      var QueryClient = /*#__PURE__*/function (_grpc_1$makeGenericCl) {
+        (0, _inherits2["default"])(QueryClient, _grpc_1$makeGenericCl);
+
+        var _super9 = _createSuper(QueryClient);
+
+        function QueryClient(address, credentials, _options) {
+          var _thisSuper, _thisSuper2, _thisSuper3, _thisSuper4, _this10;
+
+          (0, _classCallCheck2["default"])(this, QueryClient);
+          _this10 = _super9.call(this, address, credentials, _options);
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this10), "CurrentPlan", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper = (0, _assertThisInitialized2["default"])(_this10), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "CurrentPlan", _thisSuper).call(_thisSuper, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this10), "AppliedPlan", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper2 = (0, _assertThisInitialized2["default"])(_this10), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "AppliedPlan", _thisSuper2).call(_thisSuper2, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this10), "UpgradedConsensusState", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper3 = (0, _assertThisInitialized2["default"])(_this10), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "UpgradedConsensusState", _thisSuper3).call(_thisSuper3, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this10), "ModuleVersions", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper4 = (0, _assertThisInitialized2["default"])(_this10), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "ModuleVersions", _thisSuper4).call(_thisSuper4, message, metadata, options, callback);
+          });
+          return _this10;
+        }
+
+        return QueryClient;
+      }(grpc_1.makeGenericClientConstructor(UnimplementedQueryService.definition, "Query", {}));
+
+      _v1beta.QueryClient = QueryClient;
     })(v1beta1 || (v1beta1 = _upgrade.v1beta1 || (_upgrade.v1beta1 = {})));
   })(upgrade || (upgrade = _cosmos.upgrade || (_cosmos.upgrade = {})));
 })(cosmos || (exports.cosmos = cosmos = {}));

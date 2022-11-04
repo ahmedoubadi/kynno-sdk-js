@@ -7,7 +7,7 @@ import { SdkError, CODES } from '../errors';
  * Auth module is only used to build `StdTx`
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 export class Auth {
   /** @hidden */
@@ -34,7 +34,7 @@ export class Auth {
    * @param memo Memo of the transaction
    *
    * @returns
-   * @since v0.17
+   * @since v0.1
    */
   newStdTx(
     msgs: types.Msg[],
@@ -80,15 +80,12 @@ export class Auth {
     ).then((data)=>{
       let result:any = {};
       if (data && data.account && data.account.value) {
-        console.log("cosmos.auth.v1beta1.Query/Account",data);
         
         result = types.auth_auth_pb.BaseAccount.deserializeBinary(data.account.value).toObject();
-        console.log("result****//",result);
         
         if (result.pubKey && result.pubKey.value) {
           result.pubKey = types.crypto_secp256k1_keys_pb.PubKey.deserializeBinary(result.pubKey.value).toObject();
         }
-        console.log("cosmos.auth.v1beta1.Query/Account",result);
         
       }
       return result as types.BaseAccount;

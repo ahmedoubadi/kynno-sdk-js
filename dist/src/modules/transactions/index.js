@@ -39,7 +39,7 @@ var _broadcast = require("../../nets/broadcast");
 
 var _endpoint = require("../../nets/endpoint");
 
-var _nameservice = require("./messages/nameservice");
+var _signTypedData2 = require("../../helper/sign-typed-data");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -49,7 +49,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
  * This module implements Transaction related functions
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 var Transaction = /*#__PURE__*/function () {
   /** @hidden */
@@ -89,7 +89,7 @@ var Transaction = /*#__PURE__*/function () {
    * @param authInfo AuthInfo
    * @param extension MessageGenerated
    * @returns
-   * @since v0.17
+   * @since v0.1
    */
 
 
@@ -133,12 +133,6 @@ var Transaction = /*#__PURE__*/function () {
     key: "_createTxMsgEditeNft",
     value: function _createTxMsgEditeNft(chain, sender, fee, memo, params) {
       return (0, _nft.createTxMsgEditeNft)(chain, sender, fee, memo, params);
-    } //issue new kynno id
-
-  }, {
-    key: "_createTxMsgIssueName",
-    value: function _createTxMsgIssueName(chain, sender, fee, memo, params) {
-      return (0, _nameservice.createTxMsgIssueName)(chain, sender, fee, memo, params);
     } // stacking txs
 
   }, {
@@ -201,6 +195,30 @@ var Transaction = /*#__PURE__*/function () {
         }
 
         return res;
+      });
+    }
+  }, {
+    key: "_signTypedData",
+    value: function _signTypedData(_ref) {
+      var privateKey = _ref.privateKey,
+          data = _ref.data,
+          version = _ref.version;
+      return (0, _signTypedData2.signTypedData)({
+        privateKey: privateKey,
+        data: data,
+        version: version
+      });
+    }
+  }, {
+    key: "_recoverTypedSignature",
+    value: function _recoverTypedSignature(_ref2) {
+      var data = _ref2.data,
+          signature = _ref2.signature,
+          version = _ref2.version;
+      return (0, _signTypedData2.recoverTypedSignature)({
+        data: data,
+        signature: signature,
+        version: version
       });
     }
   }]);

@@ -10,7 +10,7 @@ import { SdkError, CODES } from '../errors';
  * Tendermint module provides tendermint rpc queriers implementation
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 export class Tendermint {
   /** @hidden */
@@ -24,7 +24,7 @@ export class Tendermint {
    * Get a block info at a certain height or the latest height
    * @param height The block height
    * @returns
-   * @since v0.17
+   * @since v0.1
    */
   queryBlock(height?: number): Promise<types.Block> {
     const params = height ? { height: String(height) } : {};
@@ -51,7 +51,7 @@ export class Tendermint {
    * Get a block result at a certain height or the latest height
    * @param height The block height
    * @returns
-   * @since v0.17
+   * @since v0.1
    */
   queryBlockResult(height?: number): Promise<types.BlockResult> {
     const params = height ? { height: String(height) } : {};
@@ -88,7 +88,7 @@ export class Tendermint {
    * Query tx info by hash
    * @param hash The tx hash
    * @returns
-   * @since v0.17
+   * @since v0.1
    */
   queryTx(hash: string): Promise<types.QueryTxResult> {
     return this.client.rpcClient
@@ -107,7 +107,7 @@ export class Tendermint {
    * Query validator set at a certain height or the latest height
    * @param height The block height
    * @returns
-   * @since v0.17
+   * @since v0.1
    */
   queryValidators(
     height?: number,
@@ -155,7 +155,7 @@ export class Tendermint {
    * **Note:** Known issues on pagination
    *
    * @returns
-   * @since v0.17
+   * @since v0.1
    */
   searchTxs(
     conditions: types.EventQueryBuilder,
@@ -187,7 +187,7 @@ export class Tendermint {
    * query Net Info
    *
    * @returns
-   * @since v0.17
+   * @since v0.1
    */
   queryNetInfo(): Promise<{
     listening:boolean,

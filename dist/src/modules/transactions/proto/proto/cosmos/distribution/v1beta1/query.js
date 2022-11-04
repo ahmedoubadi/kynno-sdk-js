@@ -9,6 +9,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.cosmos = void 0;
 
+var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
@@ -30,6 +34,8 @@ var dependency_4 = _interopRequireWildcard(require("./../../base/v1beta1/coin"))
 var dependency_5 = _interopRequireWildcard(require("./distribution"));
 
 var pb_1 = _interopRequireWildcard(require("google-protobuf"));
+
+var grpc_1 = _interopRequireWildcard(require("@grpc/grpc-js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -2004,6 +2010,212 @@ exports.cosmos = cosmos;
       }(pb_1.Message);
 
       _v1beta.QueryCommunityPoolResponse = QueryCommunityPoolResponse;
+
+      var UnimplementedQueryService = function UnimplementedQueryService() {
+        (0, _classCallCheck2["default"])(this, UnimplementedQueryService);
+      };
+
+      (0, _defineProperty2["default"])(UnimplementedQueryService, "definition", {
+        Params: {
+          path: "/cosmos.distribution.v1beta1.Query/Params",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return QueryParamsRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return QueryParamsResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        ValidatorOutstandingRewards: {
+          path: "/cosmos.distribution.v1beta1.Query/ValidatorOutstandingRewards",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return QueryValidatorOutstandingRewardsRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return QueryValidatorOutstandingRewardsResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        ValidatorCommission: {
+          path: "/cosmos.distribution.v1beta1.Query/ValidatorCommission",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return QueryValidatorCommissionRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return QueryValidatorCommissionResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        ValidatorSlashes: {
+          path: "/cosmos.distribution.v1beta1.Query/ValidatorSlashes",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return QueryValidatorSlashesRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return QueryValidatorSlashesResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        DelegationRewards: {
+          path: "/cosmos.distribution.v1beta1.Query/DelegationRewards",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return QueryDelegationRewardsRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return QueryDelegationRewardsResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        DelegationTotalRewards: {
+          path: "/cosmos.distribution.v1beta1.Query/DelegationTotalRewards",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return QueryDelegationTotalRewardsRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return QueryDelegationTotalRewardsResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        DelegatorValidators: {
+          path: "/cosmos.distribution.v1beta1.Query/DelegatorValidators",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return QueryDelegatorValidatorsRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return QueryDelegatorValidatorsResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        DelegatorWithdrawAddress: {
+          path: "/cosmos.distribution.v1beta1.Query/DelegatorWithdrawAddress",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return QueryDelegatorWithdrawAddressRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return QueryDelegatorWithdrawAddressResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        CommunityPool: {
+          path: "/cosmos.distribution.v1beta1.Query/CommunityPool",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return QueryCommunityPoolRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return QueryCommunityPoolResponse.deserialize(new Uint8Array(bytes));
+          }
+        }
+      });
+      _v1beta.UnimplementedQueryService = UnimplementedQueryService;
+
+      var QueryClient = /*#__PURE__*/function (_grpc_1$makeGenericCl) {
+        (0, _inherits2["default"])(QueryClient, _grpc_1$makeGenericCl);
+
+        var _super19 = _createSuper(QueryClient);
+
+        function QueryClient(address, credentials, _options) {
+          var _thisSuper, _thisSuper2, _thisSuper3, _thisSuper4, _thisSuper5, _thisSuper6, _thisSuper7, _thisSuper8, _thisSuper9, _this24;
+
+          (0, _classCallCheck2["default"])(this, QueryClient);
+          _this24 = _super19.call(this, address, credentials, _options);
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this24), "Params", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper = (0, _assertThisInitialized2["default"])(_this24), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "Params", _thisSuper).call(_thisSuper, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this24), "ValidatorOutstandingRewards", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper2 = (0, _assertThisInitialized2["default"])(_this24), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "ValidatorOutstandingRewards", _thisSuper2).call(_thisSuper2, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this24), "ValidatorCommission", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper3 = (0, _assertThisInitialized2["default"])(_this24), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "ValidatorCommission", _thisSuper3).call(_thisSuper3, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this24), "ValidatorSlashes", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper4 = (0, _assertThisInitialized2["default"])(_this24), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "ValidatorSlashes", _thisSuper4).call(_thisSuper4, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this24), "DelegationRewards", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper5 = (0, _assertThisInitialized2["default"])(_this24), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "DelegationRewards", _thisSuper5).call(_thisSuper5, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this24), "DelegationTotalRewards", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper6 = (0, _assertThisInitialized2["default"])(_this24), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "DelegationTotalRewards", _thisSuper6).call(_thisSuper6, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this24), "DelegatorValidators", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper7 = (0, _assertThisInitialized2["default"])(_this24), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "DelegatorValidators", _thisSuper7).call(_thisSuper7, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this24), "DelegatorWithdrawAddress", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper8 = (0, _assertThisInitialized2["default"])(_this24), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "DelegatorWithdrawAddress", _thisSuper8).call(_thisSuper8, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this24), "CommunityPool", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper9 = (0, _assertThisInitialized2["default"])(_this24), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "CommunityPool", _thisSuper9).call(_thisSuper9, message, metadata, options, callback);
+          });
+          return _this24;
+        }
+
+        return QueryClient;
+      }(grpc_1.makeGenericClientConstructor(UnimplementedQueryService.definition, "Query", {}));
+
+      _v1beta.QueryClient = QueryClient;
     })(v1beta1 || (v1beta1 = _distribution.v1beta1 || (_distribution.v1beta1 = {})));
   })(distribution || (distribution = _cosmos.distribution || (_cosmos.distribution = {})));
 })(cosmos || (exports.cosmos = cosmos = {}));

@@ -75,6 +75,14 @@ exports.ethermint = ethermint;
             if ("base_fee" in data && data.base_fee != undefined) {
               _this.base_fee = data.base_fee;
             }
+
+            if ("min_gas_price" in data && data.min_gas_price != undefined) {
+              _this.min_gas_price = data.min_gas_price;
+            }
+
+            if ("min_gas_multiplier" in data && data.min_gas_multiplier != undefined) {
+              _this.min_gas_multiplier = data.min_gas_multiplier;
+            }
           }
 
           return _this;
@@ -121,6 +129,22 @@ exports.ethermint = ethermint;
             pb_1.Message.setField(this, 6, value);
           }
         }, {
+          key: "min_gas_price",
+          get: function get() {
+            return pb_1.Message.getField(this, 7);
+          },
+          set: function set(value) {
+            pb_1.Message.setField(this, 7, value);
+          }
+        }, {
+          key: "min_gas_multiplier",
+          get: function get() {
+            return pb_1.Message.getField(this, 8);
+          },
+          set: function set(value) {
+            pb_1.Message.setField(this, 8, value);
+          }
+        }, {
           key: "toObject",
           value: function toObject() {
             var data = {};
@@ -145,6 +169,14 @@ exports.ethermint = ethermint;
               data.base_fee = this.base_fee;
             }
 
+            if (this.min_gas_price != null) {
+              data.min_gas_price = this.min_gas_price;
+            }
+
+            if (this.min_gas_multiplier != null) {
+              data.min_gas_multiplier = this.min_gas_multiplier;
+            }
+
             return data;
           }
         }, {
@@ -156,6 +188,8 @@ exports.ethermint = ethermint;
             if (this.elasticity_multiplier !== undefined) writer.writeUint32(3, this.elasticity_multiplier);
             if (this.enable_height !== undefined) writer.writeInt64(5, this.enable_height);
             if (typeof this.base_fee === "string" && this.base_fee.length) writer.writeString(6, this.base_fee);
+            if (typeof this.min_gas_price === "string" && this.min_gas_price.length) writer.writeString(7, this.min_gas_price);
+            if (typeof this.min_gas_multiplier === "string" && this.min_gas_multiplier.length) writer.writeString(8, this.min_gas_multiplier);
             if (!w) return writer.getResultBuffer();
           }
         }, {
@@ -188,6 +222,14 @@ exports.ethermint = ethermint;
               message.base_fee = data.base_fee;
             }
 
+            if (data.min_gas_price != null) {
+              message.min_gas_price = data.min_gas_price;
+            }
+
+            if (data.min_gas_multiplier != null) {
+              message.min_gas_multiplier = data.min_gas_multiplier;
+            }
+
             return message;
           }
         }, {
@@ -218,6 +260,14 @@ exports.ethermint = ethermint;
 
                 case 6:
                   message.base_fee = reader.readString();
+                  break;
+
+                case 7:
+                  message.min_gas_price = reader.readString();
+                  break;
+
+                case 8:
+                  message.min_gas_multiplier = reader.readString();
                   break;
 
                 default:

@@ -1,0 +1,70 @@
+syntax = "proto3";
+package kynno.rewardshare.v1;
+
+import "google/api/annotations.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/kynnoenterprise/core/x/rewardshare/types";
+
+// Msg defines the fees Msg service.
+service Msg {
+  // RegisterRewardshare registers a new contract for receiving transaction fees
+  rpc RegisterRewardshare(MsgRegisterRewardshare) returns (MsgRegisterRewardshareResponse) {
+    option (google.api.http).post = "/kynno/rewardshare/v1/tx/register_rewardshare";
+  };
+  // UpdateRewardshare updates the withdrawer address of a rewardshare
+  rpc UpdateRewardshare(MsgUpdateRewardshare) returns (MsgUpdateRewardshareResponse) {
+    option (google.api.http).post = "/kynno/rewardshare/v1/tx/update_rewardshare";
+  };
+  // CancelRewardshare cancels a contract's fee registration and further receival
+  // of transaction fees
+  rpc CancelRewardshare(MsgCancelRewardshare) returns (MsgCancelRewardshareResponse) {
+    option (google.api.http).post = "/kynno/rewardshare/v1/tx/cancel_rewardshare";
+  };
+}
+
+// MsgRegisterRewardshare defines a message that registers a Rewardshare
+message MsgRegisterRewardshare {
+  option (gogoproto.equal) = false;
+  // contract hex address
+  string contract_address = 1;
+  // bech32 address of message sender, must be the same as the origin EOA
+  // sending the transaction which deploys the contract
+  string deployer_address = 2;
+  // bech32 address of account receiving the transaction fees
+  string withdrawer_address = 3;
+  // array of nonces from the address path, where the last nonce is the nonce
+  // that determines the contract's address - it can be an EOA nonce or a
+  // factory contract nonce
+  repeated uint64 nonces = 4;
+}
+
+// MsgRegisterRewardshareResponse defines the MsgRegisterRewardshare response type
+message MsgRegisterRewardshareResponse {}
+
+// MsgUpdateRewardshare defines a message that updates the withdrawer address for a
+// registered Rewardshare
+message MsgUpdateRewardshare {
+  option (gogoproto.equal) = false;
+  // contract hex address
+  string contract_address = 1;
+  // deployer bech32 address
+  string deployer_address = 2;
+  // new withdrawer bech32 address for receiving the transaction fees
+  string withdrawer_address = 3;
+}
+
+// MsgUpdateRewardshareResponse defines the MsgUpdateRewardshare response type
+message MsgUpdateRewardshareResponse {}
+
+// MsgCancelRewardshare defines a message that cancels a registered Rewardshare
+message MsgCancelRewardshare {
+  option (gogoproto.equal) = false;
+  // contract hex address
+  string contract_address = 1;
+  // deployer bech32 address
+  string deployer_address = 2;
+}
+
+// MsgCancelRewardshareResponse defines the MsgCancelRewardshare response type
+message MsgCancelRewardshareResponse {}

@@ -1,7 +1,8 @@
 /// <reference types="node" />
 import * as pb_1 from "google-protobuf";
+import * as grpc_1 from "@grpc/grpc-js";
 export declare namespace kynno.nft {
-    class MsgIssueDenom extends pb_1.Message {
+    export class MsgIssueDenom extends pb_1.Message {
         constructor(data?: any[] | {
             id?: string;
             name?: string;
@@ -69,7 +70,7 @@ export declare namespace kynno.nft {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): MsgIssueDenom;
     }
-    class MsgIssueDenomResponse extends pb_1.Message {
+    export class MsgIssueDenomResponse extends pb_1.Message {
         constructor(data?: any[] | {});
         static fromObject(data: {}): MsgIssueDenomResponse;
         toObject(): {};
@@ -79,7 +80,7 @@ export declare namespace kynno.nft {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): MsgIssueDenomResponse;
     }
-    class MsgTransferNFT extends pb_1.Message {
+    export class MsgTransferNFT extends pb_1.Message {
         constructor(data?: any[] | {
             id?: string;
             denom_id?: string;
@@ -132,7 +133,7 @@ export declare namespace kynno.nft {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): MsgTransferNFT;
     }
-    class MsgTransferNFTResponse extends pb_1.Message {
+    export class MsgTransferNFTResponse extends pb_1.Message {
         constructor(data?: any[] | {});
         static fromObject(data: {}): MsgTransferNFTResponse;
         toObject(): {};
@@ -142,7 +143,7 @@ export declare namespace kynno.nft {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): MsgTransferNFTResponse;
     }
-    class MsgEditNFT extends pb_1.Message {
+    export class MsgEditNFT extends pb_1.Message {
         constructor(data?: any[] | {
             id?: string;
             denom_id?: string;
@@ -190,7 +191,7 @@ export declare namespace kynno.nft {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): MsgEditNFT;
     }
-    class MsgEditNFTResponse extends pb_1.Message {
+    export class MsgEditNFTResponse extends pb_1.Message {
         constructor(data?: any[] | {});
         static fromObject(data: {}): MsgEditNFTResponse;
         toObject(): {};
@@ -200,7 +201,7 @@ export declare namespace kynno.nft {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): MsgEditNFTResponse;
     }
-    class MsgMintNFT extends pb_1.Message {
+    export class MsgMintNFT extends pb_1.Message {
         constructor(data?: any[] | {
             id?: string;
             denom_id?: string;
@@ -253,7 +254,7 @@ export declare namespace kynno.nft {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): MsgMintNFT;
     }
-    class MsgMintNFTResponse extends pb_1.Message {
+    export class MsgMintNFTResponse extends pb_1.Message {
         constructor(data?: any[] | {});
         static fromObject(data: {}): MsgMintNFTResponse;
         toObject(): {};
@@ -263,7 +264,7 @@ export declare namespace kynno.nft {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): MsgMintNFTResponse;
     }
-    class MsgBurnNFT extends pb_1.Message {
+    export class MsgBurnNFT extends pb_1.Message {
         constructor(data?: any[] | {
             id?: string;
             denom_id?: string;
@@ -291,7 +292,7 @@ export declare namespace kynno.nft {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): MsgBurnNFT;
     }
-    class MsgBurnNFTResponse extends pb_1.Message {
+    export class MsgBurnNFTResponse extends pb_1.Message {
         constructor(data?: any[] | {});
         static fromObject(data: {}): MsgBurnNFTResponse;
         toObject(): {};
@@ -301,7 +302,7 @@ export declare namespace kynno.nft {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): MsgBurnNFTResponse;
     }
-    class MsgTransferDenom extends pb_1.Message {
+    export class MsgTransferDenom extends pb_1.Message {
         constructor(data?: any[] | {
             id?: string;
             sender?: string;
@@ -329,7 +330,7 @@ export declare namespace kynno.nft {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): MsgTransferDenom;
     }
-    class MsgTransferDenomResponse extends pb_1.Message {
+    export class MsgTransferDenomResponse extends pb_1.Message {
         constructor(data?: any[] | {});
         static fromObject(data: {}): MsgTransferDenomResponse;
         toObject(): {};
@@ -339,7 +340,13 @@ export declare namespace kynno.nft {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): MsgTransferDenomResponse;
     }
-    abstract class UnimplementedMsgService {
+    interface GrpcUnaryServiceInterface<P, R> {
+        (message: P, metadata: grpc_1.Metadata, options: grpc_1.CallOptions, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
+        (message: P, metadata: grpc_1.Metadata, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
+        (message: P, options: grpc_1.CallOptions, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
+        (message: P, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
+    }
+    export abstract class UnimplementedMsgService {
         static definition: {
             IssueDenom: {
                 path: string;
@@ -396,5 +403,23 @@ export declare namespace kynno.nft {
                 responseDeserialize: (bytes: Buffer) => MsgTransferDenomResponse;
             };
         };
+        [method: string]: grpc_1.UntypedHandleCall;
+        abstract IssueDenom(call: grpc_1.ServerUnaryCall<MsgIssueDenom, MsgIssueDenomResponse>, callback: grpc_1.sendUnaryData<MsgIssueDenomResponse>): void;
+        abstract MintNFT(call: grpc_1.ServerUnaryCall<MsgMintNFT, MsgMintNFTResponse>, callback: grpc_1.sendUnaryData<MsgMintNFTResponse>): void;
+        abstract EditNFT(call: grpc_1.ServerUnaryCall<MsgEditNFT, MsgEditNFTResponse>, callback: grpc_1.sendUnaryData<MsgEditNFTResponse>): void;
+        abstract TransferNFT(call: grpc_1.ServerUnaryCall<MsgTransferNFT, MsgTransferNFTResponse>, callback: grpc_1.sendUnaryData<MsgTransferNFTResponse>): void;
+        abstract BurnNFT(call: grpc_1.ServerUnaryCall<MsgBurnNFT, MsgBurnNFTResponse>, callback: grpc_1.sendUnaryData<MsgBurnNFTResponse>): void;
+        abstract TransferDenom(call: grpc_1.ServerUnaryCall<MsgTransferDenom, MsgTransferDenomResponse>, callback: grpc_1.sendUnaryData<MsgTransferDenomResponse>): void;
     }
+    const MsgClient_base: grpc_1.ServiceClientConstructor;
+    export class MsgClient extends MsgClient_base {
+        constructor(address: string, credentials: grpc_1.ChannelCredentials, options?: Partial<grpc_1.ChannelOptions>);
+        IssueDenom: GrpcUnaryServiceInterface<MsgIssueDenom, MsgIssueDenomResponse>;
+        MintNFT: GrpcUnaryServiceInterface<MsgMintNFT, MsgMintNFTResponse>;
+        EditNFT: GrpcUnaryServiceInterface<MsgEditNFT, MsgEditNFTResponse>;
+        TransferNFT: GrpcUnaryServiceInterface<MsgTransferNFT, MsgTransferNFTResponse>;
+        BurnNFT: GrpcUnaryServiceInterface<MsgBurnNFT, MsgBurnNFTResponse>;
+        TransferDenom: GrpcUnaryServiceInterface<MsgTransferDenom, MsgTransferDenomResponse>;
+    }
+    export {};
 }

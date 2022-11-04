@@ -21,6 +21,8 @@ var modules = _interopRequireWildcard(require("./modules"));
 
 var _rpcClient = require("./nets/rpc-client");
 
+var _wsClient = require("./nets/ws-client");
+
 var types = _interopRequireWildcard(require("./types"));
 
 var _errors = require("./errors");
@@ -42,12 +44,12 @@ var Client = /*#__PURE__*/function () {
     (0, _classCallCheck2["default"])(this, Client);
     (0, _defineProperty2["default"])(this, "config", void 0);
     (0, _defineProperty2["default"])(this, "_rpcClient", void 0);
+    (0, _defineProperty2["default"])(this, "_wsClient", void 0);
     (0, _defineProperty2["default"])(this, "_auth", void 0);
     (0, _defineProperty2["default"])(this, "_bank", void 0);
     (0, _defineProperty2["default"])(this, "_keys", void 0);
     (0, _defineProperty2["default"])(this, "_protobuf", void 0);
     (0, _defineProperty2["default"])(this, "_staking", void 0);
-    (0, _defineProperty2["default"])(this, "_tx", void 0);
     (0, _defineProperty2["default"])(this, "_gov", void 0);
     (0, _defineProperty2["default"])(this, "_slashing", void 0);
     (0, _defineProperty2["default"])(this, "_distribution", void 0);
@@ -103,6 +105,17 @@ var Client = /*#__PURE__*/function () {
 
       return this._rpcClient;
     }
+    /** Axios client for tendermint rpc requests */
+
+  }, {
+    key: "wsClient",
+    get: function get() {
+      if (!this._wsClient) {
+        this._wsClient = new _wsClient.WsClient(this.config.wsUrl);
+      }
+
+      return this._wsClient;
+    }
     /** Auth module */
 
   }, {
@@ -157,17 +170,6 @@ var Client = /*#__PURE__*/function () {
       }
 
       return this._staking;
-    }
-    /** Tx module */
-
-  }, {
-    key: "tx",
-    get: function get() {
-      if (!this._tx) {
-        this._tx = new modules.Tx(this);
-      }
-
-      return this._tx;
     }
     /** Gov module */
 
@@ -399,6 +401,32 @@ var Client = /*#__PURE__*/function () {
       this._rpcClient = new _rpcClient.RpcClient(this.config.rpcConfig);
       return this;
     }
+    /**
+     * Set default websocket Url
+     *
+     * @param wsUrl Default websocket Url
+     * @returns The SDK itself
+     */
+
+  }, {
+    key: "withWebsocket",
+    value: function withWebsocket(wsUrl) {
+      this.config.wsUrl = wsUrl;
+      return this;
+    }
+    /**
+     * Set default websocket Url
+     *
+     * @param wsUrl Default websocket Url
+     * @returns The SDK itself
+     */
+
+  }, {
+    key: "withRpcUrl",
+    value: function withRpcUrl(rpcUrl) {
+      this.config.rpcUrl = rpcUrl;
+      return this;
+    }
   }]);
   return Client;
 }();
@@ -422,6 +450,8 @@ var DefaultClientConfig = function DefaultClientConfig() {
   (0, _defineProperty2["default"])(this, "keyDAO", void 0);
   (0, _defineProperty2["default"])(this, "bech32Prefix", void 0);
   (0, _defineProperty2["default"])(this, "rpcConfig", void 0);
+  (0, _defineProperty2["default"])(this, "wsUrl", void 0);
+  (0, _defineProperty2["default"])(this, "rpcUrl", void 0);
   this.node = '';
   this.api = '';
   this.provider = _ethers.ethers.getDefaultProvider();
@@ -439,6 +469,8 @@ var DefaultClientConfig = function DefaultClientConfig() {
   this.rpcConfig = {
     timeout: 2000
   };
+  this.wsUrl = "";
+  this.rpcUrl = "";
 };
 /**
  * Key DAO Interface, to be implemented by apps if they need the key management.

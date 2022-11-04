@@ -9,6 +9,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ibc = void 0;
 
+var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
@@ -32,6 +36,8 @@ var dependency_3 = _interopRequireWildcard(require("./channel"));
 var dependency_5 = _interopRequireWildcard(require("./../../../../google/protobuf/any"));
 
 var pb_1 = _interopRequireWildcard(require("google-protobuf"));
+
+var grpc_1 = _interopRequireWildcard(require("@grpc/grpc-js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -4030,6 +4036,292 @@ exports.ibc = ibc;
         }(pb_1.Message);
 
         _v.QueryNextSequenceReceiveResponse = QueryNextSequenceReceiveResponse;
+
+        var UnimplementedQueryService = function UnimplementedQueryService() {
+          (0, _classCallCheck2["default"])(this, UnimplementedQueryService);
+        };
+
+        (0, _defineProperty2["default"])(UnimplementedQueryService, "definition", {
+          Channel: {
+            path: "/ibc.core.channel.v1.Query/Channel",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return QueryChannelRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return QueryChannelResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          Channels: {
+            path: "/ibc.core.channel.v1.Query/Channels",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return QueryChannelsRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return QueryChannelsResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          ConnectionChannels: {
+            path: "/ibc.core.channel.v1.Query/ConnectionChannels",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return QueryConnectionChannelsRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return QueryConnectionChannelsResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          ChannelClientState: {
+            path: "/ibc.core.channel.v1.Query/ChannelClientState",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return QueryChannelClientStateRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return QueryChannelClientStateResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          ChannelConsensusState: {
+            path: "/ibc.core.channel.v1.Query/ChannelConsensusState",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return QueryChannelConsensusStateRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return QueryChannelConsensusStateResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          PacketCommitment: {
+            path: "/ibc.core.channel.v1.Query/PacketCommitment",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return QueryPacketCommitmentRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return QueryPacketCommitmentResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          PacketCommitments: {
+            path: "/ibc.core.channel.v1.Query/PacketCommitments",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return QueryPacketCommitmentsRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return QueryPacketCommitmentsResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          PacketReceipt: {
+            path: "/ibc.core.channel.v1.Query/PacketReceipt",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return QueryPacketReceiptRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return QueryPacketReceiptResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          PacketAcknowledgement: {
+            path: "/ibc.core.channel.v1.Query/PacketAcknowledgement",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return QueryPacketAcknowledgementRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return QueryPacketAcknowledgementResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          PacketAcknowledgements: {
+            path: "/ibc.core.channel.v1.Query/PacketAcknowledgements",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return QueryPacketAcknowledgementsRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return QueryPacketAcknowledgementsResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          UnreceivedPackets: {
+            path: "/ibc.core.channel.v1.Query/UnreceivedPackets",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return QueryUnreceivedPacketsRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return QueryUnreceivedPacketsResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          UnreceivedAcks: {
+            path: "/ibc.core.channel.v1.Query/UnreceivedAcks",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return QueryUnreceivedAcksRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return QueryUnreceivedAcksResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          NextSequenceReceive: {
+            path: "/ibc.core.channel.v1.Query/NextSequenceReceive",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return QueryNextSequenceReceiveRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return QueryNextSequenceReceiveResponse.deserialize(new Uint8Array(bytes));
+            }
+          }
+        });
+        _v.UnimplementedQueryService = UnimplementedQueryService;
+
+        var QueryClient = /*#__PURE__*/function (_grpc_1$makeGenericCl) {
+          (0, _inherits2["default"])(QueryClient, _grpc_1$makeGenericCl);
+
+          var _super27 = _createSuper(QueryClient);
+
+          function QueryClient(address, credentials, _options) {
+            var _thisSuper, _thisSuper2, _thisSuper3, _thisSuper4, _thisSuper5, _thisSuper6, _thisSuper7, _thisSuper8, _thisSuper9, _thisSuper10, _thisSuper11, _thisSuper12, _thisSuper13, _this44;
+
+            (0, _classCallCheck2["default"])(this, QueryClient);
+            _this44 = _super27.call(this, address, credentials, _options);
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this44), "Channel", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper = (0, _assertThisInitialized2["default"])(_this44), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "Channel", _thisSuper).call(_thisSuper, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this44), "Channels", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper2 = (0, _assertThisInitialized2["default"])(_this44), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "Channels", _thisSuper2).call(_thisSuper2, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this44), "ConnectionChannels", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper3 = (0, _assertThisInitialized2["default"])(_this44), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "ConnectionChannels", _thisSuper3).call(_thisSuper3, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this44), "ChannelClientState", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper4 = (0, _assertThisInitialized2["default"])(_this44), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "ChannelClientState", _thisSuper4).call(_thisSuper4, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this44), "ChannelConsensusState", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper5 = (0, _assertThisInitialized2["default"])(_this44), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "ChannelConsensusState", _thisSuper5).call(_thisSuper5, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this44), "PacketCommitment", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper6 = (0, _assertThisInitialized2["default"])(_this44), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "PacketCommitment", _thisSuper6).call(_thisSuper6, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this44), "PacketCommitments", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper7 = (0, _assertThisInitialized2["default"])(_this44), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "PacketCommitments", _thisSuper7).call(_thisSuper7, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this44), "PacketReceipt", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper8 = (0, _assertThisInitialized2["default"])(_this44), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "PacketReceipt", _thisSuper8).call(_thisSuper8, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this44), "PacketAcknowledgement", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper9 = (0, _assertThisInitialized2["default"])(_this44), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "PacketAcknowledgement", _thisSuper9).call(_thisSuper9, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this44), "PacketAcknowledgements", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper10 = (0, _assertThisInitialized2["default"])(_this44), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "PacketAcknowledgements", _thisSuper10).call(_thisSuper10, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this44), "UnreceivedPackets", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper11 = (0, _assertThisInitialized2["default"])(_this44), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "UnreceivedPackets", _thisSuper11).call(_thisSuper11, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this44), "UnreceivedAcks", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper12 = (0, _assertThisInitialized2["default"])(_this44), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "UnreceivedAcks", _thisSuper12).call(_thisSuper12, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this44), "NextSequenceReceive", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper13 = (0, _assertThisInitialized2["default"])(_this44), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "NextSequenceReceive", _thisSuper13).call(_thisSuper13, message, metadata, options, callback);
+            });
+            return _this44;
+          }
+
+          return QueryClient;
+        }(grpc_1.makeGenericClientConstructor(UnimplementedQueryService.definition, "Query", {}));
+
+        _v.QueryClient = QueryClient;
       })(v1 || (v1 = _channel.v1 || (_channel.v1 = {})));
     })(channel || (channel = _core.channel || (_core.channel = {})));
   })(core || (core = _ibc.core || (_ibc.core = {})));

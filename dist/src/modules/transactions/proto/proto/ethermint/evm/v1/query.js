@@ -9,6 +9,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ethermint = void 0;
 
+var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
@@ -32,6 +36,8 @@ var dependency_5 = _interopRequireWildcard(require("./tx"));
 var dependency_6 = _interopRequireWildcard(require("./../../../google/protobuf/timestamp"));
 
 var pb_1 = _interopRequireWildcard(require("google-protobuf"));
+
+var grpc_1 = _interopRequireWildcard(require("@grpc/grpc-js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -2057,10 +2063,6 @@ exports.ethermint = ethermint;
               _this22.msg = data.msg;
             }
 
-            if ("tx_index" in data && data.tx_index != undefined) {
-              _this22.tx_index = data.tx_index;
-            }
-
             if ("trace_config" in data && data.trace_config != undefined) {
               _this22.trace_config = data.trace_config;
             }
@@ -2092,14 +2094,6 @@ exports.ethermint = ethermint;
           },
           set: function set(value) {
             pb_1.Message.setWrapperField(this, 1, value);
-          }
-        }, {
-          key: "tx_index",
-          get: function get() {
-            return pb_1.Message.getField(this, 2);
-          },
-          set: function set(value) {
-            pb_1.Message.setField(this, 2, value);
           }
         }, {
           key: "trace_config",
@@ -2160,10 +2154,6 @@ exports.ethermint = ethermint;
               data.msg = this.msg.toObject();
             }
 
-            if (this.tx_index != null) {
-              data.tx_index = this.tx_index;
-            }
-
             if (this.trace_config != null) {
               data.trace_config = this.trace_config.toObject();
             }
@@ -2197,7 +2187,6 @@ exports.ethermint = ethermint;
             if (this.msg !== undefined) writer.writeMessage(1, this.msg, function () {
               return _this23.msg.serialize(writer);
             });
-            if (this.tx_index !== undefined) writer.writeUint64(2, this.tx_index);
             if (this.trace_config !== undefined) writer.writeMessage(3, this.trace_config, function () {
               return _this23.trace_config.serialize(writer);
             });
@@ -2223,10 +2212,6 @@ exports.ethermint = ethermint;
 
             if (data.msg != null) {
               message.msg = dependency_5.ethermint.evm.v1.MsgEthereumTx.fromObject(data.msg);
-            }
-
-            if (data.tx_index != null) {
-              message.tx_index = data.tx_index;
             }
 
             if (data.trace_config != null) {
@@ -2267,10 +2252,6 @@ exports.ethermint = ethermint;
                   reader.readMessage(message.msg, function () {
                     return message.msg = dependency_5.ethermint.evm.v1.MsgEthereumTx.deserialize(reader);
                   });
-                  break;
-
-                case 2:
-                  message.tx_index = reader.readUint64();
                   break;
 
                 case 3:
@@ -2729,6 +2710,435 @@ exports.ethermint = ethermint;
       }(pb_1.Message);
 
       _v.QueryTraceBlockResponse = QueryTraceBlockResponse;
+
+      var QueryBaseFeeRequest = /*#__PURE__*/function (_pb_1$Message23) {
+        (0, _inherits2["default"])(QueryBaseFeeRequest, _pb_1$Message23);
+
+        var _super23 = _createSuper(QueryBaseFeeRequest);
+
+        function QueryBaseFeeRequest(data) {
+          var _this28;
+
+          (0, _classCallCheck2["default"])(this, QueryBaseFeeRequest);
+          _this28 = _super23.call(this);
+          pb_1.Message.initialize((0, _assertThisInitialized2["default"])(_this28), Array.isArray(data) ? data : [], 0, -1, [], []);
+
+          if (!Array.isArray(data) && (0, _typeof2["default"])(data) == "object") {}
+
+          return _this28;
+        }
+
+        (0, _createClass2["default"])(QueryBaseFeeRequest, [{
+          key: "toObject",
+          value: function toObject() {
+            var data = {};
+            return data;
+          }
+        }, {
+          key: "serialize",
+          value: function serialize(w) {
+            var writer = w || new pb_1.BinaryWriter();
+            if (!w) return writer.getResultBuffer();
+          }
+        }, {
+          key: "serializeBinary",
+          value: function serializeBinary() {
+            return this.serialize();
+          }
+        }], [{
+          key: "fromObject",
+          value: function fromObject(data) {
+            var message = new QueryBaseFeeRequest({});
+            return message;
+          }
+        }, {
+          key: "deserialize",
+          value: function deserialize(bytes) {
+            var reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
+                message = new QueryBaseFeeRequest();
+
+            while (reader.nextField()) {
+              if (reader.isEndGroup()) break;
+
+              switch (reader.getFieldNumber()) {
+                default:
+                  reader.skipField();
+              }
+            }
+
+            return message;
+          }
+        }, {
+          key: "deserializeBinary",
+          value: function deserializeBinary(bytes) {
+            return QueryBaseFeeRequest.deserialize(bytes);
+          }
+        }]);
+        return QueryBaseFeeRequest;
+      }(pb_1.Message);
+
+      _v.QueryBaseFeeRequest = QueryBaseFeeRequest;
+
+      var QueryBaseFeeResponse = /*#__PURE__*/function (_pb_1$Message24) {
+        (0, _inherits2["default"])(QueryBaseFeeResponse, _pb_1$Message24);
+
+        var _super24 = _createSuper(QueryBaseFeeResponse);
+
+        function QueryBaseFeeResponse(data) {
+          var _this29;
+
+          (0, _classCallCheck2["default"])(this, QueryBaseFeeResponse);
+          _this29 = _super24.call(this);
+          pb_1.Message.initialize((0, _assertThisInitialized2["default"])(_this29), Array.isArray(data) ? data : [], 0, -1, [], []);
+
+          if (!Array.isArray(data) && (0, _typeof2["default"])(data) == "object") {
+            if ("base_fee" in data && data.base_fee != undefined) {
+              _this29.base_fee = data.base_fee;
+            }
+          }
+
+          return _this29;
+        }
+
+        (0, _createClass2["default"])(QueryBaseFeeResponse, [{
+          key: "base_fee",
+          get: function get() {
+            return pb_1.Message.getField(this, 1);
+          },
+          set: function set(value) {
+            pb_1.Message.setField(this, 1, value);
+          }
+        }, {
+          key: "toObject",
+          value: function toObject() {
+            var data = {};
+
+            if (this.base_fee != null) {
+              data.base_fee = this.base_fee;
+            }
+
+            return data;
+          }
+        }, {
+          key: "serialize",
+          value: function serialize(w) {
+            var writer = w || new pb_1.BinaryWriter();
+            if (typeof this.base_fee === "string" && this.base_fee.length) writer.writeString(1, this.base_fee);
+            if (!w) return writer.getResultBuffer();
+          }
+        }, {
+          key: "serializeBinary",
+          value: function serializeBinary() {
+            return this.serialize();
+          }
+        }], [{
+          key: "fromObject",
+          value: function fromObject(data) {
+            var message = new QueryBaseFeeResponse({});
+
+            if (data.base_fee != null) {
+              message.base_fee = data.base_fee;
+            }
+
+            return message;
+          }
+        }, {
+          key: "deserialize",
+          value: function deserialize(bytes) {
+            var reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
+                message = new QueryBaseFeeResponse();
+
+            while (reader.nextField()) {
+              if (reader.isEndGroup()) break;
+
+              switch (reader.getFieldNumber()) {
+                case 1:
+                  message.base_fee = reader.readString();
+                  break;
+
+                default:
+                  reader.skipField();
+              }
+            }
+
+            return message;
+          }
+        }, {
+          key: "deserializeBinary",
+          value: function deserializeBinary(bytes) {
+            return QueryBaseFeeResponse.deserialize(bytes);
+          }
+        }]);
+        return QueryBaseFeeResponse;
+      }(pb_1.Message);
+
+      _v.QueryBaseFeeResponse = QueryBaseFeeResponse;
+
+      var UnimplementedQueryService = function UnimplementedQueryService() {
+        (0, _classCallCheck2["default"])(this, UnimplementedQueryService);
+      };
+
+      (0, _defineProperty2["default"])(UnimplementedQueryService, "definition", {
+        Account: {
+          path: "/ethermint.evm.v1.Query/Account",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return QueryAccountRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return QueryAccountResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        CosmosAccount: {
+          path: "/ethermint.evm.v1.Query/CosmosAccount",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return QueryCosmosAccountRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return QueryCosmosAccountResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        ValidatorAccount: {
+          path: "/ethermint.evm.v1.Query/ValidatorAccount",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return QueryValidatorAccountRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return QueryValidatorAccountResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        Balance: {
+          path: "/ethermint.evm.v1.Query/Balance",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return QueryBalanceRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return QueryBalanceResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        Storage: {
+          path: "/ethermint.evm.v1.Query/Storage",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return QueryStorageRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return QueryStorageResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        Code: {
+          path: "/ethermint.evm.v1.Query/Code",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return QueryCodeRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return QueryCodeResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        Params: {
+          path: "/ethermint.evm.v1.Query/Params",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return QueryParamsRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return QueryParamsResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        EthCall: {
+          path: "/ethermint.evm.v1.Query/EthCall",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return EthCallRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return dependency_5.ethermint.evm.v1.MsgEthereumTxResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        EstimateGas: {
+          path: "/ethermint.evm.v1.Query/EstimateGas",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return EthCallRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return EstimateGasResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        TraceTx: {
+          path: "/ethermint.evm.v1.Query/TraceTx",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return QueryTraceTxRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return QueryTraceTxResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        TraceBlock: {
+          path: "/ethermint.evm.v1.Query/TraceBlock",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return QueryTraceBlockRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return QueryTraceBlockResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        BaseFee: {
+          path: "/ethermint.evm.v1.Query/BaseFee",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return QueryBaseFeeRequest.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return QueryBaseFeeResponse.deserialize(new Uint8Array(bytes));
+          }
+        }
+      });
+      _v.UnimplementedQueryService = UnimplementedQueryService;
+
+      var QueryClient = /*#__PURE__*/function (_grpc_1$makeGenericCl) {
+        (0, _inherits2["default"])(QueryClient, _grpc_1$makeGenericCl);
+
+        var _super25 = _createSuper(QueryClient);
+
+        function QueryClient(address, credentials, _options) {
+          var _thisSuper, _thisSuper2, _thisSuper3, _thisSuper4, _thisSuper5, _thisSuper6, _thisSuper7, _thisSuper8, _thisSuper9, _thisSuper10, _thisSuper11, _thisSuper12, _this30;
+
+          (0, _classCallCheck2["default"])(this, QueryClient);
+          _this30 = _super25.call(this, address, credentials, _options);
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this30), "Account", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper = (0, _assertThisInitialized2["default"])(_this30), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "Account", _thisSuper).call(_thisSuper, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this30), "CosmosAccount", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper2 = (0, _assertThisInitialized2["default"])(_this30), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "CosmosAccount", _thisSuper2).call(_thisSuper2, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this30), "ValidatorAccount", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper3 = (0, _assertThisInitialized2["default"])(_this30), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "ValidatorAccount", _thisSuper3).call(_thisSuper3, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this30), "Balance", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper4 = (0, _assertThisInitialized2["default"])(_this30), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "Balance", _thisSuper4).call(_thisSuper4, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this30), "Storage", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper5 = (0, _assertThisInitialized2["default"])(_this30), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "Storage", _thisSuper5).call(_thisSuper5, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this30), "Code", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper6 = (0, _assertThisInitialized2["default"])(_this30), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "Code", _thisSuper6).call(_thisSuper6, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this30), "Params", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper7 = (0, _assertThisInitialized2["default"])(_this30), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "Params", _thisSuper7).call(_thisSuper7, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this30), "EthCall", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper8 = (0, _assertThisInitialized2["default"])(_this30), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "EthCall", _thisSuper8).call(_thisSuper8, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this30), "EstimateGas", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper9 = (0, _assertThisInitialized2["default"])(_this30), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "EstimateGas", _thisSuper9).call(_thisSuper9, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this30), "TraceTx", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper10 = (0, _assertThisInitialized2["default"])(_this30), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "TraceTx", _thisSuper10).call(_thisSuper10, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this30), "TraceBlock", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper11 = (0, _assertThisInitialized2["default"])(_this30), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "TraceBlock", _thisSuper11).call(_thisSuper11, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this30), "BaseFee", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper12 = (0, _assertThisInitialized2["default"])(_this30), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "BaseFee", _thisSuper12).call(_thisSuper12, message, metadata, options, callback);
+          });
+          return _this30;
+        }
+
+        return QueryClient;
+      }(grpc_1.makeGenericClientConstructor(UnimplementedQueryService.definition, "Query", {}));
+
+      _v.QueryClient = QueryClient;
     })(v1 || (v1 = _evm.v1 || (_evm.v1 = {})));
   })(evm || (evm = _ethermint.evm || (_ethermint.evm = {})));
 })(ethermint || (exports.ethermint = ethermint = {}));

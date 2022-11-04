@@ -106,7 +106,7 @@ export declare namespace kynno.erc20.v1 {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): RegisterERC20Proposal;
     }
-    class ToggleTokenRelayProposal extends pb_1.Message {
+    class ToggleTokenConversionProposal extends pb_1.Message {
         constructor(data?: any[] | {
             title?: string;
             description?: string;
@@ -122,7 +122,7 @@ export declare namespace kynno.erc20.v1 {
             title?: string;
             description?: string;
             token?: string;
-        }): ToggleTokenRelayProposal;
+        }): ToggleTokenConversionProposal;
         toObject(): {
             title?: string | undefined;
             description?: string | undefined;
@@ -130,41 +130,8 @@ export declare namespace kynno.erc20.v1 {
         };
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ToggleTokenRelayProposal;
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ToggleTokenConversionProposal;
         serializeBinary(): Uint8Array;
-        static deserializeBinary(bytes: Uint8Array): ToggleTokenRelayProposal;
-    }
-    class UpdateTokenPairERC20Proposal extends pb_1.Message {
-        constructor(data?: any[] | {
-            title?: string;
-            description?: string;
-            erc20_address?: string;
-            new_erc20_address?: string;
-        });
-        get title(): string;
-        set title(value: string);
-        get description(): string;
-        set description(value: string);
-        get erc20_address(): string;
-        set erc20_address(value: string);
-        get new_erc20_address(): string;
-        set new_erc20_address(value: string);
-        static fromObject(data: {
-            title?: string;
-            description?: string;
-            erc20_address?: string;
-            new_erc20_address?: string;
-        }): UpdateTokenPairERC20Proposal;
-        toObject(): {
-            title?: string | undefined;
-            description?: string | undefined;
-            erc20_address?: string | undefined;
-            new_erc20_address?: string | undefined;
-        };
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): UpdateTokenPairERC20Proposal;
-        serializeBinary(): Uint8Array;
-        static deserializeBinary(bytes: Uint8Array): UpdateTokenPairERC20Proposal;
+        static deserializeBinary(bytes: Uint8Array): ToggleTokenConversionProposal;
     }
 }

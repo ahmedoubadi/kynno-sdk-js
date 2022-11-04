@@ -9,6 +9,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.cosmos = void 0;
 
+var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
@@ -24,6 +28,8 @@ var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime
 var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
 
 var pb_1 = _interopRequireWildcard(require("google-protobuf"));
+
+var grpc_1 = _interopRequireWildcard(require("@grpc/grpc-js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -2976,6 +2982,152 @@ exports.cosmos = cosmos;
         }(pb_1.Message);
 
         _v2alpha.QueryMethodDescriptor = QueryMethodDescriptor;
+
+        var UnimplementedReflectionServiceService = function UnimplementedReflectionServiceService() {
+          (0, _classCallCheck2["default"])(this, UnimplementedReflectionServiceService);
+        };
+
+        (0, _defineProperty2["default"])(UnimplementedReflectionServiceService, "definition", {
+          GetAuthnDescriptor: {
+            path: "/cosmos.base.reflection.v2alpha1.ReflectionService/GetAuthnDescriptor",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return GetAuthnDescriptorRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return GetAuthnDescriptorResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          GetChainDescriptor: {
+            path: "/cosmos.base.reflection.v2alpha1.ReflectionService/GetChainDescriptor",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return GetChainDescriptorRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return GetChainDescriptorResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          GetCodecDescriptor: {
+            path: "/cosmos.base.reflection.v2alpha1.ReflectionService/GetCodecDescriptor",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return GetCodecDescriptorRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return GetCodecDescriptorResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          GetConfigurationDescriptor: {
+            path: "/cosmos.base.reflection.v2alpha1.ReflectionService/GetConfigurationDescriptor",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return GetConfigurationDescriptorRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return GetConfigurationDescriptorResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          GetQueryServicesDescriptor: {
+            path: "/cosmos.base.reflection.v2alpha1.ReflectionService/GetQueryServicesDescriptor",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return GetQueryServicesDescriptorRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return GetQueryServicesDescriptorResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          GetTxDescriptor: {
+            path: "/cosmos.base.reflection.v2alpha1.ReflectionService/GetTxDescriptor",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return GetTxDescriptorRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return GetTxDescriptorResponse.deserialize(new Uint8Array(bytes));
+            }
+          }
+        });
+        _v2alpha.UnimplementedReflectionServiceService = UnimplementedReflectionServiceService;
+
+        var ReflectionServiceClient = /*#__PURE__*/function (_grpc_1$makeGenericCl) {
+          (0, _inherits2["default"])(ReflectionServiceClient, _grpc_1$makeGenericCl);
+
+          var _super27 = _createSuper(ReflectionServiceClient);
+
+          function ReflectionServiceClient(address, credentials, _options) {
+            var _thisSuper, _thisSuper2, _thisSuper3, _thisSuper4, _thisSuper5, _thisSuper6, _this34;
+
+            (0, _classCallCheck2["default"])(this, ReflectionServiceClient);
+            _this34 = _super27.call(this, address, credentials, _options);
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this34), "GetAuthnDescriptor", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper = (0, _assertThisInitialized2["default"])(_this34), (0, _getPrototypeOf2["default"])(ReflectionServiceClient.prototype)), "GetAuthnDescriptor", _thisSuper).call(_thisSuper, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this34), "GetChainDescriptor", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper2 = (0, _assertThisInitialized2["default"])(_this34), (0, _getPrototypeOf2["default"])(ReflectionServiceClient.prototype)), "GetChainDescriptor", _thisSuper2).call(_thisSuper2, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this34), "GetCodecDescriptor", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper3 = (0, _assertThisInitialized2["default"])(_this34), (0, _getPrototypeOf2["default"])(ReflectionServiceClient.prototype)), "GetCodecDescriptor", _thisSuper3).call(_thisSuper3, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this34), "GetConfigurationDescriptor", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper4 = (0, _assertThisInitialized2["default"])(_this34), (0, _getPrototypeOf2["default"])(ReflectionServiceClient.prototype)), "GetConfigurationDescriptor", _thisSuper4).call(_thisSuper4, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this34), "GetQueryServicesDescriptor", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper5 = (0, _assertThisInitialized2["default"])(_this34), (0, _getPrototypeOf2["default"])(ReflectionServiceClient.prototype)), "GetQueryServicesDescriptor", _thisSuper5).call(_thisSuper5, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this34), "GetTxDescriptor", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper6 = (0, _assertThisInitialized2["default"])(_this34), (0, _getPrototypeOf2["default"])(ReflectionServiceClient.prototype)), "GetTxDescriptor", _thisSuper6).call(_thisSuper6, message, metadata, options, callback);
+            });
+            return _this34;
+          }
+
+          return ReflectionServiceClient;
+        }(grpc_1.makeGenericClientConstructor(UnimplementedReflectionServiceService.definition, "ReflectionService", {}));
+
+        _v2alpha.ReflectionServiceClient = ReflectionServiceClient;
       })(v2alpha1 || (v2alpha1 = _reflection.v2alpha1 || (_reflection.v2alpha1 = {})));
     })(reflection || (reflection = _base.reflection || (_base.reflection = {})));
   })(base || (base = _cosmos.base || (_cosmos.base = {})));

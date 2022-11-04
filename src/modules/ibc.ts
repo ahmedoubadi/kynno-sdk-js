@@ -9,7 +9,7 @@ import { SdkError, CODES } from '../errors';
  *
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 
 export class Ibc {
@@ -18,52 +18,6 @@ export class Ibc {
   /** @hidden */
   constructor(client: Client) {
     this.client = client;
-  }
-
-  /**
-   * ibc transfer
-   * @param param:{
-      source_port: string;
-      source_channel: string;
-      token: Coin;
-      receiver: string;
-      timeout_height?: {revision_number:number, revision_height:number},
-      timeout_timestamp?:number,
-    }
-   * @param baseTx { types.BaseTx }
-   * @returns
-   * @since v0.17
-   */
-  async transfer(
-    param:{
-      source_port: string,
-      source_channel: string,
-      token: types.Coin,
-      receiver: string,
-      timeout_height?: {revision_number:number, revision_height:number},
-      timeout_timestamp?:number,
-    },
-    baseTx: types.BaseTx
-  ): Promise<types.TxResult> {
-    if (!param.timeout_height && !param.timeout_timestamp) {
-      throw new SdkError("there must be one timeout_height or timeout_timestamp");
-    }
-    const from = this.client.keys.show(baseTx.from);
-    const msgs: any[] = [
-      {
-        type:types.TxType.MsgTransfer,
-        value:{
-          source_port: param.source_port,
-          source_channel: param.source_channel,
-          token: param.token,
-          sender: from,
-          receiver: param.receiver,
-          timeout_height: param.timeout_height,
-          timeout_timestamp: param.timeout_timestamp
-        }
-      }
-    ];
-    return this.client.tx.buildAndSend(msgs, baseTx);
   }
 
   /**

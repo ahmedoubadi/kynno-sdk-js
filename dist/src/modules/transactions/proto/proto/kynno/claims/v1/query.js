@@ -9,6 +9,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.kynno = void 0;
 
+var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
+
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
@@ -34,6 +36,8 @@ var dependency_5 = _interopRequireWildcard(require("./claims"));
 var dependency_6 = _interopRequireWildcard(require("./genesis"));
 
 var pb_1 = _interopRequireWildcard(require("google-protobuf"));
+
+var grpc_1 = _interopRequireWildcard(require("@grpc/grpc-js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -900,9 +904,11 @@ exports.kynno = kynno;
       }(pb_1.Message);
 
       _v.QueryClaimsRecordResponse = QueryClaimsRecordResponse;
-      var UnimplementedQueryService = /*#__PURE__*/(0, _createClass2["default"])(function UnimplementedQueryService() {
+
+      var UnimplementedQueryService = function UnimplementedQueryService() {
         (0, _classCallCheck2["default"])(this, UnimplementedQueryService);
-      });
+      };
+
       (0, _defineProperty2["default"])(UnimplementedQueryService, "definition", {
         TotalUnclaimed: {
           path: "/kynno.claims.v1.Query/TotalUnclaimed",
@@ -974,6 +980,36 @@ exports.kynno = kynno;
         }
       });
       _v.UnimplementedQueryService = UnimplementedQueryService;
+
+      var QueryClient = /*#__PURE__*/function (_grpc_1$makeGenericCl) {
+        (0, _inherits2["default"])(QueryClient, _grpc_1$makeGenericCl);
+
+        var _super9 = _createSuper(QueryClient);
+
+        function QueryClient(address, credentials, _options) {
+          var _thisSuper, _thisSuper2, _thisSuper3, _thisSuper4, _this12;
+
+          (0, _classCallCheck2["default"])(this, QueryClient);
+          _this12 = _super9.call(this, address, credentials, _options);
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this12), "TotalUnclaimed", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper = (0, _assertThisInitialized2["default"])(_this12), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "TotalUnclaimed", _thisSuper).call(_thisSuper, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this12), "Params", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper2 = (0, _assertThisInitialized2["default"])(_this12), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "Params", _thisSuper2).call(_thisSuper2, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this12), "ClaimsRecords", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper3 = (0, _assertThisInitialized2["default"])(_this12), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "ClaimsRecords", _thisSuper3).call(_thisSuper3, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this12), "ClaimsRecord", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper4 = (0, _assertThisInitialized2["default"])(_this12), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "ClaimsRecord", _thisSuper4).call(_thisSuper4, message, metadata, options, callback);
+          });
+          return _this12;
+        }
+
+        return QueryClient;
+      }(grpc_1.makeGenericClientConstructor(UnimplementedQueryService.definition, "Query", {}));
+
+      _v.QueryClient = QueryClient;
     })(v1 || (v1 = _claims.v1 || (_claims.v1 = {})));
   })(claims || (claims = _kynno.claims || (_kynno.claims = {})));
 })(kynno || (exports.kynno = kynno = {}));

@@ -7,5 +7,4 @@ export * from './messages/utils';
 export * from './messages/vote';
 export * from './messages/web3Extension';
 export * from './messages/nft';
-export * from './messages/nameservice';
 export * from './transaction/transaction';

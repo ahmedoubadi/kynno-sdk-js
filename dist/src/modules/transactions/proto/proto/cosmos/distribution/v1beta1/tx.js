@@ -9,6 +9,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.cosmos = void 0;
 
+var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
@@ -26,6 +30,8 @@ var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/ge
 var dependency_2 = _interopRequireWildcard(require("./../../base/v1beta1/coin"));
 
 var pb_1 = _interopRequireWildcard(require("google-protobuf"));
+
+var grpc_1 = _interopRequireWildcard(require("@grpc/grpc-js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -789,6 +795,112 @@ exports.cosmos = cosmos;
       }(pb_1.Message);
 
       _v1beta.MsgFundCommunityPoolResponse = MsgFundCommunityPoolResponse;
+
+      var UnimplementedMsgService = function UnimplementedMsgService() {
+        (0, _classCallCheck2["default"])(this, UnimplementedMsgService);
+      };
+
+      (0, _defineProperty2["default"])(UnimplementedMsgService, "definition", {
+        SetWithdrawAddress: {
+          path: "/cosmos.distribution.v1beta1.Msg/SetWithdrawAddress",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return MsgSetWithdrawAddress.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return MsgSetWithdrawAddressResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        WithdrawDelegatorReward: {
+          path: "/cosmos.distribution.v1beta1.Msg/WithdrawDelegatorReward",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return MsgWithdrawDelegatorReward.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return MsgWithdrawDelegatorRewardResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        WithdrawValidatorCommission: {
+          path: "/cosmos.distribution.v1beta1.Msg/WithdrawValidatorCommission",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return MsgWithdrawValidatorCommission.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return MsgWithdrawValidatorCommissionResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        FundCommunityPool: {
+          path: "/cosmos.distribution.v1beta1.Msg/FundCommunityPool",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return MsgFundCommunityPool.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return MsgFundCommunityPoolResponse.deserialize(new Uint8Array(bytes));
+          }
+        }
+      });
+      _v1beta.UnimplementedMsgService = UnimplementedMsgService;
+
+      var MsgClient = /*#__PURE__*/function (_grpc_1$makeGenericCl) {
+        (0, _inherits2["default"])(MsgClient, _grpc_1$makeGenericCl);
+
+        var _super9 = _createSuper(MsgClient);
+
+        function MsgClient(address, credentials, _options) {
+          var _thisSuper, _thisSuper2, _thisSuper3, _thisSuper4, _this9;
+
+          (0, _classCallCheck2["default"])(this, MsgClient);
+          _this9 = _super9.call(this, address, credentials, _options);
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this9), "SetWithdrawAddress", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper = (0, _assertThisInitialized2["default"])(_this9), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "SetWithdrawAddress", _thisSuper).call(_thisSuper, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this9), "WithdrawDelegatorReward", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper2 = (0, _assertThisInitialized2["default"])(_this9), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "WithdrawDelegatorReward", _thisSuper2).call(_thisSuper2, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this9), "WithdrawValidatorCommission", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper3 = (0, _assertThisInitialized2["default"])(_this9), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "WithdrawValidatorCommission", _thisSuper3).call(_thisSuper3, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this9), "FundCommunityPool", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper4 = (0, _assertThisInitialized2["default"])(_this9), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "FundCommunityPool", _thisSuper4).call(_thisSuper4, message, metadata, options, callback);
+          });
+          return _this9;
+        }
+
+        return MsgClient;
+      }(grpc_1.makeGenericClientConstructor(UnimplementedMsgService.definition, "Msg", {}));
+
+      _v1beta.MsgClient = MsgClient;
     })(v1beta1 || (v1beta1 = _distribution.v1beta1 || (_distribution.v1beta1 = {})));
   })(distribution || (distribution = _cosmos.distribution || (_cosmos.distribution = {})));
 })(cosmos || (exports.cosmos = cosmos = {}));

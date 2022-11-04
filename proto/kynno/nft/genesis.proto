@@ -4,7 +4,7 @@ package kynno.nft;
 import "gogoproto/gogo.proto";
 import "kynno/nft/nft.proto";
 
-option go_package = "github.com/ahmedoubadi/core/x/nft/types";
+option go_package = "github.com/kynnoenterprise/core/x/nft/types";
 
 // GenesisState defines the NFT module's genesis state
 message GenesisState {

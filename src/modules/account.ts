@@ -9,7 +9,7 @@ import { generateEndpointAccount } from '../nets/endpoint';
  * Account module is only used to query `Account data`
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 export class Account {
   /** @hidden */
@@ -46,7 +46,7 @@ export class Account {
    * @param url Rpc address of kynno node
    *
    * @returns
-   * @since v0.17
+   * @since v0.1
    */
 
   /**

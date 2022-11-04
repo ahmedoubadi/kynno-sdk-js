@@ -9,6 +9,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.cosmos = void 0;
 
+var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
@@ -24,6 +28,8 @@ var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime
 var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
 
 var pb_1 = _interopRequireWildcard(require("google-protobuf"));
+
+var grpc_1 = _interopRequireWildcard(require("@grpc/grpc-js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -398,6 +404,72 @@ exports.cosmos = cosmos;
         }(pb_1.Message);
 
         _v1beta.ListImplementationsResponse = ListImplementationsResponse;
+
+        var UnimplementedReflectionServiceService = function UnimplementedReflectionServiceService() {
+          (0, _classCallCheck2["default"])(this, UnimplementedReflectionServiceService);
+        };
+
+        (0, _defineProperty2["default"])(UnimplementedReflectionServiceService, "definition", {
+          ListAllInterfaces: {
+            path: "/cosmos.base.reflection.v1beta1.ReflectionService/ListAllInterfaces",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return ListAllInterfacesRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return ListAllInterfacesResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          ListImplementations: {
+            path: "/cosmos.base.reflection.v1beta1.ReflectionService/ListImplementations",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return ListImplementationsRequest.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return ListImplementationsResponse.deserialize(new Uint8Array(bytes));
+            }
+          }
+        });
+        _v1beta.UnimplementedReflectionServiceService = UnimplementedReflectionServiceService;
+
+        var ReflectionServiceClient = /*#__PURE__*/function (_grpc_1$makeGenericCl) {
+          (0, _inherits2["default"])(ReflectionServiceClient, _grpc_1$makeGenericCl);
+
+          var _super5 = _createSuper(ReflectionServiceClient);
+
+          function ReflectionServiceClient(address, credentials, _options) {
+            var _thisSuper, _thisSuper2, _this5;
+
+            (0, _classCallCheck2["default"])(this, ReflectionServiceClient);
+            _this5 = _super5.call(this, address, credentials, _options);
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this5), "ListAllInterfaces", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper = (0, _assertThisInitialized2["default"])(_this5), (0, _getPrototypeOf2["default"])(ReflectionServiceClient.prototype)), "ListAllInterfaces", _thisSuper).call(_thisSuper, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this5), "ListImplementations", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper2 = (0, _assertThisInitialized2["default"])(_this5), (0, _getPrototypeOf2["default"])(ReflectionServiceClient.prototype)), "ListImplementations", _thisSuper2).call(_thisSuper2, message, metadata, options, callback);
+            });
+            return _this5;
+          }
+
+          return ReflectionServiceClient;
+        }(grpc_1.makeGenericClientConstructor(UnimplementedReflectionServiceService.definition, "ReflectionService", {}));
+
+        _v1beta.ReflectionServiceClient = ReflectionServiceClient;
       })(v1beta1 || (v1beta1 = _reflection.v1beta1 || (_reflection.v1beta1 = {})));
     })(reflection || (reflection = _base.reflection || (_base.reflection = {})));
   })(base || (base = _cosmos.base || (_cosmos.base = {})));

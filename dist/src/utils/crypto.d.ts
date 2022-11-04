@@ -108,6 +108,7 @@ export declare class Crypto {
      * @returns Signature. Does not include tx.
      */
     static generateSignature(signDocSerialize: Uint8Array, private_key: string, type?: types.PubkeyType): string;
+    static generateAddressFromPk(pk: string): string;
     /**
      * Generates a keystore object (web3 secret storage format) given a private key to store and a password.
      * @param privateKeyHex The private key hexstring.

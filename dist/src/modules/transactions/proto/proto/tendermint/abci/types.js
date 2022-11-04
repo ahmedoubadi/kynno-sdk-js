@@ -9,6 +9,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.tendermint = void 0;
 
+var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
@@ -34,6 +38,8 @@ var dependency_4 = _interopRequireWildcard(require("./../types/params"));
 var dependency_5 = _interopRequireWildcard(require("./../../google/protobuf/timestamp"));
 
 var pb_1 = _interopRequireWildcard(require("google-protobuf"));
+
+var grpc_1 = _interopRequireWildcard(require("@grpc/grpc-js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -7362,5 +7368,331 @@ exports.tendermint = tendermint;
     }(pb_1.Message);
 
     _abci.Snapshot = Snapshot;
+
+    var UnimplementedABCIApplicationService = function UnimplementedABCIApplicationService() {
+      (0, _classCallCheck2["default"])(this, UnimplementedABCIApplicationService);
+    };
+
+    (0, _defineProperty2["default"])(UnimplementedABCIApplicationService, "definition", {
+      Echo: {
+        path: "/tendermint.abci.ABCIApplication/Echo",
+        requestStream: false,
+        responseStream: false,
+        requestSerialize: function requestSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        requestDeserialize: function requestDeserialize(bytes) {
+          return RequestEcho.deserialize(new Uint8Array(bytes));
+        },
+        responseSerialize: function responseSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        responseDeserialize: function responseDeserialize(bytes) {
+          return ResponseEcho.deserialize(new Uint8Array(bytes));
+        }
+      },
+      Flush: {
+        path: "/tendermint.abci.ABCIApplication/Flush",
+        requestStream: false,
+        responseStream: false,
+        requestSerialize: function requestSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        requestDeserialize: function requestDeserialize(bytes) {
+          return RequestFlush.deserialize(new Uint8Array(bytes));
+        },
+        responseSerialize: function responseSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        responseDeserialize: function responseDeserialize(bytes) {
+          return ResponseFlush.deserialize(new Uint8Array(bytes));
+        }
+      },
+      Info: {
+        path: "/tendermint.abci.ABCIApplication/Info",
+        requestStream: false,
+        responseStream: false,
+        requestSerialize: function requestSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        requestDeserialize: function requestDeserialize(bytes) {
+          return RequestInfo.deserialize(new Uint8Array(bytes));
+        },
+        responseSerialize: function responseSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        responseDeserialize: function responseDeserialize(bytes) {
+          return ResponseInfo.deserialize(new Uint8Array(bytes));
+        }
+      },
+      SetOption: {
+        path: "/tendermint.abci.ABCIApplication/SetOption",
+        requestStream: false,
+        responseStream: false,
+        requestSerialize: function requestSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        requestDeserialize: function requestDeserialize(bytes) {
+          return RequestSetOption.deserialize(new Uint8Array(bytes));
+        },
+        responseSerialize: function responseSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        responseDeserialize: function responseDeserialize(bytes) {
+          return ResponseSetOption.deserialize(new Uint8Array(bytes));
+        }
+      },
+      DeliverTx: {
+        path: "/tendermint.abci.ABCIApplication/DeliverTx",
+        requestStream: false,
+        responseStream: false,
+        requestSerialize: function requestSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        requestDeserialize: function requestDeserialize(bytes) {
+          return RequestDeliverTx.deserialize(new Uint8Array(bytes));
+        },
+        responseSerialize: function responseSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        responseDeserialize: function responseDeserialize(bytes) {
+          return ResponseDeliverTx.deserialize(new Uint8Array(bytes));
+        }
+      },
+      CheckTx: {
+        path: "/tendermint.abci.ABCIApplication/CheckTx",
+        requestStream: false,
+        responseStream: false,
+        requestSerialize: function requestSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        requestDeserialize: function requestDeserialize(bytes) {
+          return RequestCheckTx.deserialize(new Uint8Array(bytes));
+        },
+        responseSerialize: function responseSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        responseDeserialize: function responseDeserialize(bytes) {
+          return ResponseCheckTx.deserialize(new Uint8Array(bytes));
+        }
+      },
+      Query: {
+        path: "/tendermint.abci.ABCIApplication/Query",
+        requestStream: false,
+        responseStream: false,
+        requestSerialize: function requestSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        requestDeserialize: function requestDeserialize(bytes) {
+          return RequestQuery.deserialize(new Uint8Array(bytes));
+        },
+        responseSerialize: function responseSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        responseDeserialize: function responseDeserialize(bytes) {
+          return ResponseQuery.deserialize(new Uint8Array(bytes));
+        }
+      },
+      Commit: {
+        path: "/tendermint.abci.ABCIApplication/Commit",
+        requestStream: false,
+        responseStream: false,
+        requestSerialize: function requestSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        requestDeserialize: function requestDeserialize(bytes) {
+          return RequestCommit.deserialize(new Uint8Array(bytes));
+        },
+        responseSerialize: function responseSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        responseDeserialize: function responseDeserialize(bytes) {
+          return ResponseCommit.deserialize(new Uint8Array(bytes));
+        }
+      },
+      InitChain: {
+        path: "/tendermint.abci.ABCIApplication/InitChain",
+        requestStream: false,
+        responseStream: false,
+        requestSerialize: function requestSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        requestDeserialize: function requestDeserialize(bytes) {
+          return RequestInitChain.deserialize(new Uint8Array(bytes));
+        },
+        responseSerialize: function responseSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        responseDeserialize: function responseDeserialize(bytes) {
+          return ResponseInitChain.deserialize(new Uint8Array(bytes));
+        }
+      },
+      BeginBlock: {
+        path: "/tendermint.abci.ABCIApplication/BeginBlock",
+        requestStream: false,
+        responseStream: false,
+        requestSerialize: function requestSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        requestDeserialize: function requestDeserialize(bytes) {
+          return RequestBeginBlock.deserialize(new Uint8Array(bytes));
+        },
+        responseSerialize: function responseSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        responseDeserialize: function responseDeserialize(bytes) {
+          return ResponseBeginBlock.deserialize(new Uint8Array(bytes));
+        }
+      },
+      EndBlock: {
+        path: "/tendermint.abci.ABCIApplication/EndBlock",
+        requestStream: false,
+        responseStream: false,
+        requestSerialize: function requestSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        requestDeserialize: function requestDeserialize(bytes) {
+          return RequestEndBlock.deserialize(new Uint8Array(bytes));
+        },
+        responseSerialize: function responseSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        responseDeserialize: function responseDeserialize(bytes) {
+          return ResponseEndBlock.deserialize(new Uint8Array(bytes));
+        }
+      },
+      ListSnapshots: {
+        path: "/tendermint.abci.ABCIApplication/ListSnapshots",
+        requestStream: false,
+        responseStream: false,
+        requestSerialize: function requestSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        requestDeserialize: function requestDeserialize(bytes) {
+          return RequestListSnapshots.deserialize(new Uint8Array(bytes));
+        },
+        responseSerialize: function responseSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        responseDeserialize: function responseDeserialize(bytes) {
+          return ResponseListSnapshots.deserialize(new Uint8Array(bytes));
+        }
+      },
+      OfferSnapshot: {
+        path: "/tendermint.abci.ABCIApplication/OfferSnapshot",
+        requestStream: false,
+        responseStream: false,
+        requestSerialize: function requestSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        requestDeserialize: function requestDeserialize(bytes) {
+          return RequestOfferSnapshot.deserialize(new Uint8Array(bytes));
+        },
+        responseSerialize: function responseSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        responseDeserialize: function responseDeserialize(bytes) {
+          return ResponseOfferSnapshot.deserialize(new Uint8Array(bytes));
+        }
+      },
+      LoadSnapshotChunk: {
+        path: "/tendermint.abci.ABCIApplication/LoadSnapshotChunk",
+        requestStream: false,
+        responseStream: false,
+        requestSerialize: function requestSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        requestDeserialize: function requestDeserialize(bytes) {
+          return RequestLoadSnapshotChunk.deserialize(new Uint8Array(bytes));
+        },
+        responseSerialize: function responseSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        responseDeserialize: function responseDeserialize(bytes) {
+          return ResponseLoadSnapshotChunk.deserialize(new Uint8Array(bytes));
+        }
+      },
+      ApplySnapshotChunk: {
+        path: "/tendermint.abci.ABCIApplication/ApplySnapshotChunk",
+        requestStream: false,
+        responseStream: false,
+        requestSerialize: function requestSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        requestDeserialize: function requestDeserialize(bytes) {
+          return RequestApplySnapshotChunk.deserialize(new Uint8Array(bytes));
+        },
+        responseSerialize: function responseSerialize(message) {
+          return Buffer.from(message.serialize());
+        },
+        responseDeserialize: function responseDeserialize(bytes) {
+          return ResponseApplySnapshotChunk.deserialize(new Uint8Array(bytes));
+        }
+      }
+    });
+    _abci.UnimplementedABCIApplicationService = UnimplementedABCIApplicationService;
+
+    var ABCIApplicationClient = /*#__PURE__*/function (_grpc_1$makeGenericCl) {
+      (0, _inherits2["default"])(ABCIApplicationClient, _grpc_1$makeGenericCl);
+
+      var _super45 = _createSuper(ABCIApplicationClient);
+
+      function ABCIApplicationClient(address, credentials, _options) {
+        var _thisSuper, _thisSuper2, _thisSuper3, _thisSuper4, _thisSuper5, _thisSuper6, _thisSuper7, _thisSuper8, _thisSuper9, _thisSuper10, _thisSuper11, _thisSuper12, _thisSuper13, _thisSuper14, _thisSuper15, _this58;
+
+        (0, _classCallCheck2["default"])(this, ABCIApplicationClient);
+        _this58 = _super45.call(this, address, credentials, _options);
+        (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this58), "Echo", function (message, metadata, options, callback) {
+          return (0, _get2["default"])((_thisSuper = (0, _assertThisInitialized2["default"])(_this58), (0, _getPrototypeOf2["default"])(ABCIApplicationClient.prototype)), "Echo", _thisSuper).call(_thisSuper, message, metadata, options, callback);
+        });
+        (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this58), "Flush", function (message, metadata, options, callback) {
+          return (0, _get2["default"])((_thisSuper2 = (0, _assertThisInitialized2["default"])(_this58), (0, _getPrototypeOf2["default"])(ABCIApplicationClient.prototype)), "Flush", _thisSuper2).call(_thisSuper2, message, metadata, options, callback);
+        });
+        (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this58), "Info", function (message, metadata, options, callback) {
+          return (0, _get2["default"])((_thisSuper3 = (0, _assertThisInitialized2["default"])(_this58), (0, _getPrototypeOf2["default"])(ABCIApplicationClient.prototype)), "Info", _thisSuper3).call(_thisSuper3, message, metadata, options, callback);
+        });
+        (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this58), "SetOption", function (message, metadata, options, callback) {
+          return (0, _get2["default"])((_thisSuper4 = (0, _assertThisInitialized2["default"])(_this58), (0, _getPrototypeOf2["default"])(ABCIApplicationClient.prototype)), "SetOption", _thisSuper4).call(_thisSuper4, message, metadata, options, callback);
+        });
+        (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this58), "DeliverTx", function (message, metadata, options, callback) {
+          return (0, _get2["default"])((_thisSuper5 = (0, _assertThisInitialized2["default"])(_this58), (0, _getPrototypeOf2["default"])(ABCIApplicationClient.prototype)), "DeliverTx", _thisSuper5).call(_thisSuper5, message, metadata, options, callback);
+        });
+        (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this58), "CheckTx", function (message, metadata, options, callback) {
+          return (0, _get2["default"])((_thisSuper6 = (0, _assertThisInitialized2["default"])(_this58), (0, _getPrototypeOf2["default"])(ABCIApplicationClient.prototype)), "CheckTx", _thisSuper6).call(_thisSuper6, message, metadata, options, callback);
+        });
+        (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this58), "Query", function (message, metadata, options, callback) {
+          return (0, _get2["default"])((_thisSuper7 = (0, _assertThisInitialized2["default"])(_this58), (0, _getPrototypeOf2["default"])(ABCIApplicationClient.prototype)), "Query", _thisSuper7).call(_thisSuper7, message, metadata, options, callback);
+        });
+        (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this58), "Commit", function (message, metadata, options, callback) {
+          return (0, _get2["default"])((_thisSuper8 = (0, _assertThisInitialized2["default"])(_this58), (0, _getPrototypeOf2["default"])(ABCIApplicationClient.prototype)), "Commit", _thisSuper8).call(_thisSuper8, message, metadata, options, callback);
+        });
+        (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this58), "InitChain", function (message, metadata, options, callback) {
+          return (0, _get2["default"])((_thisSuper9 = (0, _assertThisInitialized2["default"])(_this58), (0, _getPrototypeOf2["default"])(ABCIApplicationClient.prototype)), "InitChain", _thisSuper9).call(_thisSuper9, message, metadata, options, callback);
+        });
+        (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this58), "BeginBlock", function (message, metadata, options, callback) {
+          return (0, _get2["default"])((_thisSuper10 = (0, _assertThisInitialized2["default"])(_this58), (0, _getPrototypeOf2["default"])(ABCIApplicationClient.prototype)), "BeginBlock", _thisSuper10).call(_thisSuper10, message, metadata, options, callback);
+        });
+        (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this58), "EndBlock", function (message, metadata, options, callback) {
+          return (0, _get2["default"])((_thisSuper11 = (0, _assertThisInitialized2["default"])(_this58), (0, _getPrototypeOf2["default"])(ABCIApplicationClient.prototype)), "EndBlock", _thisSuper11).call(_thisSuper11, message, metadata, options, callback);
+        });
+        (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this58), "ListSnapshots", function (message, metadata, options, callback) {
+          return (0, _get2["default"])((_thisSuper12 = (0, _assertThisInitialized2["default"])(_this58), (0, _getPrototypeOf2["default"])(ABCIApplicationClient.prototype)), "ListSnapshots", _thisSuper12).call(_thisSuper12, message, metadata, options, callback);
+        });
+        (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this58), "OfferSnapshot", function (message, metadata, options, callback) {
+          return (0, _get2["default"])((_thisSuper13 = (0, _assertThisInitialized2["default"])(_this58), (0, _getPrototypeOf2["default"])(ABCIApplicationClient.prototype)), "OfferSnapshot", _thisSuper13).call(_thisSuper13, message, metadata, options, callback);
+        });
+        (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this58), "LoadSnapshotChunk", function (message, metadata, options, callback) {
+          return (0, _get2["default"])((_thisSuper14 = (0, _assertThisInitialized2["default"])(_this58), (0, _getPrototypeOf2["default"])(ABCIApplicationClient.prototype)), "LoadSnapshotChunk", _thisSuper14).call(_thisSuper14, message, metadata, options, callback);
+        });
+        (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this58), "ApplySnapshotChunk", function (message, metadata, options, callback) {
+          return (0, _get2["default"])((_thisSuper15 = (0, _assertThisInitialized2["default"])(_this58), (0, _getPrototypeOf2["default"])(ABCIApplicationClient.prototype)), "ApplySnapshotChunk", _thisSuper15).call(_thisSuper15, message, metadata, options, callback);
+        });
+        return _this58;
+      }
+
+      return ABCIApplicationClient;
+    }(grpc_1.makeGenericClientConstructor(UnimplementedABCIApplicationService.definition, "ABCIApplication", {}));
+
+    _abci.ABCIApplicationClient = ABCIApplicationClient;
   })(abci || (abci = _tendermint.abci || (_tendermint.abci = {})));
 })(tendermint || (exports.tendermint = tendermint = {}));

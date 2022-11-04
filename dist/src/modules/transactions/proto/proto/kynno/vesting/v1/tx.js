@@ -9,6 +9,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.kynno = void 0;
 
+var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
+
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
@@ -30,6 +32,8 @@ var dependency_3 = _interopRequireWildcard(require("./../../../google/protobuf/t
 var dependency_4 = _interopRequireWildcard(require("./../../../cosmos/vesting/v1beta1/vesting"));
 
 var pb_1 = _interopRequireWildcard(require("google-protobuf"));
+
+var grpc_1 = _interopRequireWildcard(require("@grpc/grpc-js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -581,9 +585,11 @@ exports.kynno = kynno;
       }(pb_1.Message);
 
       _v.MsgClawbackResponse = MsgClawbackResponse;
-      var UnimplementedMsgService = /*#__PURE__*/(0, _createClass2["default"])(function UnimplementedMsgService() {
+
+      var UnimplementedMsgService = function UnimplementedMsgService() {
         (0, _classCallCheck2["default"])(this, UnimplementedMsgService);
-      });
+      };
+
       (0, _defineProperty2["default"])(UnimplementedMsgService, "definition", {
         CreateClawbackVestingAccount: {
           path: "/kynno.vesting.v1.Msg/CreateClawbackVestingAccount",
@@ -621,6 +627,30 @@ exports.kynno = kynno;
         }
       });
       _v.UnimplementedMsgService = UnimplementedMsgService;
+
+      var MsgClient = /*#__PURE__*/function (_grpc_1$makeGenericCl) {
+        (0, _inherits2["default"])(MsgClient, _grpc_1$makeGenericCl);
+
+        var _super5 = _createSuper(MsgClient);
+
+        function MsgClient(address, credentials, _options) {
+          var _thisSuper, _thisSuper2, _this6;
+
+          (0, _classCallCheck2["default"])(this, MsgClient);
+          _this6 = _super5.call(this, address, credentials, _options);
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this6), "CreateClawbackVestingAccount", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper = (0, _assertThisInitialized2["default"])(_this6), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "CreateClawbackVestingAccount", _thisSuper).call(_thisSuper, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this6), "Clawback", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper2 = (0, _assertThisInitialized2["default"])(_this6), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "Clawback", _thisSuper2).call(_thisSuper2, message, metadata, options, callback);
+          });
+          return _this6;
+        }
+
+        return MsgClient;
+      }(grpc_1.makeGenericClientConstructor(UnimplementedMsgService.definition, "Msg", {}));
+
+      _v.MsgClient = MsgClient;
     })(v1 || (v1 = _vesting.v1 || (_vesting.v1 = {})));
   })(vesting || (vesting = _kynno.vesting || (_kynno.vesting = {})));
 })(kynno || (exports.kynno = kynno = {}));

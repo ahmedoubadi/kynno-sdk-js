@@ -6,7 +6,7 @@ import * as types from '../types';
  * **NOTE:** You need to implement the [[KeyDAO]] Interface first.
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 export declare class Keys {
     /** @hidden */
@@ -20,7 +20,7 @@ export declare class Keys {
      * @param password Password for encrypting the keystore
      * @param type Pubkey Type
      * @returns Bech32 address and mnemonic
-     * @since v0.17
+     * @since v0.1
      */
     add(name: string, password: string, type?: types.PubkeyType): types.Wallet;
     /**
@@ -34,7 +34,7 @@ export declare class Keys {
      * @param derive Derive a private key using the default HD path (default: true)
      * @param saltPassword A passphrase for generating the salt, according to bip39
      * @returns Bech32 address
-     * @since v0.17
+     * @since v0.1
      */
     recover(name: string, password: string, mnemonic: string, type?: types.PubkeyType, index?: number, derive?: boolean, saltPassword?: string): types.Wallet;
     /**
@@ -45,7 +45,7 @@ export declare class Keys {
      * @param keystore Keystore json or object
      * @param type Pubkey Type
      * @returns types.Wallet
-     * @since v0.17
+     * @since v0.1
      */
     import(name: string, password: string, keystore: string | types.Keystore, type?: types.PubkeyType): types.Wallet;
     /**
@@ -55,7 +55,7 @@ export declare class Keys {
      * @param password Password of the keystore
      * @param keystore Keystore v1.0
      * @returns types.Wallet
-     * @since v0.17
+     * @since v0.1
      */
     importKeystore(name: string, password: string, keystore: string): types.Wallet;
     /**
@@ -66,7 +66,7 @@ export declare class Keys {
      * @param privateKey privateKey hex
      * @param type Pubkey Type
      * @returns Bech32 address
-     * @since v0.17
+     * @since v0.1
      */
     importPrivateKey(name: string, password: string, privateKey: string, type?: types.PubkeyType): Promise<types.Wallet>;
     /**
@@ -77,7 +77,7 @@ export declare class Keys {
      * @param keystorePassword Password for encrypting the keystore
      * @param iterations
      * @returns Keystore json
-     * @since v0.17
+     * @since v0.1
      */
     export(name: string, keyPassword: string, keystorePassword: string, iterations?: number): string;
     /**
@@ -85,7 +85,7 @@ export declare class Keys {
      *
      * @param name Name of the key
      * @param password Password of the key
-     * @since v0.17
+     * @since v0.1
      */
     delete(name: string, password: string): void;
     /**
@@ -93,7 +93,7 @@ export declare class Keys {
      *
      * @param name Name of the key
      * @returns Bech32 address
-     * @since v0.17
+     * @since v0.1
      */
     show(name: string): string;
 }

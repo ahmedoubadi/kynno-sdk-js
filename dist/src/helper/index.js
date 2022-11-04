@@ -42,3 +42,16 @@ Object.keys(_txModelCreator).forEach(function (key) {
     }
   });
 });
+
+var _signTypedData = require("./sign-typed-data");
+
+Object.keys(_signTypedData).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (key in exports && exports[key] === _signTypedData[key]) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _signTypedData[key];
+    }
+  });
+});

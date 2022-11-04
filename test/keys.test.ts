@@ -6,6 +6,7 @@ test('Keys', () => {
   
   // Create a new key
   const addedKey = client.keys.add('name1', password);
+  
   expect(addedKey.address.substring(0, 5)).toBe('kynno');
   let mnemonic = client.config.keyDAO.decrypt!(addedKey.mnemonic!,password);
   expect(mnemonic.split(' ').length).toBe(24);
@@ -13,11 +14,15 @@ test('Keys', () => {
   // Export keystore of a key
   const keystore = client.keys.export('name1', password, password);
   const keystoreObj = JSON.parse(keystore.toString());
-  expect(keystoreObj.address).toBe(addedKey.address);
+  
+  const keyAddr = addedKey.address
+  const keystoreObjAddr = client.utils.toKynno(keystoreObj.address)
+  expect(keystoreObjAddr).toBe(keyAddr);
 
   // Import a keystore
   const importedKey = client.keys.import('name3', password, keystore);
   expect(importedKey.address).toBe(addedKey.address);
+
 
   // Show address of a key
   const showAddr = client.keys.show('name1');
@@ -28,6 +33,11 @@ test('Keys', () => {
   expect(() => {
     client.keys.show('name1');
   }).toThrow("Key with name 'name1' not found");
+
+  client.wsClient.connect()
+  const isConnected = client.wsClient.isReady()
+  expect(isConnected).toBe(true);
+  
 });
 
 test('recover', () => {

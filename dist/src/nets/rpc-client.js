@@ -31,7 +31,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 /**
  * Tendermint JSON RPC Client
- * @since v0.17
+ * @since v0.1
  */
 var RpcClient = /*#__PURE__*/function () {
   /** @hidden */
@@ -43,7 +43,7 @@ var RpcClient = /*#__PURE__*/function () {
    * @param url Rpc address of kynno node
    * @param config The other configurations, refer to { [[AxiosRequestConfig]] }
    * @returns
-   * @since v0.17
+   * @since v0.1
    */
   function RpcClient(config) {
     (0, _classCallCheck2["default"])(this, RpcClient);
@@ -73,7 +73,7 @@ var RpcClient = /*#__PURE__*/function () {
    * @param method Tendermint RPC method
    * @param params Request params
    * @returns
-   * @since v0.17
+   * @since v0.1
    */
 
 
@@ -105,7 +105,7 @@ var RpcClient = /*#__PURE__*/function () {
      * @param protoRequest protobuf Request
      * @param protoResponse protobuf Response so if "protoResponse" exists, well deserialize "ABCI Response" with "protoResponse" and return json object, else return base64 string
      * @returns
-     * @since v0.17
+     * @since v0.1
      */
 
   }, {
@@ -115,7 +115,6 @@ var RpcClient = /*#__PURE__*/function () {
         path: path,
         height: height
       };
-      console.log("params", params);
 
       if (protoRequest && protoRequest.serializeBinary) {
         params.data = Buffer.from(protoRequest.serializeBinary()).toString('hex');
@@ -151,7 +150,7 @@ var RpcClient = /*#__PURE__*/function () {
      * @param data Input params
      * @param height Use a specific height to query state at (this can error if the node is pruning state)
      * @returns
-     * @since v0.17
+     * @since v0.1
      */
 
   }, {
@@ -199,7 +198,7 @@ var RpcClient = /*#__PURE__*/function () {
      * @param storeName The store name
      * @param height Block height to query, omit to get most recent provable block
      * @returns
-     * @since v0.17
+     * @since v0.1
      */
 
   }, {

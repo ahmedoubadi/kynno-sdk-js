@@ -9,6 +9,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.kynno = void 0;
 
+var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
+
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
@@ -30,6 +32,8 @@ var dependency_3 = _interopRequireWildcard(require("./../../../cosmos/base/v1bet
 var dependency_4 = _interopRequireWildcard(require("./genesis"));
 
 var pb_1 = _interopRequireWildcard(require("google-protobuf"));
+
+var grpc_1 = _interopRequireWildcard(require("@grpc/grpc-js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -554,15 +558,15 @@ exports.kynno = kynno;
 
       _v.QuerySkippedEpochsResponse = QuerySkippedEpochsResponse;
 
-      var QueryTotalSupplyRequest = /*#__PURE__*/function (_pb_1$Message7) {
-        (0, _inherits2["default"])(QueryTotalSupplyRequest, _pb_1$Message7);
+      var QueryCirculatingSupplyRequest = /*#__PURE__*/function (_pb_1$Message7) {
+        (0, _inherits2["default"])(QueryCirculatingSupplyRequest, _pb_1$Message7);
 
-        var _super7 = _createSuper(QueryTotalSupplyRequest);
+        var _super7 = _createSuper(QueryCirculatingSupplyRequest);
 
-        function QueryTotalSupplyRequest(data) {
+        function QueryCirculatingSupplyRequest(data) {
           var _this8;
 
-          (0, _classCallCheck2["default"])(this, QueryTotalSupplyRequest);
+          (0, _classCallCheck2["default"])(this, QueryCirculatingSupplyRequest);
           _this8 = _super7.call(this);
           pb_1.Message.initialize((0, _assertThisInitialized2["default"])(_this8), Array.isArray(data) ? data : [], 0, -1, [], []);
 
@@ -571,7 +575,7 @@ exports.kynno = kynno;
           return _this8;
         }
 
-        (0, _createClass2["default"])(QueryTotalSupplyRequest, [{
+        (0, _createClass2["default"])(QueryCirculatingSupplyRequest, [{
           key: "toObject",
           value: function toObject() {
             var data = {};
@@ -591,14 +595,14 @@ exports.kynno = kynno;
         }], [{
           key: "fromObject",
           value: function fromObject(data) {
-            var message = new QueryTotalSupplyRequest({});
+            var message = new QueryCirculatingSupplyRequest({});
             return message;
           }
         }, {
           key: "deserialize",
           value: function deserialize(bytes) {
             var reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new QueryTotalSupplyRequest();
+                message = new QueryCirculatingSupplyRequest();
 
             while (reader.nextField()) {
               if (reader.isEndGroup()) break;
@@ -614,37 +618,37 @@ exports.kynno = kynno;
         }, {
           key: "deserializeBinary",
           value: function deserializeBinary(bytes) {
-            return QueryTotalSupplyRequest.deserialize(bytes);
+            return QueryCirculatingSupplyRequest.deserialize(bytes);
           }
         }]);
-        return QueryTotalSupplyRequest;
+        return QueryCirculatingSupplyRequest;
       }(pb_1.Message);
 
-      _v.QueryTotalSupplyRequest = QueryTotalSupplyRequest;
+      _v.QueryCirculatingSupplyRequest = QueryCirculatingSupplyRequest;
 
-      var QueryTotalSupplyResponse = /*#__PURE__*/function (_pb_1$Message8) {
-        (0, _inherits2["default"])(QueryTotalSupplyResponse, _pb_1$Message8);
+      var QueryCirculatingSupplyResponse = /*#__PURE__*/function (_pb_1$Message8) {
+        (0, _inherits2["default"])(QueryCirculatingSupplyResponse, _pb_1$Message8);
 
-        var _super8 = _createSuper(QueryTotalSupplyResponse);
+        var _super8 = _createSuper(QueryCirculatingSupplyResponse);
 
-        function QueryTotalSupplyResponse(data) {
+        function QueryCirculatingSupplyResponse(data) {
           var _this9;
 
-          (0, _classCallCheck2["default"])(this, QueryTotalSupplyResponse);
+          (0, _classCallCheck2["default"])(this, QueryCirculatingSupplyResponse);
           _this9 = _super8.call(this);
           pb_1.Message.initialize((0, _assertThisInitialized2["default"])(_this9), Array.isArray(data) ? data : [], 0, -1, [], []);
 
           if (!Array.isArray(data) && (0, _typeof2["default"])(data) == "object") {
-            if ("total_supply" in data && data.total_supply != undefined) {
-              _this9.total_supply = data.total_supply;
+            if ("circulating_supply" in data && data.circulating_supply != undefined) {
+              _this9.circulating_supply = data.circulating_supply;
             }
           }
 
           return _this9;
         }
 
-        (0, _createClass2["default"])(QueryTotalSupplyResponse, [{
-          key: "total_supply",
+        (0, _createClass2["default"])(QueryCirculatingSupplyResponse, [{
+          key: "circulating_supply",
           get: function get() {
             return pb_1.Message.getWrapperField(this, dependency_3.cosmos.base.v1beta1.DecCoin, 1);
           },
@@ -666,8 +670,8 @@ exports.kynno = kynno;
           }(function () {
             var data = {};
 
-            if (this.total_supply != null) {
-              data.total_supply = this.total_supply.toObject();
+            if (this.circulating_supply != null) {
+              data.circulating_supply = this.circulating_supply.toObject();
             }
 
             return data;
@@ -678,8 +682,8 @@ exports.kynno = kynno;
             var _this10 = this;
 
             var writer = w || new pb_1.BinaryWriter();
-            if (this.total_supply !== undefined) writer.writeMessage(1, this.total_supply, function () {
-              return _this10.total_supply.serialize(writer);
+            if (this.circulating_supply !== undefined) writer.writeMessage(1, this.circulating_supply, function () {
+              return _this10.circulating_supply.serialize(writer);
             });
             if (!w) return writer.getResultBuffer();
           }
@@ -691,10 +695,10 @@ exports.kynno = kynno;
         }], [{
           key: "fromObject",
           value: function fromObject(data) {
-            var message = new QueryTotalSupplyResponse({});
+            var message = new QueryCirculatingSupplyResponse({});
 
-            if (data.total_supply != null) {
-              message.total_supply = dependency_3.cosmos.base.v1beta1.DecCoin.fromObject(data.total_supply);
+            if (data.circulating_supply != null) {
+              message.circulating_supply = dependency_3.cosmos.base.v1beta1.DecCoin.fromObject(data.circulating_supply);
             }
 
             return message;
@@ -703,15 +707,15 @@ exports.kynno = kynno;
           key: "deserialize",
           value: function deserialize(bytes) {
             var reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new QueryTotalSupplyResponse();
+                message = new QueryCirculatingSupplyResponse();
 
             while (reader.nextField()) {
               if (reader.isEndGroup()) break;
 
               switch (reader.getFieldNumber()) {
                 case 1:
-                  reader.readMessage(message.total_supply, function () {
-                    return message.total_supply = dependency_3.cosmos.base.v1beta1.DecCoin.deserialize(reader);
+                  reader.readMessage(message.circulating_supply, function () {
+                    return message.circulating_supply = dependency_3.cosmos.base.v1beta1.DecCoin.deserialize(reader);
                   });
                   break;
 
@@ -725,13 +729,13 @@ exports.kynno = kynno;
         }, {
           key: "deserializeBinary",
           value: function deserializeBinary(bytes) {
-            return QueryTotalSupplyResponse.deserialize(bytes);
+            return QueryCirculatingSupplyResponse.deserialize(bytes);
           }
         }]);
-        return QueryTotalSupplyResponse;
+        return QueryCirculatingSupplyResponse;
       }(pb_1.Message);
 
-      _v.QueryTotalSupplyResponse = QueryTotalSupplyResponse;
+      _v.QueryCirculatingSupplyResponse = QueryCirculatingSupplyResponse;
 
       var QueryInflationRateRequest = /*#__PURE__*/function (_pb_1$Message9) {
         (0, _inherits2["default"])(QueryInflationRateRequest, _pb_1$Message9);
@@ -1074,9 +1078,11 @@ exports.kynno = kynno;
       }(pb_1.Message);
 
       _v.QueryParamsResponse = QueryParamsResponse;
-      var UnimplementedQueryService = /*#__PURE__*/(0, _createClass2["default"])(function UnimplementedQueryService() {
+
+      var UnimplementedQueryService = function UnimplementedQueryService() {
         (0, _classCallCheck2["default"])(this, UnimplementedQueryService);
-      });
+      };
+
       (0, _defineProperty2["default"])(UnimplementedQueryService, "definition", {
         Period: {
           path: "/kynno.inflation.v1.Query/Period",
@@ -1129,21 +1135,21 @@ exports.kynno = kynno;
             return QuerySkippedEpochsResponse.deserialize(new Uint8Array(bytes));
           }
         },
-        TotalSupply: {
-          path: "/kynno.inflation.v1.Query/TotalSupply",
+        CirculatingSupply: {
+          path: "/kynno.inflation.v1.Query/CirculatingSupply",
           requestStream: false,
           responseStream: false,
           requestSerialize: function requestSerialize(message) {
             return Buffer.from(message.serialize());
           },
           requestDeserialize: function requestDeserialize(bytes) {
-            return QueryTotalSupplyRequest.deserialize(new Uint8Array(bytes));
+            return QueryCirculatingSupplyRequest.deserialize(new Uint8Array(bytes));
           },
           responseSerialize: function responseSerialize(message) {
             return Buffer.from(message.serialize());
           },
           responseDeserialize: function responseDeserialize(bytes) {
-            return QueryTotalSupplyResponse.deserialize(new Uint8Array(bytes));
+            return QueryCirculatingSupplyResponse.deserialize(new Uint8Array(bytes));
           }
         },
         InflationRate: {
@@ -1182,6 +1188,42 @@ exports.kynno = kynno;
         }
       });
       _v.UnimplementedQueryService = UnimplementedQueryService;
+
+      var QueryClient = /*#__PURE__*/function (_grpc_1$makeGenericCl) {
+        (0, _inherits2["default"])(QueryClient, _grpc_1$makeGenericCl);
+
+        var _super13 = _createSuper(QueryClient);
+
+        function QueryClient(address, credentials, _options) {
+          var _thisSuper, _thisSuper2, _thisSuper3, _thisSuper4, _thisSuper5, _thisSuper6, _this16;
+
+          (0, _classCallCheck2["default"])(this, QueryClient);
+          _this16 = _super13.call(this, address, credentials, _options);
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this16), "Period", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper = (0, _assertThisInitialized2["default"])(_this16), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "Period", _thisSuper).call(_thisSuper, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this16), "EpochMintProvision", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper2 = (0, _assertThisInitialized2["default"])(_this16), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "EpochMintProvision", _thisSuper2).call(_thisSuper2, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this16), "SkippedEpochs", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper3 = (0, _assertThisInitialized2["default"])(_this16), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "SkippedEpochs", _thisSuper3).call(_thisSuper3, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this16), "CirculatingSupply", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper4 = (0, _assertThisInitialized2["default"])(_this16), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "CirculatingSupply", _thisSuper4).call(_thisSuper4, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this16), "InflationRate", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper5 = (0, _assertThisInitialized2["default"])(_this16), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "InflationRate", _thisSuper5).call(_thisSuper5, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this16), "Params", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper6 = (0, _assertThisInitialized2["default"])(_this16), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "Params", _thisSuper6).call(_thisSuper6, message, metadata, options, callback);
+          });
+          return _this16;
+        }
+
+        return QueryClient;
+      }(grpc_1.makeGenericClientConstructor(UnimplementedQueryService.definition, "Query", {}));
+
+      _v.QueryClient = QueryClient;
     })(v1 || (v1 = _inflation.v1 || (_inflation.v1 = {})));
   })(inflation || (inflation = _kynno.inflation || (_kynno.inflation = {})));
 })(kynno || (exports.kynno = kynno = {}));

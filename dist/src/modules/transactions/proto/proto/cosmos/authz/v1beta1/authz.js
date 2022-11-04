@@ -281,6 +281,196 @@ exports.cosmos = cosmos;
       }(pb_1.Message);
 
       _v1beta.Grant = Grant;
+
+      var GrantAuthorization = /*#__PURE__*/function (_pb_1$Message3) {
+        (0, _inherits2["default"])(GrantAuthorization, _pb_1$Message3);
+
+        var _super3 = _createSuper(GrantAuthorization);
+
+        function GrantAuthorization(data) {
+          var _this4;
+
+          (0, _classCallCheck2["default"])(this, GrantAuthorization);
+          _this4 = _super3.call(this);
+          pb_1.Message.initialize((0, _assertThisInitialized2["default"])(_this4), Array.isArray(data) ? data : [], 0, -1, [], []);
+
+          if (!Array.isArray(data) && (0, _typeof2["default"])(data) == "object") {
+            if ("granter" in data && data.granter != undefined) {
+              _this4.granter = data.granter;
+            }
+
+            if ("grantee" in data && data.grantee != undefined) {
+              _this4.grantee = data.grantee;
+            }
+
+            if ("authorization" in data && data.authorization != undefined) {
+              _this4.authorization = data.authorization;
+            }
+
+            if ("expiration" in data && data.expiration != undefined) {
+              _this4.expiration = data.expiration;
+            }
+          }
+
+          return _this4;
+        }
+
+        (0, _createClass2["default"])(GrantAuthorization, [{
+          key: "granter",
+          get: function get() {
+            return pb_1.Message.getField(this, 1);
+          },
+          set: function set(value) {
+            pb_1.Message.setField(this, 1, value);
+          }
+        }, {
+          key: "grantee",
+          get: function get() {
+            return pb_1.Message.getField(this, 2);
+          },
+          set: function set(value) {
+            pb_1.Message.setField(this, 2, value);
+          }
+        }, {
+          key: "authorization",
+          get: function get() {
+            return pb_1.Message.getWrapperField(this, dependency_4.google.protobuf.Any, 3);
+          },
+          set: function set(value) {
+            pb_1.Message.setWrapperField(this, 3, value);
+          }
+        }, {
+          key: "expiration",
+          get: function get() {
+            return pb_1.Message.getWrapperField(this, dependency_2.google.protobuf.Timestamp, 4);
+          },
+          set: function set(value) {
+            pb_1.Message.setWrapperField(this, 4, value);
+          }
+        }, {
+          key: "toObject",
+          value: function (_toObject2) {
+            function toObject() {
+              return _toObject2.apply(this, arguments);
+            }
+
+            toObject.toString = function () {
+              return _toObject2.toString();
+            };
+
+            return toObject;
+          }(function () {
+            var data = {};
+
+            if (this.granter != null) {
+              data.granter = this.granter;
+            }
+
+            if (this.grantee != null) {
+              data.grantee = this.grantee;
+            }
+
+            if (this.authorization != null) {
+              data.authorization = this.authorization.toObject();
+            }
+
+            if (this.expiration != null) {
+              data.expiration = this.expiration.toObject();
+            }
+
+            return data;
+          })
+        }, {
+          key: "serialize",
+          value: function serialize(w) {
+            var _this5 = this;
+
+            var writer = w || new pb_1.BinaryWriter();
+            if (typeof this.granter === "string" && this.granter.length) writer.writeString(1, this.granter);
+            if (typeof this.grantee === "string" && this.grantee.length) writer.writeString(2, this.grantee);
+            if (this.authorization !== undefined) writer.writeMessage(3, this.authorization, function () {
+              return _this5.authorization.serialize(writer);
+            });
+            if (this.expiration !== undefined) writer.writeMessage(4, this.expiration, function () {
+              return _this5.expiration.serialize(writer);
+            });
+            if (!w) return writer.getResultBuffer();
+          }
+        }, {
+          key: "serializeBinary",
+          value: function serializeBinary() {
+            return this.serialize();
+          }
+        }], [{
+          key: "fromObject",
+          value: function fromObject(data) {
+            var message = new GrantAuthorization({});
+
+            if (data.granter != null) {
+              message.granter = data.granter;
+            }
+
+            if (data.grantee != null) {
+              message.grantee = data.grantee;
+            }
+
+            if (data.authorization != null) {
+              message.authorization = dependency_4.google.protobuf.Any.fromObject(data.authorization);
+            }
+
+            if (data.expiration != null) {
+              message.expiration = dependency_2.google.protobuf.Timestamp.fromObject(data.expiration);
+            }
+
+            return message;
+          }
+        }, {
+          key: "deserialize",
+          value: function deserialize(bytes) {
+            var reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
+                message = new GrantAuthorization();
+
+            while (reader.nextField()) {
+              if (reader.isEndGroup()) break;
+
+              switch (reader.getFieldNumber()) {
+                case 1:
+                  message.granter = reader.readString();
+                  break;
+
+                case 2:
+                  message.grantee = reader.readString();
+                  break;
+
+                case 3:
+                  reader.readMessage(message.authorization, function () {
+                    return message.authorization = dependency_4.google.protobuf.Any.deserialize(reader);
+                  });
+                  break;
+
+                case 4:
+                  reader.readMessage(message.expiration, function () {
+                    return message.expiration = dependency_2.google.protobuf.Timestamp.deserialize(reader);
+                  });
+                  break;
+
+                default:
+                  reader.skipField();
+              }
+            }
+
+            return message;
+          }
+        }, {
+          key: "deserializeBinary",
+          value: function deserializeBinary(bytes) {
+            return GrantAuthorization.deserialize(bytes);
+          }
+        }]);
+        return GrantAuthorization;
+      }(pb_1.Message);
+
+      _v1beta.GrantAuthorization = GrantAuthorization;
     })(v1beta1 || (v1beta1 = _authz.v1beta1 || (_authz.v1beta1 = {})));
   })(authz || (authz = _cosmos.authz || (_cosmos.authz = {})));
 })(cosmos || (exports.cosmos = cosmos = {}));

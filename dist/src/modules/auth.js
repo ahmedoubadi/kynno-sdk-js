@@ -29,7 +29,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
  * Auth module is only used to build `StdTx`
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 var Auth = /*#__PURE__*/function () {
   /** @hidden */
@@ -58,7 +58,7 @@ var Auth = /*#__PURE__*/function () {
    * @param memo Memo of the transaction
    *
    * @returns
-   * @since v0.17
+   * @since v0.1
    */
 
 
@@ -107,15 +107,11 @@ var Auth = /*#__PURE__*/function () {
         var result = {};
 
         if (data && data.account && data.account.value) {
-          console.log("cosmos.auth.v1beta1.Query/Account", data);
           result = types.auth_auth_pb.BaseAccount.deserializeBinary(data.account.value).toObject();
-          console.log("result****//", result);
 
           if (result.pubKey && result.pubKey.value) {
             result.pubKey = types.crypto_secp256k1_keys_pb.PubKey.deserializeBinary(result.pubKey.value).toObject();
           }
-
-          console.log("cosmos.auth.v1beta1.Query/Account", result);
         }
 
         return result;

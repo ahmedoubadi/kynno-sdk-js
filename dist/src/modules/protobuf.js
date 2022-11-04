@@ -31,7 +31,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
  * ProtobufModel module allows you to deserialize protobuf serialize string
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 var Protobuf = /*#__PURE__*/function () {
   /** @hidden */

@@ -9,6 +9,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ibc = void 0;
 
+var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
@@ -26,6 +30,8 @@ var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/ge
 var dependency_2 = _interopRequireWildcard(require("./../../../../google/protobuf/any"));
 
 var pb_1 = _interopRequireWildcard(require("google-protobuf"));
+
+var grpc_1 = _interopRequireWildcard(require("@grpc/grpc-js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -1046,6 +1052,112 @@ exports.ibc = ibc;
         }(pb_1.Message);
 
         _v.MsgSubmitMisbehaviourResponse = MsgSubmitMisbehaviourResponse;
+
+        var UnimplementedMsgService = function UnimplementedMsgService() {
+          (0, _classCallCheck2["default"])(this, UnimplementedMsgService);
+        };
+
+        (0, _defineProperty2["default"])(UnimplementedMsgService, "definition", {
+          CreateClient: {
+            path: "/ibc.core.client.v1.Msg/CreateClient",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return MsgCreateClient.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return MsgCreateClientResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          UpdateClient: {
+            path: "/ibc.core.client.v1.Msg/UpdateClient",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return MsgUpdateClient.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return MsgUpdateClientResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          UpgradeClient: {
+            path: "/ibc.core.client.v1.Msg/UpgradeClient",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return MsgUpgradeClient.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return MsgUpgradeClientResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          SubmitMisbehaviour: {
+            path: "/ibc.core.client.v1.Msg/SubmitMisbehaviour",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return MsgSubmitMisbehaviour.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return MsgSubmitMisbehaviourResponse.deserialize(new Uint8Array(bytes));
+            }
+          }
+        });
+        _v.UnimplementedMsgService = UnimplementedMsgService;
+
+        var MsgClient = /*#__PURE__*/function (_grpc_1$makeGenericCl) {
+          (0, _inherits2["default"])(MsgClient, _grpc_1$makeGenericCl);
+
+          var _super9 = _createSuper(MsgClient);
+
+          function MsgClient(address, credentials, _options) {
+            var _thisSuper, _thisSuper2, _thisSuper3, _thisSuper4, _this13;
+
+            (0, _classCallCheck2["default"])(this, MsgClient);
+            _this13 = _super9.call(this, address, credentials, _options);
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this13), "CreateClient", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper = (0, _assertThisInitialized2["default"])(_this13), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "CreateClient", _thisSuper).call(_thisSuper, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this13), "UpdateClient", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper2 = (0, _assertThisInitialized2["default"])(_this13), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "UpdateClient", _thisSuper2).call(_thisSuper2, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this13), "UpgradeClient", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper3 = (0, _assertThisInitialized2["default"])(_this13), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "UpgradeClient", _thisSuper3).call(_thisSuper3, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this13), "SubmitMisbehaviour", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper4 = (0, _assertThisInitialized2["default"])(_this13), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "SubmitMisbehaviour", _thisSuper4).call(_thisSuper4, message, metadata, options, callback);
+            });
+            return _this13;
+          }
+
+          return MsgClient;
+        }(grpc_1.makeGenericClientConstructor(UnimplementedMsgService.definition, "Msg", {}));
+
+        _v.MsgClient = MsgClient;
       })(v1 || (v1 = _client.v1 || (_client.v1 = {})));
     })(client || (client = _core.client || (_core.client = {})));
   })(core || (core = _ibc.core || (_ibc.core = {})));

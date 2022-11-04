@@ -75,6 +75,10 @@ exports.ethermint = ethermint;
             if ("chain_config" in data && data.chain_config != undefined) {
               _this.chain_config = data.chain_config;
             }
+
+            if ("allow_unprotected_txs" in data && data.allow_unprotected_txs != undefined) {
+              _this.allow_unprotected_txs = data.allow_unprotected_txs;
+            }
           }
 
           return _this;
@@ -121,6 +125,14 @@ exports.ethermint = ethermint;
             pb_1.Message.setWrapperField(this, 5, value);
           }
         }, {
+          key: "allow_unprotected_txs",
+          get: function get() {
+            return pb_1.Message.getField(this, 6);
+          },
+          set: function set(value) {
+            pb_1.Message.setField(this, 6, value);
+          }
+        }, {
           key: "toObject",
           value: function (_toObject) {
             function toObject() {
@@ -155,6 +167,10 @@ exports.ethermint = ethermint;
               data.chain_config = this.chain_config.toObject();
             }
 
+            if (this.allow_unprotected_txs != null) {
+              data.allow_unprotected_txs = this.allow_unprotected_txs;
+            }
+
             return data;
           })
         }, {
@@ -170,6 +186,7 @@ exports.ethermint = ethermint;
             if (this.chain_config !== undefined) writer.writeMessage(5, this.chain_config, function () {
               return _this2.chain_config.serialize(writer);
             });
+            if (this.allow_unprotected_txs !== undefined) writer.writeBool(6, this.allow_unprotected_txs);
             if (!w) return writer.getResultBuffer();
           }
         }, {
@@ -200,6 +217,10 @@ exports.ethermint = ethermint;
 
             if (data.chain_config != null) {
               message.chain_config = ChainConfig.fromObject(data.chain_config);
+            }
+
+            if (data.allow_unprotected_txs != null) {
+              message.allow_unprotected_txs = data.allow_unprotected_txs;
             }
 
             return message;
@@ -234,6 +255,10 @@ exports.ethermint = ethermint;
                   reader.readMessage(message.chain_config, function () {
                     return message.chain_config = ChainConfig.deserialize(reader);
                   });
+                  break;
+
+                case 6:
+                  message.allow_unprotected_txs = reader.readBool();
                   break;
 
                 default:

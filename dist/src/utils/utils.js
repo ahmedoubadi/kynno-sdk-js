@@ -29,6 +29,10 @@ var _errors = require("../errors");
 
 var types = _interopRequireWildcard(require("../types"));
 
+var _util = require("@ethereumjs/util");
+
+var _ethjsUtil = require("ethjs-util");
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof3(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -369,7 +373,6 @@ var Utils = /*#__PURE__*/function () {
       }
 
       if (hex.length % 2 !== 0) {
-        console.log("sha256", hex);
         throw new _errors.SdkError("invalid hex string length: ".concat(hex), _errors.CODES.Internal);
       }
 
@@ -388,8 +391,6 @@ var Utils = /*#__PURE__*/function () {
       if (typeof hex !== 'string') {
         throw new _errors.SdkError('sha3 expects a hex string', _errors.CODES.Internal);
       }
-
-      console.log("sha3", hex);
 
       if (hex.length % 2 !== 0) {
         throw new _errors.SdkError("invalid hex string length: ".concat(hex), _errors.CODES.Internal);
@@ -466,6 +467,138 @@ var Utils = /*#__PURE__*/function () {
 
       b = b.slice(0, 4);
       return b;
+    }
+    /**
+     * Pads the front of the given hex string with zeroes until it reaches the
+     * target length. If the input string is already longer than or equal to the
+     * target length, it is returned unmodified.
+     *
+     * If the input string is "0x"-prefixed or not a hex string, an error will be
+     * thrown.
+     *
+     * @param hexString - The hexadecimal string to pad with zeroes.
+     * @param targetLength - The target length of the hexadecimal string.
+     * @returns The input string front-padded with zeroes, or the original string
+     * if it was already greater than or equal to to the target length.
+     */
+
+  }, {
+    key: "padWithZeroes",
+    value: function padWithZeroes(hexString, targetLength) {
+      if (hexString !== '' && !/^[0-9a-f]+$/i.test(hexString)) {
+        throw new Error("Expected an unprefixed hex string. Received: ".concat(hexString));
+      }
+
+      if (targetLength < 0) {
+        throw new Error("Expected a non-negative integer target length. Received: ".concat(targetLength));
+      }
+
+      return String.prototype.padStart.call(hexString, targetLength, '0');
+    }
+    /**
+     * Returns `true` if the given value is nullish.
+     *
+     * @param value - The value being checked.
+     * @returns Whether the value is nullish.
+     */
+
+  }, {
+    key: "isNullish",
+    value: function isNullish(value) {
+      return value === null || value === undefined;
+    }
+    /**
+     * Convert a value to a Buffer. This function should be equivalent to the `toBuffer` function in
+     * `ethereumjs-util@5.2.1`.
+     *
+     * @param value - The value to convert to a Buffer.
+     * @returns The given value as a Buffer.
+     */
+
+  }, {
+    key: "legacyToBuffer",
+    value: function legacyToBuffer(value) {
+      return typeof value === 'string' && !(0, _ethjsUtil.isHexString)(value) ? Buffer.from(value) : (0, _util.toBuffer)(value);
+    }
+    /**
+     * Concatenate an extended ECDSA signature into a single '0x'-prefixed hex string.
+     *
+     * @param v - The 'v' portion of the signature.
+     * @param r - The 'r' portion of the signature.
+     * @param s - The 's' portion of the signature.
+     * @returns The concatenated ECDSA signature as a '0x'-prefixed string.
+     */
+
+  }, {
+    key: "concatSig",
+    value: function concatSig(v, r, s) {
+      var rSig = (0, _util.fromSigned)(r);
+      var sSig = (0, _util.fromSigned)(s);
+      var vSig = (0, _util.bufferToInt)(v);
+      var rStr = this.padWithZeroes((0, _util.toUnsigned)(rSig).toString('hex'), 64);
+      var sStr = this.padWithZeroes((0, _util.toUnsigned)(sSig).toString('hex'), 64);
+      var vStr = (0, _ethjsUtil.stripHexPrefix)((0, _ethjsUtil.intToHex)(vSig));
+      return (0, _util.addHexPrefix)(rStr.concat(sStr, vStr));
+    }
+    /**
+     * Recover the public key from the given signature and message hash.
+     *
+     * @param messageHash - The hash of the signed message.
+     * @param signature - The signature.
+     * @returns The public key of the signer.
+     */
+
+  }, {
+    key: "recoverPublicKey",
+    value: function recoverPublicKey(messageHash, signature) {
+      var sigParams = (0, _util.fromRpcSig)(signature);
+      return (0, _util.ecrecover)(messageHash, sigParams.v, sigParams.r, sigParams.s);
+    }
+    /**
+     * Normalize the input to a lower-cased '0x'-prefixed hex string.
+     *
+     * @param input - The value to normalize.
+     * @returns The normalized value.
+     */
+
+  }, {
+    key: "normalize",
+    value: function normalize(input) {
+      if (!input) {
+        return "";
+      }
+
+      if (typeof input === 'number') {
+        if (input < 0) {
+          return '0x';
+        }
+
+        var buffer = (0, _util.toBuffer)(input);
+        input = (0, _util.bufferToHex)(buffer);
+      }
+
+      if (typeof input !== 'string') {
+        var msg = 'eth-sig-util.normalize() requires hex string or integer input.';
+        msg += " received ".concat((0, _typeof2["default"])(input), ": ").concat(input);
+        throw new Error(msg);
+      }
+
+      return (0, _util.addHexPrefix)(input.toLowerCase());
+    }
+    /**
+     * Node's Buffer.from() method does not seem to buffer numbers correctly out of the box.
+     * This helper method formats the number correct for Buffer.from to return correct buffer.
+     *
+     * @param num - The number to convert to buffer.
+     * @returns The number in buffer form.
+     */
+
+  }, {
+    key: "numberToBuffer",
+    value: function numberToBuffer(num) {
+      var hexVal = num.toString(16);
+      var prepend = hexVal.length % 2 ? '0' : '';
+      return Buffer.from(prepend + hexVal, 'hex');
     }
   }]);
   return Utils;

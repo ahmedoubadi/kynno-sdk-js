@@ -9,6 +9,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.cosmos = void 0;
 
+var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
@@ -26,6 +30,8 @@ var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/ge
 var dependency_2 = _interopRequireWildcard(require("./../../../google/protobuf/any"));
 
 var pb_1 = _interopRequireWildcard(require("google-protobuf"));
+
+var grpc_1 = _interopRequireWildcard(require("@grpc/grpc-js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -461,6 +467,72 @@ exports.cosmos = cosmos;
       }(pb_1.Message);
 
       _v1beta.MsgRevokeAllowanceResponse = MsgRevokeAllowanceResponse;
+
+      var UnimplementedMsgService = function UnimplementedMsgService() {
+        (0, _classCallCheck2["default"])(this, UnimplementedMsgService);
+      };
+
+      (0, _defineProperty2["default"])(UnimplementedMsgService, "definition", {
+        GrantAllowance: {
+          path: "/cosmos.feegrant.v1beta1.Msg/GrantAllowance",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return MsgGrantAllowance.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return MsgGrantAllowanceResponse.deserialize(new Uint8Array(bytes));
+          }
+        },
+        RevokeAllowance: {
+          path: "/cosmos.feegrant.v1beta1.Msg/RevokeAllowance",
+          requestStream: false,
+          responseStream: false,
+          requestSerialize: function requestSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          requestDeserialize: function requestDeserialize(bytes) {
+            return MsgRevokeAllowance.deserialize(new Uint8Array(bytes));
+          },
+          responseSerialize: function responseSerialize(message) {
+            return Buffer.from(message.serialize());
+          },
+          responseDeserialize: function responseDeserialize(bytes) {
+            return MsgRevokeAllowanceResponse.deserialize(new Uint8Array(bytes));
+          }
+        }
+      });
+      _v1beta.UnimplementedMsgService = UnimplementedMsgService;
+
+      var MsgClient = /*#__PURE__*/function (_grpc_1$makeGenericCl) {
+        (0, _inherits2["default"])(MsgClient, _grpc_1$makeGenericCl);
+
+        var _super5 = _createSuper(MsgClient);
+
+        function MsgClient(address, credentials, _options) {
+          var _thisSuper, _thisSuper2, _this6;
+
+          (0, _classCallCheck2["default"])(this, MsgClient);
+          _this6 = _super5.call(this, address, credentials, _options);
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this6), "GrantAllowance", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper = (0, _assertThisInitialized2["default"])(_this6), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "GrantAllowance", _thisSuper).call(_thisSuper, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this6), "RevokeAllowance", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper2 = (0, _assertThisInitialized2["default"])(_this6), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "RevokeAllowance", _thisSuper2).call(_thisSuper2, message, metadata, options, callback);
+          });
+          return _this6;
+        }
+
+        return MsgClient;
+      }(grpc_1.makeGenericClientConstructor(UnimplementedMsgService.definition, "Msg", {}));
+
+      _v1beta.MsgClient = MsgClient;
     })(v1beta1 || (v1beta1 = _feegrant.v1beta1 || (_feegrant.v1beta1 = {})));
   })(feegrant || (feegrant = _cosmos.feegrant || (_cosmos.feegrant = {})));
 })(cosmos || (exports.cosmos = cosmos = {}));

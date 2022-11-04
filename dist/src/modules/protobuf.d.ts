@@ -4,7 +4,7 @@ import * as types from '../types';
  * ProtobufModel module allows you to deserialize protobuf serialize string
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 export declare class Protobuf {
     /** @hidden */

@@ -121,19 +121,6 @@ Object.keys(_nft).forEach(function (key) {
   });
 });
 
-var _nameservice = require("./messages/nameservice");
-
-Object.keys(_nameservice).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (key in exports && exports[key] === _nameservice[key]) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _nameservice[key];
-    }
-  });
-});
-
 var _transaction = require("./transaction/transaction");
 
 Object.keys(_transaction).forEach(function (key) {

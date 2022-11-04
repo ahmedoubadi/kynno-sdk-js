@@ -5,7 +5,7 @@ import { SdkError, CODES } from '../errors';
 
 /**
  * kynno Websocket Client
- * @since v0.17
+ * @since v0.1
  */
 export class WsClient {
   /** @hidden */
@@ -22,10 +22,10 @@ export class WsClient {
 
   /**
    * Initialize ws client
-   * @since v0.17
+   * @since v0.1
    */
   connect(): void {
-    this.ws = new Websocket(this.url + '/websocket');
+    this.ws = new Websocket(this.url);
     if (!this.ws) {
       throw new SdkError('Websocket client not initialized',CODES.Internal); // Should not happen
     }
@@ -45,7 +45,7 @@ export class WsClient {
       if (!data.id) {
         this.eventEmitter.emit(
           'error',
-          'Unexpected response: ' + JSON.stringify(data)
+          'Unexpected response: ' //+ JSON.stringify(data)
         );
       }
       // Route the data to the specified subscriber based on the request ID
@@ -60,7 +60,7 @@ export class WsClient {
 
   /**
    * Disconnect from server
-   * @since v0.17
+   * @since v0.1
    */
   async disconnect(): Promise<void> {
     return new Promise(reslove => {
@@ -88,7 +88,7 @@ export class WsClient {
 
   /**
    * Check if the ws client is connected or not
-   * @since v0.17
+   * @since v0.1
    */
   isReady(): boolean {
     return this.ws?.readyState === 1;
@@ -99,9 +99,9 @@ export class WsClient {
    * @param method The tendermint rpc method
    * @param id The request id which is the same as the incoming response
    * @param query The tendermint query string
-   * @since v0.17
+   * @since v0.1
    */
-  send(method: string, id: string, query?: string): void {
+  send(method: string, id: string | number, query?: string): void {
     if (!this.ws) {
       throw new SdkError('Websocket client not initialized',CODES.Internal); // Should not happen
     }

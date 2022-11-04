@@ -7,7 +7,7 @@ import { TransactionReceipt, TransactionResponse } from '@ethersproject/abstract
  * This module implements NFT related functions
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 export class NameService {
   /** @hidden */

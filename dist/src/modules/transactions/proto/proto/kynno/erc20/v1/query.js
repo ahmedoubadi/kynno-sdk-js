@@ -9,6 +9,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.kynno = void 0;
 
+var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
+
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
@@ -32,6 +34,8 @@ var dependency_2 = _interopRequireWildcard(require("./genesis"));
 var dependency_3 = _interopRequireWildcard(require("./erc20"));
 
 var pb_1 = _interopRequireWildcard(require("google-protobuf"));
+
+var grpc_1 = _interopRequireWildcard(require("@grpc/grpc-js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -690,9 +694,11 @@ exports.kynno = kynno;
       }(pb_1.Message);
 
       _v.QueryParamsResponse = QueryParamsResponse;
-      var UnimplementedQueryService = /*#__PURE__*/(0, _createClass2["default"])(function UnimplementedQueryService() {
+
+      var UnimplementedQueryService = function UnimplementedQueryService() {
         (0, _classCallCheck2["default"])(this, UnimplementedQueryService);
-      });
+      };
+
       (0, _defineProperty2["default"])(UnimplementedQueryService, "definition", {
         TokenPairs: {
           path: "/kynno.erc20.v1.Query/TokenPairs",
@@ -747,6 +753,33 @@ exports.kynno = kynno;
         }
       });
       _v.UnimplementedQueryService = UnimplementedQueryService;
+
+      var QueryClient = /*#__PURE__*/function (_grpc_1$makeGenericCl) {
+        (0, _inherits2["default"])(QueryClient, _grpc_1$makeGenericCl);
+
+        var _super7 = _createSuper(QueryClient);
+
+        function QueryClient(address, credentials, _options) {
+          var _thisSuper, _thisSuper2, _thisSuper3, _this11;
+
+          (0, _classCallCheck2["default"])(this, QueryClient);
+          _this11 = _super7.call(this, address, credentials, _options);
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this11), "TokenPairs", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper = (0, _assertThisInitialized2["default"])(_this11), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "TokenPairs", _thisSuper).call(_thisSuper, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this11), "TokenPair", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper2 = (0, _assertThisInitialized2["default"])(_this11), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "TokenPair", _thisSuper2).call(_thisSuper2, message, metadata, options, callback);
+          });
+          (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this11), "Params", function (message, metadata, options, callback) {
+            return (0, _get2["default"])((_thisSuper3 = (0, _assertThisInitialized2["default"])(_this11), (0, _getPrototypeOf2["default"])(QueryClient.prototype)), "Params", _thisSuper3).call(_thisSuper3, message, metadata, options, callback);
+          });
+          return _this11;
+        }
+
+        return QueryClient;
+      }(grpc_1.makeGenericClientConstructor(UnimplementedQueryService.definition, "Query", {}));
+
+      _v.QueryClient = QueryClient;
     })(v1 || (v1 = _erc.v1 || (_erc.v1 = {})));
   })(erc20 || (erc20 = _kynno.erc20 || (_kynno.erc20 = {})));
 })(kynno || (exports.kynno = kynno = {}));

@@ -9,10 +9,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Gov = void 0;
 
-var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
-
-var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
-
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
@@ -35,7 +31,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
  * [More Details](https://www.kynno.io/docs/features/governance.html)
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 var Gov = /*#__PURE__*/function () {
   /** @hidden */
@@ -47,141 +43,12 @@ var Gov = /*#__PURE__*/function () {
     this.client = client;
   }
   /**
-   * submit Proposal
-   * @param proposal_id 
-   * @param option
-   * @param baseTx { types.BaseTx }
-   * @returns
-   * @since v0.17
+   * Proposal queries proposal details based on ProposalID.
+   * @param proposal_id defines the unique id of the proposal.
    */
 
 
   (0, _createClass2["default"])(Gov, [{
-    key: "submitProposal",
-    value: function () {
-      var _submitProposal = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(content, initial_deposit, baseTx) {
-        var from, msgs;
-        return _regenerator["default"].wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                from = this.client.keys.show(baseTx.from);
-                msgs = [{
-                  type: types.TxType.MsgSubmitProposal,
-                  value: {
-                    content: content,
-                    initial_deposit: initial_deposit,
-                    proposer: from
-                  }
-                }];
-                return _context.abrupt("return", this.client.tx.buildAndSend(msgs, baseTx));
-
-              case 3:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function submitProposal(_x, _x2, _x3) {
-        return _submitProposal.apply(this, arguments);
-      }
-
-      return submitProposal;
-    }()
-    /**
-     * vote
-     * @param proposal_id 
-     * @param option
-     * @param baseTx { types.BaseTx }
-     * @returns
-     * @since v0.17
-     */
-
-  }, {
-    key: "vote",
-    value: function () {
-      var _vote = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(proposal_id, option, baseTx) {
-        var from, msgs;
-        return _regenerator["default"].wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                from = this.client.keys.show(baseTx.from);
-                msgs = [{
-                  type: types.TxType.MsgVote,
-                  value: {
-                    proposal_id: proposal_id,
-                    voter: from,
-                    option: option
-                  }
-                }];
-                return _context2.abrupt("return", this.client.tx.buildAndSend(msgs, baseTx));
-
-              case 3:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
-      }));
-
-      function vote(_x4, _x5, _x6) {
-        return _vote.apply(this, arguments);
-      }
-
-      return vote;
-    }()
-    /**
-     * deposit
-     * @param proposal_id 
-     * @param amount
-     * @param baseTx { types.BaseTx }
-     * @returns
-     * @since v0.17
-     */
-
-  }, {
-    key: "deposit",
-    value: function () {
-      var _deposit = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(proposal_id, amount, baseTx) {
-        var from, msgs;
-        return _regenerator["default"].wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                from = this.client.keys.show(baseTx.from);
-                msgs = [{
-                  type: types.TxType.MsgDeposit,
-                  value: {
-                    proposal_id: proposal_id,
-                    depositor: from,
-                    amount: amount
-                  }
-                }];
-                return _context3.abrupt("return", this.client.tx.buildAndSend(msgs, baseTx));
-
-              case 3:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, this);
-      }));
-
-      function deposit(_x7, _x8, _x9) {
-        return _deposit.apply(this, arguments);
-      }
-
-      return deposit;
-    }()
-    /**
-     * Proposal queries proposal details based on ProposalID.
-     * @param proposal_id defines the unique id of the proposal.
-     */
-
-  }, {
     key: "queryProposal",
     value: function queryProposal(proposal_id) {
       var _this = this;

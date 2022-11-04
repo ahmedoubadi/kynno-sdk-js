@@ -65,7 +65,7 @@ var EventDAO = /*#__PURE__*/function () {
 }();
 /**
  * KYNNO Event Listener
- * @since v0.17
+ * @since v0.1
  */
 
 
@@ -165,7 +165,7 @@ var EventListener = /*#__PURE__*/function () {
   }
   /**
    * Connect to server
-   * @since v0.17
+   * @since v0.1
    */
 
 
@@ -176,7 +176,7 @@ var EventListener = /*#__PURE__*/function () {
     }
     /**
      * Disconnect from server and clear all the listeners
-     * @since v0.17
+     * @since v0.1
      */
 
   }, {
@@ -212,7 +212,7 @@ var EventListener = /*#__PURE__*/function () {
      * @param conditions Query conditions
      * @param callback A function to receive notifications
      * @returns
-     * @since v0.17
+     * @since v0.1
      */
 
   }, {
@@ -251,7 +251,7 @@ var EventListener = /*#__PURE__*/function () {
      * @param conditions Query conditions
      * @param callback A function to receive notifications
      * @returns
-     * @since v0.17
+     * @since v0.1
      */
 
   }, {
@@ -289,7 +289,7 @@ var EventListener = /*#__PURE__*/function () {
      * @param conditions Query conditions
      * @param callback A function to receive notifications
      * @returns
-     * @since v0.17
+     * @since v0.1
      */
 
   }, {
@@ -327,7 +327,7 @@ var EventListener = /*#__PURE__*/function () {
      * @param conditions Query conditions
      * @param callback A function to receive notifications
      * @returns
-     * @since v0.17
+     * @since v0.1
      */
 
   }, {
@@ -364,7 +364,7 @@ var EventListener = /*#__PURE__*/function () {
     /**
      * Unsubscribe the specified event
      * @param subscription The event subscription instance
-     * @since v0.17
+     * @since v0.1
      */
 
   }, {

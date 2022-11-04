@@ -3,15 +3,15 @@ package kynno.inflation.v1;
 
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/ahmedoubadi/core/x/inflation/types";
+option go_package = "github.com/kynnoenterprise/core/x/inflation/types";
 
 // InflationDistribution defines the distribution in which inflation is
 // allocated through minting on each epoch (staking, incentives, community). It
 // excludes the team vesting distribution, as this is minted once at genesis.
-// The initial InflationDistribution can be calculated from the Evmvos Token
+// The initial InflationDistribution can be calculated from the kynno Token
 // Model like this:
 // mintDistribution1 = distribution1 / (1 - teamVestingDistribution)
-// 0.5333333         = 40%           / (1 - 25%)
+// 0.5333333         = 40%           / (1 - 12%)
 message InflationDistribution {
   // staking_rewards defines the proportion of the minted minted_denom that is
   // to be allocated as staking rewards

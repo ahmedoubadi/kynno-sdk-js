@@ -9,6 +9,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ibc = void 0;
 
+var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
@@ -28,6 +32,8 @@ var dependency_2 = _interopRequireWildcard(require("./../../../../cosmos/base/v1
 var dependency_3 = _interopRequireWildcard(require("./../../../core/client/v1/client"));
 
 var pb_1 = _interopRequireWildcard(require("google-protobuf"));
+
+var grpc_1 = _interopRequireWildcard(require("@grpc/grpc-js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -382,6 +388,52 @@ exports.ibc = ibc;
         }(pb_1.Message);
 
         _v.MsgTransferResponse = MsgTransferResponse;
+
+        var UnimplementedMsgService = function UnimplementedMsgService() {
+          (0, _classCallCheck2["default"])(this, UnimplementedMsgService);
+        };
+
+        (0, _defineProperty2["default"])(UnimplementedMsgService, "definition", {
+          Transfer: {
+            path: "/ibc.applications.transfer.v1.Msg/Transfer",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return MsgTransfer.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return MsgTransferResponse.deserialize(new Uint8Array(bytes));
+            }
+          }
+        });
+        _v.UnimplementedMsgService = UnimplementedMsgService;
+
+        var MsgClient = /*#__PURE__*/function (_grpc_1$makeGenericCl) {
+          (0, _inherits2["default"])(MsgClient, _grpc_1$makeGenericCl);
+
+          var _super3 = _createSuper(MsgClient);
+
+          function MsgClient(address, credentials, _options) {
+            var _thisSuper, _this4;
+
+            (0, _classCallCheck2["default"])(this, MsgClient);
+            _this4 = _super3.call(this, address, credentials, _options);
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this4), "Transfer", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper = (0, _assertThisInitialized2["default"])(_this4), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "Transfer", _thisSuper).call(_thisSuper, message, metadata, options, callback);
+            });
+            return _this4;
+          }
+
+          return MsgClient;
+        }(grpc_1.makeGenericClientConstructor(UnimplementedMsgService.definition, "Msg", {}));
+
+        _v.MsgClient = MsgClient;
       })(v1 || (v1 = _transfer.v1 || (_transfer.v1 = {})));
     })(transfer || (transfer = _applications.transfer || (_applications.transfer = {})));
   })(applications || (applications = _ibc.applications || (_ibc.applications = {})));

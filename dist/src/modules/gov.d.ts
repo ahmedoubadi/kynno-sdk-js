@@ -6,43 +6,13 @@ import * as types from '../types';
  * [More Details](https://www.kynno.io/docs/features/governance.html)
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 export declare class Gov {
     /** @hidden */
     private client;
     /** @hidden */
     constructor(client: Client);
-    /**
-     * submit Proposal
-     * @param proposal_id
-     * @param option
-     * @param baseTx { types.BaseTx }
-     * @returns
-     * @since v0.17
-     */
-    submitProposal(content: {
-        type: types.ProposalType;
-        value: types.TextProposal | types.CommunityPoolSpendProposal | types.ParameterChangeProposal | types.CancelSoftwareUpgradeProposal | types.SoftwareUpgradeProposal;
-    }, initial_deposit: types.Coin[], baseTx: types.BaseTx): Promise<types.TxResult>;
-    /**
-     * vote
-     * @param proposal_id
-     * @param option
-     * @param baseTx { types.BaseTx }
-     * @returns
-     * @since v0.17
-     */
-    vote(proposal_id: number, option: types.VoteOption, baseTx: types.BaseTx): Promise<types.TxResult>;
-    /**
-     * deposit
-     * @param proposal_id
-     * @param amount
-     * @param baseTx { types.BaseTx }
-     * @returns
-     * @since v0.17
-     */
-    deposit(proposal_id: number, amount: types.Coin[], baseTx: types.BaseTx): Promise<types.TxResult>;
     /**
      * Proposal queries proposal details based on ProposalID.
      * @param proposal_id defines the unique id of the proposal.

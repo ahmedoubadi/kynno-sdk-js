@@ -4,14 +4,13 @@ import { SdkError, CODES } from '../errors';
 import * as is from 'is_js';
 import * as types from '../types';
 import { ethers } from 'ethers';
-
 /**
  * This module allows you to manage your local tendermint keystore (wallets) for kynno.
  *
  * **NOTE:** You need to implement the [[KeyDAO]] Interface first.
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 export class Keys {
   /** @hidden */
@@ -28,7 +27,7 @@ export class Keys {
    * @param password Password for encrypting the keystore
    * @param type Pubkey Type
    * @returns Bech32 address and mnemonic
-   * @since v0.17
+   * @since v0.1
    */
   add(
     name: string, 
@@ -49,12 +48,11 @@ export class Keys {
     //   throw new SdkError(`Key with name '${name}' already exists`);
     // }
     const mnemonic = Crypto.generateMnemonic();
+    
+    
     const privKey = Crypto.getPrivateKeyFromMnemonic(mnemonic);
-    const pubKey = Crypto.getPublicKeyFromPrivateKey(privKey, type);
-    const address = Crypto.getAddressFromPublicKey(
-      pubKey,
-      this.client.config.bech32Prefix.AccAddr
-    );
+    
+    let walletObj = new ethers.Wallet(privKey);
 
     const encryptedPrivKey = this.client.config.keyDAO.encrypt(
       privKey,
@@ -65,11 +63,10 @@ export class Keys {
         mnemonic,
         password
     );
-
     let wallet = {
-        address,
+        address:this.client.utils.toKynno(walletObj.address),
         privateKey: encryptedPrivKey,
-        publicKey: Crypto.aminoMarshalPubKey(pubKey),
+        publicKey: walletObj.publicKey,
         mnemonic: encryptedMnemonic,
     };
     // Save the key to app
@@ -89,7 +86,7 @@ export class Keys {
    * @param derive Derive a private key using the default HD path (default: true)
    * @param saltPassword A passphrase for generating the salt, according to bip39
    * @returns Bech32 address
-   * @since v0.17
+   * @since v0.1
    */
   recover(
     name: string,
@@ -159,7 +156,7 @@ export class Keys {
    * @param keystore Keystore json or object
    * @param type Pubkey Type
    * @returns types.Wallet
-   * @since v0.17
+   * @since v0.1
    */
   import(
     name: string,
@@ -185,21 +182,16 @@ export class Keys {
     // }
 
     const privKey = Crypto.getPrivateKeyFromKeyStore(keystore, password);
-    const pubKey = Crypto.getPublicKeyFromPrivateKey(privKey, type);
-    const address = Crypto.getAddressFromPublicKey(
-      pubKey,
-      this.client.config.bech32Prefix.AccAddr
-    );
+    let walletObj = new ethers.Wallet(privKey);
 
     const encryptedPrivKey = this.client.config.keyDAO.encrypt(
       privKey,
       password
     );
-
     let wallet = {
-        address,
+        address:this.client.utils.toKynno(walletObj.address),
         privateKey: encryptedPrivKey,
-        publicKey:Crypto.aminoMarshalPubKey(pubKey),
+        publicKey: walletObj.publicKey
     };
     // Save the key to app
     this.client.config.keyDAO.write(name, wallet);
@@ -214,7 +206,7 @@ export class Keys {
    * @param password Password of the keystore
    * @param keystore Keystore v1.0
    * @returns types.Wallet
-   * @since v0.17
+   * @since v0.1
    */
   importKeystore(
     name: string,
@@ -236,20 +228,19 @@ export class Keys {
 
     let pk = Crypto.getPrivateKeyFromKeystoreV1(keystore, password);
 
-    const pubKey = Crypto.getPublicKeyFromPrivateKey(pk.privKey, pk.type);
-    const address = Crypto.getAddressFromPublicKey(
-      pubKey,
-      this.client.config.bech32Prefix.AccAddr
-    );
+    let walletObj = new ethers.Wallet(pk.privKey);
+
     const encryptedPrivKey = this.client.config.keyDAO.encrypt(
       pk.privKey,
       password
     );
     let wallet = {
-        address,
+        address:this.client.utils.toKynno(walletObj.address),
         privateKey: encryptedPrivKey,
-        publicKey:Crypto.aminoMarshalPubKey(pubKey),
+        publicKey: walletObj.publicKey
     };
+    // Save the key to app
+    this.client.config.keyDAO.write(name, wallet);
     // Save the key to app
     this.client.config.keyDAO.write(name, wallet);
     return wallet;
@@ -263,7 +254,7 @@ export class Keys {
    * @param privateKey privateKey hex
    * @param type Pubkey Type
    * @returns Bech32 address
-   * @since v0.17
+   * @since v0.1
    */
   async importPrivateKey(
     name: string,
@@ -288,12 +279,11 @@ export class Keys {
     if (!this.client.config.keyDAO.decrypt) {
       throw new SdkError(`Decrypt method of KeyDAO not implemented`,CODES.Panic);
     }
-    let walletObj = new ethers.Wallet(privateKey, this.client.config.provider);
-    let address:string = await walletObj.getAddress()
-    let kynnoAddress = this.client.utils.toKynno(address)
-    // Query account info from block chain
-    const accountData = await this.client.account.queryAccount(kynnoAddress)
     const pubKey = Crypto.getPublicKeyFromPrivateKey(privateKey, type);
+    const address = Crypto.getAddressFromPublicKey(
+      pubKey,
+      this.client.config.bech32Prefix.AccAddr
+    );
 
     const encryptedPrivKey = this.client.config.keyDAO.encrypt!(
       privateKey,
@@ -303,7 +293,7 @@ export class Keys {
     let wallet = {
         address,
         privateKey: encryptedPrivKey,
-        publicKey:accountData.account.base_account.pub_key?.key
+        publicKey:Crypto.aminoMarshalPubKey(pubKey)
     };
     // Save the key to app
     this.client.config.keyDAO.write(name, wallet);
@@ -318,7 +308,7 @@ export class Keys {
    * @param keystorePassword Password for encrypting the keystore
    * @param iterations
    * @returns Keystore json
-   * @since v0.17
+   * @since v0.1
    */
   export(name: string, keyPassword: string, keystorePassword: string, iterations?: number): string {
     if (is.empty(name)) {
@@ -339,6 +329,7 @@ export class Keys {
       keyObj.privateKey,
       keyPassword
     );
+    
 
     const keystore = Crypto.generateKeyStore(
       privKey,
@@ -346,15 +337,16 @@ export class Keys {
       this.client.config.bech32Prefix.AccAddr,
         iterations
     );
+    
     return JSON.stringify(keystore);
   }
-
+  
   /**
    * Delete a key
    *
    * @param name Name of the key
    * @param password Password of the key
-   * @since v0.17
+   * @since v0.1
    */
   delete(name: string, password: string) {
     if (is.empty(name)) {
@@ -383,7 +375,7 @@ export class Keys {
    *
    * @param name Name of the key
    * @returns Bech32 address
-   * @since v0.17
+   * @since v0.1
    */
   show(name: string) {
     if (is.empty(name)) {

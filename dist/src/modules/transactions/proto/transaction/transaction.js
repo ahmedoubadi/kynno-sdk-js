@@ -5,16 +5,15 @@ var _typeof = require("@babel/runtime/helpers/typeof");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SIGN_DIRECT = exports.LEGACY_AMINO = void 0;
-exports.createAuthInfo = createAuthInfo;
-exports.createBody = createBody;
 exports.createBodyWithMultipleMessages = createBodyWithMultipleMessages;
+exports.createBody = createBody;
 exports.createFee = createFee;
-exports.createSigDoc = createSigDoc;
 exports.createSignerInfo = createSignerInfo;
-exports.createTransaction = createTransaction;
+exports.createAuthInfo = createAuthInfo;
+exports.createSigDoc = createSigDoc;
 exports.createTransactionWithMultipleMessages = createTransactionWithMultipleMessages;
-exports.protoTxNamespace = void 0;
+exports.createTransaction = createTransaction;
+exports.protoTxNamespace = exports.LEGACY_AMINO = exports.SIGN_DIRECT = void 0;
 
 var _sha = require("sha3");
 
@@ -75,7 +74,7 @@ function createFee(fee, denom, gasLimit) {
 }
 
 function createSignerInfo(algo, publicKey, sequence, mode) {
-  var pubkey; // NOTE: secp256k1 is going to be removed from kynno
+  var pubkey; // NOTE: secp256k1 is going to be removed from evmos
 
   if (algo === 'secp256k1') {
     pubkey = {

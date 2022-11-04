@@ -33,7 +33,7 @@ class EventDAO {
 
 /**
  * KYNNO Event Listener
- * @since v0.17
+ * @since v0.1
  */
 export class EventListener {
   /** @hidden */
@@ -113,7 +113,7 @@ export class EventListener {
 
   /**
    * Connect to server
-   * @since v0.17
+   * @since v0.1
    */
   connect(): void {
     this.wsClient.connect();
@@ -121,7 +121,7 @@ export class EventListener {
 
   /**
    * Disconnect from server and clear all the listeners
-   * @since v0.17
+   * @since v0.1
    */
   async disconnect(): Promise<void> {
     return this.wsClient.disconnect().then(() => {
@@ -134,7 +134,7 @@ export class EventListener {
    * @param conditions Query conditions
    * @param callback A function to receive notifications
    * @returns
-   * @since v0.17
+   * @since v0.1
    */
   subscribeNewBlock(
     callback: (error?: SdkError, data?: types.EventDataNewBlock) => void,
@@ -171,7 +171,7 @@ export class EventListener {
    * @param conditions Query conditions
    * @param callback A function to receive notifications
    * @returns
-   * @since v0.17
+   * @since v0.1
    */
   subscribeNewBlockHeader(
     callback: (error?: SdkError, data?: types.EventDataNewBlockHeader) => void
@@ -206,7 +206,7 @@ export class EventListener {
    * @param conditions Query conditions
    * @param callback A function to receive notifications
    * @returns
-   * @since v0.17
+   * @since v0.1
    */
   subscribeValidatorSetUpdates(
     callback: (
@@ -243,7 +243,7 @@ export class EventListener {
    * @param conditions Query conditions
    * @param callback A function to receive notifications
    * @returns
-   * @since v0.17
+   * @since v0.1
    */
   subscribeTx(
     conditions: EventQueryBuilder,
@@ -277,7 +277,7 @@ export class EventListener {
   /**
    * Unsubscribe the specified event
    * @param subscription The event subscription instance
-   * @since v0.17
+   * @since v0.1
    */
   unsubscribe(subscription: types.EventSubscription): void {
     // Unsubscribe the specified event from server

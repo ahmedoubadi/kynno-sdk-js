@@ -1,114 +1,82 @@
 import { BaseTest } from './basetest';
-import * as types from '../src/types';
+import { ethers } from 'ethers';
+import { signatureToPubkey } from '@hanchon/signature-to-pubkey';
+const timeout = 10000;
+const baseTx = {
+    from: 'name1',
+    password: "kynno@131213",
+}
 
-let timeout = 9999;
-
-describe('Tx Tests', () => {
-  const amount: types.Coin[] = [
-    {
-      denom: 'ubif',
-      amount: '100',
+const getPubKey=async(pk:string)=>{
+    const provider = new ethers.providers.JsonRpcProvider(
+        "https://testnet.kynno.dev"
+    )
+    const signer = new ethers.Wallet(pk,provider)
+    const messageToSign = 'Generate pub key'
+    const signature = await signer.signMessage(messageToSign)
+  
+    const msgHash = ethers.utils.hashMessage(messageToSign);
+    const msgHashBytes = ethers.utils.arrayify(msgHash);
+    // @ts-ignore
+    let pubkey = signatureToPubkey(signature,msgHashBytes)
+    return pubkey
+  }
+describe('Build tx', () => {
+  test(
+    'sign transaction',
+    async () => {
+        
+        const wallet = BaseTest.getClient().keys.add(baseTx.from, baseTx.password);
+        let pk = BaseTest.getClient().config.keyDAO.decrypt!(wallet.privateKey!,baseTx.password);
+        const chain = {
+            chainId: 9700,
+            cosmosChainId: 'kynno_9700-1',
+        }
+        
+        
+        const {account} = await BaseTest.getClient().account.queryAccount(wallet.address)
+        let sender = {
+            "accountAddress": account.base_account.address,
+            "sequence": parseInt(account.base_account.sequence),
+            "accountNumber": parseInt(account.base_account.account_number),
+            "pubkey": account.base_account.pub_key?.key||""
+        }
+        if(!account.base_account.pub_key){
+            
+            let key = await getPubKey(pk)
+            sender.pubkey = key
+        } else {
+            sender.pubkey =account.base_account.pub_key.key
+        }
+        
+        const fee = {
+            amount: '20',
+            denom: 'akynno',
+            gas: '200000',
+        }
+        
+        const memo = ''
+        
+        const params = {
+            destinationAddress: 'kynno1m63tc4gflpgx904fu2vmekdex652tp4vvvhdqy',
+            amount: (1*(10**18)).toString(),
+            denom: 'akynno',
+        }
+        const msg = BaseTest.getClient().transaction._createMessageSend(
+          chain,sender,fee,memo,params
+        )
+        const signature = BaseTest.getClient().transaction._signTypedData(
+            // @ts-ignore
+            { privateKey:Buffer.from(pk,'hex'), data:msg.eipToSign, version:'V4'}
+        )
+        const recovrSig = BaseTest.getClient().transaction._recoverTypedSignature(
+            // @ts-ignore
+            {data:msg.eipToSign,signature, version:'V4', }
+        )
+        expect(recovrSig).toBe(
+            BaseTest.getClient().utils.toEth(sender.accountAddress)
+        );
     },
-  ];
-
-  const msgs: any[] = [
-    {
-      type:types.TxType.MsgSend,
-      value:{
-        from_address:'kynno1krjc2zs8uyzfdxm0cj2z428hm3ju2nfnymktrj',
-        to_address:'kynno16yky9s6tjmv3kvvrxtnnrcn7x42ngs5wzjcywt',
-        amount
-      }
-    }
-  ];
-
-  const moreMessages: any[] = [
-    {
-      type:types.TxType.MsgSend,
-      value:{
-        from_address:'kynno1krjc2zs8uyzfdxm0cj2z428hm3ju2nfnymktrj',
-        to_address:'kynno16yky9s6tjmv3kvvrxtnnrcn7x42ngs5wzjcywt',
-        amount
-      }
-    },
-    {
-      type:types.TxType.MsgSend,
-      value:{
-        from_address:'kynno1krjc2zs8uyzfdxm0cj2z428hm3ju2nfnymktrj',
-        to_address:'kynno16yky9s6tjmv3kvvrxtnnrcn7x42ngs5wzjcywt',
-        amount
-      }
-    }
-  ];
-
-  describe('watch/cold wallet', () => {
-    test('watch/cold wallet tx', async () => {
-      let baseTx = {...BaseTest.baseTx};
-      baseTx.account_number = 2;
-      baseTx.sequence = 40;
-      baseTx.chainId = BaseTest.getClient().config.chainId;
-      // watch wallet
-      let unsignedStdTx =  BaseTest.getClient().tx.buildTx(msgs, baseTx);
-      let unsignedTxStr = Buffer.from(unsignedStdTx.getData()).toString('base64');
-      // cold wallet
-      let recover_unsigned_std_tx = BaseTest.getClient().tx.newStdTxFromTxData(unsignedTxStr);
-      let recover_signed_std_tx = await BaseTest.getClient().tx.sign(recover_unsigned_std_tx, baseTx, true);
-      let recover_signed_std_tx_str = Buffer.from(recover_signed_std_tx.getData()).toString('base64'); 
-      // watch wallet
-      let signed_std_tx = BaseTest.getClient().tx.newStdTxFromTxData(recover_signed_std_tx_str);
-      await BaseTest.getClient().tx.broadcast(signed_std_tx, baseTx.mode).then(res=>{
-        console.log(res);
-      }).catch(error => {
-        console.log(error);
-      });
-    });
-  });
-
-  let signedTx:any;
-
-  describe('Signing', () => {
-    test('sign tx online', async () => {
-      let unsignedTx = BaseTest.getClient().tx.buildTx(msgs, BaseTest.baseTx);
-      signedTx =  await BaseTest.getClient().tx.sign(unsignedTx, BaseTest.baseTx);
-      console.log(signedTx);
-    });
-
-    test('sign tx offline', async () => {
-      let baseTx = {...BaseTest.baseTx};
-      baseTx.account_number = 8;
-      baseTx.sequence = 356;
-      let unsignedTx = BaseTest.getClient().tx.buildTx(msgs, BaseTest.baseTx);
-      
-      let offlineSignedTx = await BaseTest.getClient().tx.sign(unsignedTx,baseTx);
-      console.log(offlineSignedTx);
-    });
-  });
-
-  describe('Broadcast', () => {
-    test('broadcast tx', async () => {
-        await BaseTest.getClient()
-          .tx.broadcast(signedTx, types.BroadcastMode.Commit)
-          .then(res => {
-            console.log(JSON.stringify(res));
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      },
-      timeout
-    );
-
-    test('more messages', async () => {
-        await BaseTest.getClient()
-        .tx.buildAndSend(moreMessages,BaseTest.baseTx)
-        .then(res => {
-            console.log(JSON.stringify(res));
-        })
-        .catch(error => {
-          console.log(error);
-        });;
-      },
-      timeout
-    );
-  });
+    timeout
+  );
 });

@@ -25,7 +25,7 @@ var _abi = require("../helper/abi");
  * This module implements NFT related functions
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 var NameService = /*#__PURE__*/function () {
   /** @hidden */

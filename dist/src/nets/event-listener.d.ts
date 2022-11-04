@@ -4,7 +4,7 @@ import { EventQueryBuilder } from '../types';
 import { Client } from '../client';
 /**
  * KYNNO Event Listener
- * @since v0.17
+ * @since v0.1
  */
 export declare class EventListener {
     /** @hidden */
@@ -17,12 +17,12 @@ export declare class EventListener {
     constructor(client: Client);
     /**
      * Connect to server
-     * @since v0.17
+     * @since v0.1
      */
     connect(): void;
     /**
      * Disconnect from server and clear all the listeners
-     * @since v0.17
+     * @since v0.1
      */
     disconnect(): Promise<void>;
     /**
@@ -30,7 +30,7 @@ export declare class EventListener {
      * @param conditions Query conditions
      * @param callback A function to receive notifications
      * @returns
-     * @since v0.17
+     * @since v0.1
      */
     subscribeNewBlock(callback: (error?: SdkError, data?: types.EventDataNewBlock) => void, conditions?: EventQueryBuilder): types.EventSubscription;
     /**
@@ -38,7 +38,7 @@ export declare class EventListener {
      * @param conditions Query conditions
      * @param callback A function to receive notifications
      * @returns
-     * @since v0.17
+     * @since v0.1
      */
     subscribeNewBlockHeader(callback: (error?: SdkError, data?: types.EventDataNewBlockHeader) => void): types.EventSubscription;
     /**
@@ -46,7 +46,7 @@ export declare class EventListener {
      * @param conditions Query conditions
      * @param callback A function to receive notifications
      * @returns
-     * @since v0.17
+     * @since v0.1
      */
     subscribeValidatorSetUpdates(callback: (error?: SdkError, data?: types.EventDataValidatorSetUpdates[]) => void): types.EventSubscription;
     /**
@@ -54,13 +54,13 @@ export declare class EventListener {
      * @param conditions Query conditions
      * @param callback A function to receive notifications
      * @returns
-     * @since v0.17
+     * @since v0.1
      */
     subscribeTx(conditions: EventQueryBuilder, callback: (error?: SdkError, data?: types.EventDataResultTx) => void): types.EventSubscription;
     /**
      * Unsubscribe the specified event
      * @param subscription The event subscription instance
-     * @since v0.17
+     * @since v0.1
      */
     unsubscribe(subscription: types.EventSubscription): void;
     private newBlockHandler;

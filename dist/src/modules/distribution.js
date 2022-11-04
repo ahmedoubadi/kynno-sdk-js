@@ -9,10 +9,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Distribution = void 0;
 
-var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
-
-var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
-
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
@@ -20,8 +16,6 @@ var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/creat
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
 var types = _interopRequireWildcard(require("../types"));
-
-var _utils = require("../utils");
 
 var _helper = require("../helper");
 
@@ -39,7 +33,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
  * [More Details](https://www.kynno.io/docs/features/distribution.html)
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 var Distribution = /*#__PURE__*/function () {
   /** @hidden */
@@ -51,181 +45,11 @@ var Distribution = /*#__PURE__*/function () {
     this.client = client;
   }
   /**
-   * Set another address to receive the rewards instead of using the delegator address
-   * @param withdrawAddress Bech32 account address
-   * @param baseTx
-   * @returns
-   * @since v0.17
+   * Params queries params of the distribution module.
    */
 
 
   (0, _createClass2["default"])(Distribution, [{
-    key: "setWithdrawAddr",
-    value: function () {
-      var _setWithdrawAddr = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(withdrawAddress, baseTx) {
-        var from, msgs;
-        return _regenerator["default"].wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                from = this.client.keys.show(baseTx.from);
-                msgs = [{
-                  type: types.TxType.MsgSetWithdrawAddress,
-                  value: {
-                    delegator_address: from,
-                    withdraw_address: withdrawAddress
-                  }
-                }];
-                return _context.abrupt("return", this.client.tx.buildAndSend(msgs, baseTx));
-
-              case 3:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function setWithdrawAddr(_x, _x2) {
-        return _setWithdrawAddr.apply(this, arguments);
-      }
-
-      return setWithdrawAddr;
-    }()
-    /**
-     * Withdraw rewards to the withdraw-address(default to the delegator address, you can set to another address via [[setWithdrawAddr]])
-     * @param baseTx { types.BaseTx }
-     * @param validatorAddr withdraw from this validator address
-     * @returns { Promise<types.TxResult> }
-     * @since v0.17
-     */
-
-  }, {
-    key: "withdrawRewards",
-    value: function () {
-      var _withdrawRewards = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(validatorAddr, baseTx) {
-        var delegatorAddr, msgs;
-        return _regenerator["default"].wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                delegatorAddr = this.client.keys.show(baseTx.from);
-                msgs = [{
-                  type: types.TxType.MsgWithdrawDelegatorReward,
-                  value: {
-                    delegator_address: delegatorAddr,
-                    validator_address: validatorAddr
-                  }
-                }];
-                return _context2.abrupt("return", this.client.tx.buildAndSend(msgs, baseTx));
-
-              case 3:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
-      }));
-
-      function withdrawRewards(_x3, _x4) {
-        return _withdrawRewards.apply(this, arguments);
-      }
-
-      return withdrawRewards;
-    }()
-    /**
-     * withdraws the full commission to the validator
-     * @param validatorAddr withdraw from this validator address
-     * @param baseTx { types.BaseTx }
-     * @returns { Promise<types.TxResult> }
-     * @since v0.17
-     */
-
-  }, {
-    key: "withdrawValidatorCommission",
-    value: function () {
-      var _withdrawValidatorCommission = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(validator_address, baseTx) {
-        var msgs;
-        return _regenerator["default"].wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                if (_utils.Crypto.checkAddress(validator_address, this.client.config.bech32Prefix.ValAddr)) {
-                  _context3.next = 2;
-                  break;
-                }
-
-                throw new _errors.SdkError('Invalid bech32 address');
-
-              case 2:
-                msgs = [{
-                  type: types.TxType.MsgWithdrawValidatorCommission,
-                  value: {
-                    validator_address: validator_address
-                  }
-                }];
-                return _context3.abrupt("return", this.client.tx.buildAndSend(msgs, baseTx));
-
-              case 4:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, this);
-      }));
-
-      function withdrawValidatorCommission(_x5, _x6) {
-        return _withdrawValidatorCommission.apply(this, arguments);
-      }
-
-      return withdrawValidatorCommission;
-    }()
-    /**
-     * fundCommunityPool allows an account to directly fund the community pool
-     * @param amount Coins to be fund
-     * @param baseTx { types.BaseTx }
-     * @returns { Promise<types.TxResult> }
-     * @since v0.17
-     */
-
-  }, {
-    key: "fundCommunityPool",
-    value: function () {
-      var _fundCommunityPool = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(amount, baseTx) {
-        var depositor, msgs;
-        return _regenerator["default"].wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                depositor = this.client.keys.show(baseTx.from);
-                msgs = [{
-                  type: types.TxType.MsgFundCommunityPool,
-                  value: {
-                    depositor: depositor,
-                    amount: amount
-                  }
-                }];
-                return _context4.abrupt("return", this.client.tx.buildAndSend(msgs, baseTx));
-
-              case 3:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4, this);
-      }));
-
-      function fundCommunityPool(_x7, _x8) {
-        return _fundCommunityPool.apply(this, arguments);
-      }
-
-      return fundCommunityPool;
-    }()
-    /**
-     * Params queries params of the distribution module.
-     */
-
-  }, {
     key: "queryParams",
     value: function queryParams() {
       var request = new types.distribution_query_pb.QueryParamsRequest();

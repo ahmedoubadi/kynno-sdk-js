@@ -1,4 +1,4 @@
-FROM ahmedoubadi/core:testnet-v0.16.0
+FROM kynnolabs/core:testnet-v1.0.0
 
 COPY . /scripts
 

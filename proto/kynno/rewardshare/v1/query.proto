@@ -1,0 +1,109 @@
+syntax = "proto3";
+package kynno.rewardshare.v1;
+
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "kynno/rewardshare/v1/genesis.proto";
+import "kynno/rewardshare/v1/rewardshare.proto";
+import "google/api/annotations.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/kynnoenterprise/core/x/rewardshare/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  // Rewardshares retrieves all registered rewardshares
+  rpc Rewardshares(QueryRewardsharesRequest) returns (QueryRewardsharesResponse) {
+    option (google.api.http).get = "/kynno/rewardshare/v1/rewardshares";
+  }
+
+  // Rewardshare retrieves a registered rewardshare for a given contract address
+  rpc Rewardshare(QueryRewardshareRequest) returns (QueryRewardshareResponse) {
+    option (google.api.http).get = "/kynno/rewardshare/v1/rewardshares/{contract_address}";
+  }
+
+  // Params retrieves the rewardshare module params
+  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/kynno/rewardshare/v1/params";
+  }
+
+  // DeployerRewardshares retrieves all rewardshares that a given deployer has
+  // registered
+  rpc DeployerRewardshares(QueryDeployerRewardsharesRequest)
+      returns (QueryDeployerRewardsharesResponse) {
+    option (google.api.http).get = "/kynno/rewardshare/v1/rewardshares/{deployer_address}";
+  }
+
+  // WithdrawerRewardshares retrieves all rewardshares with a given withdrawer
+  // address
+  rpc WithdrawerRewardshares(QueryWithdrawerRewardsharesRequest)
+      returns (QueryWithdrawerRewardsharesResponse) {
+    option (google.api.http).get = "/kynno/rewardshare/v1/rewardshares/{withdrawer_address}";
+  }
+}
+
+// QueryRewardsharesRequest is the request type for the Query/Rewardshares RPC method.
+message QueryRewardsharesRequest {
+  // pagination defines an optional pagination for the request.
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+// QueryRewardsharesResponse is the response type for the Query/Rewardshares RPC method.
+message QueryRewardsharesResponse {
+  repeated Rewardshare rewardshares = 1 [ (gogoproto.nullable) = false ];
+  // pagination defines the pagination in the response.
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+// QueryRewardshareRequest is the request type for the Query/Rewardshare RPC method.
+message QueryRewardshareRequest {
+  // contract identifier is the hex contract address of a contract
+  string contract_address = 1;
+}
+
+// QueryRewardshareResponse is the response type for the Query/Rewardshare RPC method.
+message QueryRewardshareResponse {
+  Rewardshare rewardshare = 1 [ (gogoproto.nullable) = false ];
+}
+
+// QueryParamsRequest is the request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is the response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  Params params = 1 [ (gogoproto.nullable) = false ];
+}
+
+// QueryDeployerRewardsharesRequest is the request type for the
+// Query/DeployerRewardshares RPC method.
+message QueryDeployerRewardsharesRequest {
+  // deployer bech32 address
+  string deployer_address = 1;
+  // pagination defines an optional pagination for the request.
+  cosmos.base.query.v1beta1.PageRequest pagination = 2;
+}
+
+// QueryDeployerRewardsharesResponse is the response type for the
+// Query/DeployerRewardshares RPC method.
+message QueryDeployerRewardsharesResponse {
+  repeated string contract_addresses = 1;
+  // pagination defines the pagination in the response.
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+
+// QueryWithdrawerRewardsharesRequest is the request type for the
+// Query/WithdrawerRewardshares RPC method.
+message QueryWithdrawerRewardsharesRequest {
+  // withdrawer bech32 address
+  string withdrawer_address = 1;
+  // pagination defines an optional pagination for the request.
+  cosmos.base.query.v1beta1.PageRequest pagination = 2;
+}
+
+// QueryWithdrawerRewardsharesResponse is the response type for the
+// Query/WithdrawerRewardshares RPC method.
+message QueryWithdrawerRewardsharesResponse {
+  repeated string contract_addresses = 1;
+  // pagination defines the pagination in the response.
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}

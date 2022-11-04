@@ -41,7 +41,7 @@ export class Slashing {
    * @param bech32ConsAddress Bech32 prefixed validator consensus address
    * @param height Block height to query, omit to get most recent provable block
    * @returns
-   * @since v0.17
+   * @since v0.1
    */
   querySigningInfo(
     bech32ConsAddress: string,
@@ -58,21 +58,4 @@ export class Slashing {
       });
   }
 
-  /**
-   * Unjail a validator previously jailed
-   * @param baseTx
-   * @returns
-   * @since v0.17
-   */
-  async unjail(baseTx: types.BaseTx): Promise<types.TxResult> {
-    const val = this.client.keys.show(baseTx.from);
-    const words = Bech32.decode(val).words;    
-    const validatorAddr = Bech32.encode(
-      this.client.config.bech32Prefix.ValAddr,
-      words
-    );
-    const msgs: types.Msg[] = [new MsgUnjail(validatorAddr)];
-
-    return this.client.tx.buildAndSend(msgs, baseTx);
-  }
 }

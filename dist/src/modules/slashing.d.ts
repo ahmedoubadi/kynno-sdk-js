@@ -26,14 +26,7 @@ export declare class Slashing {
      * @param bech32ConsAddress Bech32 prefixed validator consensus address
      * @param height Block height to query, omit to get most recent provable block
      * @returns
-     * @since v0.17
+     * @since v0.1
      */
     querySigningInfo(bech32ConsAddress: string, height?: number): Promise<types.ValidatorSigningInfo>;
-    /**
-     * Unjail a validator previously jailed
-     * @param baseTx
-     * @returns
-     * @since v0.17
-     */
-    unjail(baseTx: types.BaseTx): Promise<types.TxResult>;
 }

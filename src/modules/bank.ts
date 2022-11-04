@@ -10,7 +10,7 @@ import { SdkError, CODES } from '../errors';
  * [More Details](https://www.kynno.io/docs/features/bank.html)
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 export class Bank {
   /** @hidden */
@@ -20,67 +20,6 @@ export class Bank {
     this.client = client;
   }
 
-  /**
-   * Send coins
-   * @param to Recipient bech32 address
-   * @param amount Coins to be sent
-   * @param baseTx { types.BaseTx }
-   * @returns
-   * @since v0.17
-   */
-  async send(
-    to: string,
-    amount: types.Coin[],
-    baseTx: types.BaseTx
-  ): Promise<types.TxResult> {
-    // Validate bech32 address
-    if (!Crypto.checkAddress(to, this.client.config.bech32Prefix.AccAddr)) {
-      throw new SdkError('Invalid bech32 address');
-    }
-    const from = this.client.keys.show(baseTx.from);
-    const msgs: any[] = [
-      {
-        type:types.TxType.MsgSend,
-        value:{
-          from_address:from,
-          to_address:to,
-          amount
-        }
-      }
-    ];
-    return this.client.tx.buildAndSend(msgs, baseTx);
-  }
-
-  /**
-   * multiSend coins
-   * @param to Recipient bech32 address
-   * @param amount Coins to be sent
-   * @param baseTx { types.BaseTx }
-   * @returns
-   * @since v0.17
-   */
-  async multiSend(
-    to: string,
-    amount: types.Coin[],
-    baseTx: types.BaseTx
-  ): Promise<types.TxResult> {
-    // Validate bech32 address
-    if (!Crypto.checkAddress(to, this.client.config.bech32Prefix.AccAddr)) {
-      throw new SdkError('Invalid bech32 address');
-    }
-    const from = this.client.keys.show(baseTx.from);
-    const coins = amount;
-    const msgs: any[] = [
-      {
-        type:types.TxType.MsgMultiSend,
-        value:{
-          inputs:[{ address: from, coins }],
-          outputs:[{ address: to, coins }],
-        }
-      }
-    ];
-    return this.client.tx.buildAndSend(msgs, baseTx);
-  }
 
   /**
    * Balance queries the balance of a single coin for a single account.

@@ -27,7 +27,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
  * This module implements NFT related functions
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 var Nft = /*#__PURE__*/function () {
   /** @hidden */

@@ -9,6 +9,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ibc = void 0;
 
+var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
@@ -30,6 +34,8 @@ var dependency_3 = _interopRequireWildcard(require("./../../client/v1/client"));
 var dependency_4 = _interopRequireWildcard(require("./connection"));
 
 var pb_1 = _interopRequireWildcard(require("google-protobuf"));
+
+var grpc_1 = _interopRequireWildcard(require("@grpc/grpc-js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -1478,6 +1484,112 @@ exports.ibc = ibc;
         }(pb_1.Message);
 
         _v.MsgConnectionOpenConfirmResponse = MsgConnectionOpenConfirmResponse;
+
+        var UnimplementedMsgService = function UnimplementedMsgService() {
+          (0, _classCallCheck2["default"])(this, UnimplementedMsgService);
+        };
+
+        (0, _defineProperty2["default"])(UnimplementedMsgService, "definition", {
+          ConnectionOpenInit: {
+            path: "/ibc.core.connection.v1.Msg/ConnectionOpenInit",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return MsgConnectionOpenInit.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return MsgConnectionOpenInitResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          ConnectionOpenTry: {
+            path: "/ibc.core.connection.v1.Msg/ConnectionOpenTry",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return MsgConnectionOpenTry.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return MsgConnectionOpenTryResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          ConnectionOpenAck: {
+            path: "/ibc.core.connection.v1.Msg/ConnectionOpenAck",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return MsgConnectionOpenAck.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return MsgConnectionOpenAckResponse.deserialize(new Uint8Array(bytes));
+            }
+          },
+          ConnectionOpenConfirm: {
+            path: "/ibc.core.connection.v1.Msg/ConnectionOpenConfirm",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: function requestSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            requestDeserialize: function requestDeserialize(bytes) {
+              return MsgConnectionOpenConfirm.deserialize(new Uint8Array(bytes));
+            },
+            responseSerialize: function responseSerialize(message) {
+              return Buffer.from(message.serialize());
+            },
+            responseDeserialize: function responseDeserialize(bytes) {
+              return MsgConnectionOpenConfirmResponse.deserialize(new Uint8Array(bytes));
+            }
+          }
+        });
+        _v.UnimplementedMsgService = UnimplementedMsgService;
+
+        var MsgClient = /*#__PURE__*/function (_grpc_1$makeGenericCl) {
+          (0, _inherits2["default"])(MsgClient, _grpc_1$makeGenericCl);
+
+          var _super9 = _createSuper(MsgClient);
+
+          function MsgClient(address, credentials, _options) {
+            var _thisSuper, _thisSuper2, _thisSuper3, _thisSuper4, _this13;
+
+            (0, _classCallCheck2["default"])(this, MsgClient);
+            _this13 = _super9.call(this, address, credentials, _options);
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this13), "ConnectionOpenInit", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper = (0, _assertThisInitialized2["default"])(_this13), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "ConnectionOpenInit", _thisSuper).call(_thisSuper, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this13), "ConnectionOpenTry", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper2 = (0, _assertThisInitialized2["default"])(_this13), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "ConnectionOpenTry", _thisSuper2).call(_thisSuper2, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this13), "ConnectionOpenAck", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper3 = (0, _assertThisInitialized2["default"])(_this13), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "ConnectionOpenAck", _thisSuper3).call(_thisSuper3, message, metadata, options, callback);
+            });
+            (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this13), "ConnectionOpenConfirm", function (message, metadata, options, callback) {
+              return (0, _get2["default"])((_thisSuper4 = (0, _assertThisInitialized2["default"])(_this13), (0, _getPrototypeOf2["default"])(MsgClient.prototype)), "ConnectionOpenConfirm", _thisSuper4).call(_thisSuper4, message, metadata, options, callback);
+            });
+            return _this13;
+          }
+
+          return MsgClient;
+        }(grpc_1.makeGenericClientConstructor(UnimplementedMsgService.definition, "Msg", {}));
+
+        _v.MsgClient = MsgClient;
       })(v1 || (v1 = _connection.v1 || (_connection.v1 = {})));
     })(connection || (connection = _core.connection || (_core.connection = {})));
   })(core || (core = _ibc.core || (_ibc.core = {})));

@@ -4,7 +4,7 @@ import * as types from '../types';
  * This module implements NFT related functions
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 export declare class NameService {
     /** @hidden */

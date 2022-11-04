@@ -2,8 +2,9 @@
 import * as dependency_3 from "./nft";
 import * as dependency_4 from "./../../cosmos/base/query/v1beta1/pagination";
 import * as pb_1 from "google-protobuf";
+import * as grpc_1 from "@grpc/grpc-js";
 export declare namespace kynno.nft {
-    class QuerySupplyRequest extends pb_1.Message {
+    export class QuerySupplyRequest extends pb_1.Message {
         constructor(data?: any[] | {
             denom_id?: string;
             owner?: string;
@@ -26,7 +27,7 @@ export declare namespace kynno.nft {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): QuerySupplyRequest;
     }
-    class QuerySupplyResponse extends pb_1.Message {
+    export class QuerySupplyResponse extends pb_1.Message {
         constructor(data?: any[] | {
             amount?: number;
         });
@@ -44,7 +45,7 @@ export declare namespace kynno.nft {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): QuerySupplyResponse;
     }
-    class QueryOwnerRequest extends pb_1.Message {
+    export class QueryOwnerRequest extends pb_1.Message {
         constructor(data?: any[] | {
             denom_id?: string;
             owner?: string;
@@ -78,7 +79,7 @@ export declare namespace kynno.nft {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): QueryOwnerRequest;
     }
-    class QueryOwnerResponse extends pb_1.Message {
+    export class QueryOwnerResponse extends pb_1.Message {
         constructor(data?: any[] | {
             owner?: dependency_3.kynno.nft.Owner;
             pagination?: dependency_4.cosmos.base.query.v1beta1.PageResponse;
@@ -110,7 +111,7 @@ export declare namespace kynno.nft {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): QueryOwnerResponse;
     }
-    class QueryCollectionRequest extends pb_1.Message {
+    export class QueryCollectionRequest extends pb_1.Message {
         constructor(data?: any[] | {
             denom_id?: string;
             pagination?: dependency_4.cosmos.base.query.v1beta1.PageRequest;
@@ -139,7 +140,7 @@ export declare namespace kynno.nft {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): QueryCollectionRequest;
     }
-    class QueryCollectionResponse extends pb_1.Message {
+    export class QueryCollectionResponse extends pb_1.Message {
         constructor(data?: any[] | {
             collection?: dependency_3.kynno.nft.Collection;
             pagination?: dependency_4.cosmos.base.query.v1beta1.PageResponse;
@@ -187,7 +188,7 @@ export declare namespace kynno.nft {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): QueryCollectionResponse;
     }
-    class QueryDenomRequest extends pb_1.Message {
+    export class QueryDenomRequest extends pb_1.Message {
         constructor(data?: any[] | {
             denom_id?: string;
         });
@@ -205,7 +206,7 @@ export declare namespace kynno.nft {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): QueryDenomRequest;
     }
-    class QueryDenomResponse extends pb_1.Message {
+    export class QueryDenomResponse extends pb_1.Message {
         constructor(data?: any[] | {
             denom?: dependency_3.kynno.nft.Denom;
         });
@@ -235,7 +236,7 @@ export declare namespace kynno.nft {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): QueryDenomResponse;
     }
-    class QueryDenomsRequest extends pb_1.Message {
+    export class QueryDenomsRequest extends pb_1.Message {
         constructor(data?: any[] | {
             pagination?: dependency_4.cosmos.base.query.v1beta1.PageRequest;
         });
@@ -259,7 +260,7 @@ export declare namespace kynno.nft {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): QueryDenomsRequest;
     }
-    class QueryDenomsResponse extends pb_1.Message {
+    export class QueryDenomsResponse extends pb_1.Message {
         constructor(data?: any[] | {
             denoms?: dependency_3.kynno.nft.Denom[];
             pagination?: dependency_4.cosmos.base.query.v1beta1.PageResponse;
@@ -297,7 +298,7 @@ export declare namespace kynno.nft {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): QueryDenomsResponse;
     }
-    class QueryNFTRequest extends pb_1.Message {
+    export class QueryNFTRequest extends pb_1.Message {
         constructor(data?: any[] | {
             denom_id?: string;
             token_id?: string;
@@ -320,7 +321,7 @@ export declare namespace kynno.nft {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): QueryNFTRequest;
     }
-    class QueryNFTResponse extends pb_1.Message {
+    export class QueryNFTResponse extends pb_1.Message {
         constructor(data?: any[] | {
             nft?: dependency_3.kynno.nft.BaseNFT;
         });
@@ -345,7 +346,13 @@ export declare namespace kynno.nft {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): QueryNFTResponse;
     }
-    abstract class UnimplementedQueryService {
+    interface GrpcUnaryServiceInterface<P, R> {
+        (message: P, metadata: grpc_1.Metadata, options: grpc_1.CallOptions, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
+        (message: P, metadata: grpc_1.Metadata, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
+        (message: P, options: grpc_1.CallOptions, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
+        (message: P, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
+    }
+    export abstract class UnimplementedQueryService {
         static definition: {
             Supply: {
                 path: string;
@@ -402,5 +409,23 @@ export declare namespace kynno.nft {
                 responseDeserialize: (bytes: Buffer) => QueryNFTResponse;
             };
         };
+        [method: string]: grpc_1.UntypedHandleCall;
+        abstract Supply(call: grpc_1.ServerUnaryCall<QuerySupplyRequest, QuerySupplyResponse>, callback: grpc_1.sendUnaryData<QuerySupplyResponse>): void;
+        abstract Owner(call: grpc_1.ServerUnaryCall<QueryOwnerRequest, QueryOwnerResponse>, callback: grpc_1.sendUnaryData<QueryOwnerResponse>): void;
+        abstract Collection(call: grpc_1.ServerUnaryCall<QueryCollectionRequest, QueryCollectionResponse>, callback: grpc_1.sendUnaryData<QueryCollectionResponse>): void;
+        abstract Denom(call: grpc_1.ServerUnaryCall<QueryDenomRequest, QueryDenomResponse>, callback: grpc_1.sendUnaryData<QueryDenomResponse>): void;
+        abstract Denoms(call: grpc_1.ServerUnaryCall<QueryDenomsRequest, QueryDenomsResponse>, callback: grpc_1.sendUnaryData<QueryDenomsResponse>): void;
+        abstract NFT(call: grpc_1.ServerUnaryCall<QueryNFTRequest, QueryNFTResponse>, callback: grpc_1.sendUnaryData<QueryNFTResponse>): void;
     }
+    const QueryClient_base: grpc_1.ServiceClientConstructor;
+    export class QueryClient extends QueryClient_base {
+        constructor(address: string, credentials: grpc_1.ChannelCredentials, options?: Partial<grpc_1.ChannelOptions>);
+        Supply: GrpcUnaryServiceInterface<QuerySupplyRequest, QuerySupplyResponse>;
+        Owner: GrpcUnaryServiceInterface<QueryOwnerRequest, QueryOwnerResponse>;
+        Collection: GrpcUnaryServiceInterface<QueryCollectionRequest, QueryCollectionResponse>;
+        Denom: GrpcUnaryServiceInterface<QueryDenomRequest, QueryDenomResponse>;
+        Denoms: GrpcUnaryServiceInterface<QueryDenomsRequest, QueryDenomsResponse>;
+        NFT: GrpcUnaryServiceInterface<QueryNFTRequest, QueryNFTResponse>;
+    }
+    export {};
 }

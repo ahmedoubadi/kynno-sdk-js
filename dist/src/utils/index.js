@@ -68,3 +68,16 @@ Object.keys(_converter).forEach(function (key) {
     }
   });
 });
+
+var _ethereumjsAbiUtils = require("./ethereumjs-abi-utils");
+
+Object.keys(_ethereumjsAbiUtils).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (key in exports && exports[key] === _ethereumjsAbiUtils[key]) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _ethereumjsAbiUtils[key];
+    }
+  });
+});

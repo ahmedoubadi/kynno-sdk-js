@@ -7,14 +7,26 @@ describe('Distribution Tests', () => {
         test(
             'query Params',
             async () => {
-                await BaseTest.getClient().distribution
-                    .queryParams()
-                    .then(res => {
-                        console.log(JSON.stringify(res));
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
+                try {
+                    const res = await BaseTest.getClient().distribution.queryParams()
+                    if(res) {
+                        console.log("res.data",res);
+                        
+                    } else {
+                        console.log("something went wrong");                        
+                    }
+                } catch (error) {
+                    if (error.response) {
+                        // client received an error response (5xx, 4xx)
+                        console.log("error.response",error.response);
+                        console.log("error.data",error.data.message);
+                        
+                      } else if (error.request) {
+                        // client never received a response, or request never left
+                      } else {
+                        // anything else
+                      }
+                }
             }
         );
 
@@ -22,12 +34,12 @@ describe('Distribution Tests', () => {
             'query Validator Outstanding Rewards',
             async () => {
                 await BaseTest.getClient().distribution
-                    .queryValidatorOutstandingRewards('kynnovaloper1krjc2zs8uyzfdxm0cj2z428hm3ju2nfn2q9ss6')
+                    .queryValidatorOutstandingRewards('kynnovaloper1glxa8cl3shzk33586h0ydthfen59m4zk2pspsq')
                     .then(res => {
-                        console.log(JSON.stringify(res));
+                        console.log('query Validator Outstanding Rewards',JSON.stringify(res));
                     })
                     .catch(error => {
-                        console.log(error);
+                        console.log('query Validator Outstanding Rewards',error);
                     });
             }
         );
@@ -36,7 +48,7 @@ describe('Distribution Tests', () => {
             'query Validator Commission',
             async () => {
                 await BaseTest.getClient().distribution
-                    .queryValidatorCommission('kynnovaloper1krjc2zs8uyzfdxm0cj2z428hm3ju2nfn2q9ss6')
+                    .queryValidatorCommission('kynnovaloper1glxa8cl3shzk33586h0ydthfen59m4zk2pspsq')
                     .then(res => {
                         console.log(JSON.stringify(res));
                     })
@@ -51,7 +63,7 @@ describe('Distribution Tests', () => {
             async () => {
                 await BaseTest.getClient().distribution
                     .queryValidatorSlashes(
-                        'kynnovaloper1krjc2zs8uyzfdxm0cj2z428hm3ju2nfn2q9ss6',
+                        'kynnovaloper1glxa8cl3shzk33586h0ydthfen59m4zk2pspsq',
 
                     )
                     .then(res => {
@@ -68,7 +80,7 @@ describe('Distribution Tests', () => {
             async () => {
                 await BaseTest.getClient().distribution
                     .queryDelegationRewards(
-                        'kynnovaloper1krjc2zs8uyzfdxm0cj2z428hm3ju2nfn2q9ss6',
+                        'kynnovaloper1glxa8cl3shzk33586h0ydthfen59m4zk2pspsq',
                         'kynno16yky9s6tjmv3kvvrxtnnrcn7x42ngs5wzjcywt'
                     )
                     .then(res => {
@@ -85,7 +97,7 @@ describe('Distribution Tests', () => {
             async () => {
                 await BaseTest.getClient().distribution
                     .queryDelegationTotalRewards(
-                        'kynno16yky9s6tjmv3kvvrxtnnrcn7x42ngs5wzjcywt'
+                        'kynno1hxey68h286z7504psv9nh9x4fjn3ntsfd373zj'
                     )
                     .then(res => {
                         console.log(res);
@@ -101,7 +113,7 @@ describe('Distribution Tests', () => {
             async () => {
                 await BaseTest.getClient().distribution
                     .queryDelegatorValidators(
-                        'kynno16yky9s6tjmv3kvvrxtnnrcn7x42ngs5wzjcywt'
+                        'kynno1glxa8cl3shzk33586h0ydthfen59m4zky6r6rg'
                     )
                     .then(res => {
                         console.log(JSON.stringify(res));
@@ -117,7 +129,7 @@ describe('Distribution Tests', () => {
             async () => {
                 await BaseTest.getClient().distribution
                     .queryDelegatorWithdrawAddress(
-                        'kynno16yky9s6tjmv3kvvrxtnnrcn7x42ngs5wzjcywt'
+                        'kynno1hxey68h286z7504psv9nh9x4fjn3ntsfd373zj'
                     )
                     .then(res => {
                         console.log(JSON.stringify(res));
@@ -149,7 +161,7 @@ describe('Distribution Tests', () => {
             'withdraw Validator Commission',
             async () => {
                 await BaseTest.getClient().distribution
-                    .withdrawValidatorCommission('kynnovaloper1krjc2zs8uyzfdxm0cj2z428hm3ju2nfn2q9ss6', BaseTest.baseTx)
+                    .withdrawValidatorCommission('kynnovaloper1glxa8cl3shzk33586h0ydthfen59m4zk2pspsq', BaseTest.baseTx)
                     .then(res => {
                         console.log(JSON.stringify(res));
                     })
@@ -192,7 +204,7 @@ describe('Distribution Tests', () => {
                         console.log(JSON.stringify(res));
                     })
                     .catch(error => {
-                        console.log(error);
+                        console.log(error.json());
                     });
             },
             timeOut
@@ -206,7 +218,7 @@ describe('Distribution Tests', () => {
 
                 await BaseTest.getClient()
                     .distribution.withdrawRewards(
-                        'kynnovaloper1krjc2zs8uyzfdxm0cj2z428hm3ju2nfn2q9ss6',
+                        'kynnovaloper1glxa8cl3shzk33586h0ydthfen59m4zk2pspsq',
                         BaseTest.baseTx,
                     )
                     .then(res => {

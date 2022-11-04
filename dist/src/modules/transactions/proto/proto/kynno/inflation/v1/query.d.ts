@@ -2,8 +2,9 @@
 import * as dependency_3 from "./../../../cosmos/base/v1beta1/coin";
 import * as dependency_4 from "./genesis";
 import * as pb_1 from "google-protobuf";
+import * as grpc_1 from "@grpc/grpc-js";
 export declare namespace kynno.inflation.v1 {
-    class QueryPeriodRequest extends pb_1.Message {
+    export class QueryPeriodRequest extends pb_1.Message {
         constructor(data?: any[] | {});
         static fromObject(data: {}): QueryPeriodRequest;
         toObject(): {};
@@ -13,7 +14,7 @@ export declare namespace kynno.inflation.v1 {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): QueryPeriodRequest;
     }
-    class QueryPeriodResponse extends pb_1.Message {
+    export class QueryPeriodResponse extends pb_1.Message {
         constructor(data?: any[] | {
             period?: number;
         });
@@ -31,7 +32,7 @@ export declare namespace kynno.inflation.v1 {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): QueryPeriodResponse;
     }
-    class QueryEpochMintProvisionRequest extends pb_1.Message {
+    export class QueryEpochMintProvisionRequest extends pb_1.Message {
         constructor(data?: any[] | {});
         static fromObject(data: {}): QueryEpochMintProvisionRequest;
         toObject(): {};
@@ -41,7 +42,7 @@ export declare namespace kynno.inflation.v1 {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): QueryEpochMintProvisionRequest;
     }
-    class QueryEpochMintProvisionResponse extends pb_1.Message {
+    export class QueryEpochMintProvisionResponse extends pb_1.Message {
         constructor(data?: any[] | {
             epoch_mint_provision?: dependency_3.cosmos.base.v1beta1.DecCoin;
         });
@@ -62,7 +63,7 @@ export declare namespace kynno.inflation.v1 {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): QueryEpochMintProvisionResponse;
     }
-    class QuerySkippedEpochsRequest extends pb_1.Message {
+    export class QuerySkippedEpochsRequest extends pb_1.Message {
         constructor(data?: any[] | {});
         static fromObject(data: {}): QuerySkippedEpochsRequest;
         toObject(): {};
@@ -72,7 +73,7 @@ export declare namespace kynno.inflation.v1 {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): QuerySkippedEpochsRequest;
     }
-    class QuerySkippedEpochsResponse extends pb_1.Message {
+    export class QuerySkippedEpochsResponse extends pb_1.Message {
         constructor(data?: any[] | {
             skipped_epochs?: number;
         });
@@ -90,38 +91,38 @@ export declare namespace kynno.inflation.v1 {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): QuerySkippedEpochsResponse;
     }
-    class QueryTotalSupplyRequest extends pb_1.Message {
+    export class QueryCirculatingSupplyRequest extends pb_1.Message {
         constructor(data?: any[] | {});
-        static fromObject(data: {}): QueryTotalSupplyRequest;
+        static fromObject(data: {}): QueryCirculatingSupplyRequest;
         toObject(): {};
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): QueryTotalSupplyRequest;
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): QueryCirculatingSupplyRequest;
         serializeBinary(): Uint8Array;
-        static deserializeBinary(bytes: Uint8Array): QueryTotalSupplyRequest;
+        static deserializeBinary(bytes: Uint8Array): QueryCirculatingSupplyRequest;
     }
-    class QueryTotalSupplyResponse extends pb_1.Message {
+    export class QueryCirculatingSupplyResponse extends pb_1.Message {
         constructor(data?: any[] | {
-            total_supply?: dependency_3.cosmos.base.v1beta1.DecCoin;
+            circulating_supply?: dependency_3.cosmos.base.v1beta1.DecCoin;
         });
-        get total_supply(): dependency_3.cosmos.base.v1beta1.DecCoin;
-        set total_supply(value: dependency_3.cosmos.base.v1beta1.DecCoin);
+        get circulating_supply(): dependency_3.cosmos.base.v1beta1.DecCoin;
+        set circulating_supply(value: dependency_3.cosmos.base.v1beta1.DecCoin);
         static fromObject(data: {
-            total_supply?: ReturnType<typeof dependency_3.cosmos.base.v1beta1.DecCoin.prototype.toObject>;
-        }): QueryTotalSupplyResponse;
+            circulating_supply?: ReturnType<typeof dependency_3.cosmos.base.v1beta1.DecCoin.prototype.toObject>;
+        }): QueryCirculatingSupplyResponse;
         toObject(): {
-            total_supply?: {
+            circulating_supply?: {
                 denom?: string | undefined;
                 amount?: string | undefined;
             } | undefined;
         };
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): QueryTotalSupplyResponse;
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): QueryCirculatingSupplyResponse;
         serializeBinary(): Uint8Array;
-        static deserializeBinary(bytes: Uint8Array): QueryTotalSupplyResponse;
+        static deserializeBinary(bytes: Uint8Array): QueryCirculatingSupplyResponse;
     }
-    class QueryInflationRateRequest extends pb_1.Message {
+    export class QueryInflationRateRequest extends pb_1.Message {
         constructor(data?: any[] | {});
         static fromObject(data: {}): QueryInflationRateRequest;
         toObject(): {};
@@ -131,7 +132,7 @@ export declare namespace kynno.inflation.v1 {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): QueryInflationRateRequest;
     }
-    class QueryInflationRateResponse extends pb_1.Message {
+    export class QueryInflationRateResponse extends pb_1.Message {
         constructor(data?: any[] | {
             inflation_rate?: string;
         });
@@ -149,7 +150,7 @@ export declare namespace kynno.inflation.v1 {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): QueryInflationRateResponse;
     }
-    class QueryParamsRequest extends pb_1.Message {
+    export class QueryParamsRequest extends pb_1.Message {
         constructor(data?: any[] | {});
         static fromObject(data: {}): QueryParamsRequest;
         toObject(): {};
@@ -159,7 +160,7 @@ export declare namespace kynno.inflation.v1 {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): QueryParamsRequest;
     }
-    class QueryParamsResponse extends pb_1.Message {
+    export class QueryParamsResponse extends pb_1.Message {
         constructor(data?: any[] | {
             params?: dependency_4.kynno.inflation.v1.Params;
         });
@@ -192,7 +193,13 @@ export declare namespace kynno.inflation.v1 {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): QueryParamsResponse;
     }
-    abstract class UnimplementedQueryService {
+    interface GrpcUnaryServiceInterface<P, R> {
+        (message: P, metadata: grpc_1.Metadata, options: grpc_1.CallOptions, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
+        (message: P, metadata: grpc_1.Metadata, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
+        (message: P, options: grpc_1.CallOptions, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
+        (message: P, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
+    }
+    export abstract class UnimplementedQueryService {
         static definition: {
             Period: {
                 path: string;
@@ -221,14 +228,14 @@ export declare namespace kynno.inflation.v1 {
                 responseSerialize: (message: QuerySkippedEpochsResponse) => Buffer;
                 responseDeserialize: (bytes: Buffer) => QuerySkippedEpochsResponse;
             };
-            TotalSupply: {
+            CirculatingSupply: {
                 path: string;
                 requestStream: boolean;
                 responseStream: boolean;
-                requestSerialize: (message: QueryTotalSupplyRequest) => Buffer;
-                requestDeserialize: (bytes: Buffer) => QueryTotalSupplyRequest;
-                responseSerialize: (message: QueryTotalSupplyResponse) => Buffer;
-                responseDeserialize: (bytes: Buffer) => QueryTotalSupplyResponse;
+                requestSerialize: (message: QueryCirculatingSupplyRequest) => Buffer;
+                requestDeserialize: (bytes: Buffer) => QueryCirculatingSupplyRequest;
+                responseSerialize: (message: QueryCirculatingSupplyResponse) => Buffer;
+                responseDeserialize: (bytes: Buffer) => QueryCirculatingSupplyResponse;
             };
             InflationRate: {
                 path: string;
@@ -249,5 +256,23 @@ export declare namespace kynno.inflation.v1 {
                 responseDeserialize: (bytes: Buffer) => QueryParamsResponse;
             };
         };
+        [method: string]: grpc_1.UntypedHandleCall;
+        abstract Period(call: grpc_1.ServerUnaryCall<QueryPeriodRequest, QueryPeriodResponse>, callback: grpc_1.sendUnaryData<QueryPeriodResponse>): void;
+        abstract EpochMintProvision(call: grpc_1.ServerUnaryCall<QueryEpochMintProvisionRequest, QueryEpochMintProvisionResponse>, callback: grpc_1.sendUnaryData<QueryEpochMintProvisionResponse>): void;
+        abstract SkippedEpochs(call: grpc_1.ServerUnaryCall<QuerySkippedEpochsRequest, QuerySkippedEpochsResponse>, callback: grpc_1.sendUnaryData<QuerySkippedEpochsResponse>): void;
+        abstract CirculatingSupply(call: grpc_1.ServerUnaryCall<QueryCirculatingSupplyRequest, QueryCirculatingSupplyResponse>, callback: grpc_1.sendUnaryData<QueryCirculatingSupplyResponse>): void;
+        abstract InflationRate(call: grpc_1.ServerUnaryCall<QueryInflationRateRequest, QueryInflationRateResponse>, callback: grpc_1.sendUnaryData<QueryInflationRateResponse>): void;
+        abstract Params(call: grpc_1.ServerUnaryCall<QueryParamsRequest, QueryParamsResponse>, callback: grpc_1.sendUnaryData<QueryParamsResponse>): void;
     }
+    const QueryClient_base: grpc_1.ServiceClientConstructor;
+    export class QueryClient extends QueryClient_base {
+        constructor(address: string, credentials: grpc_1.ChannelCredentials, options?: Partial<grpc_1.ChannelOptions>);
+        Period: GrpcUnaryServiceInterface<QueryPeriodRequest, QueryPeriodResponse>;
+        EpochMintProvision: GrpcUnaryServiceInterface<QueryEpochMintProvisionRequest, QueryEpochMintProvisionResponse>;
+        SkippedEpochs: GrpcUnaryServiceInterface<QuerySkippedEpochsRequest, QuerySkippedEpochsResponse>;
+        CirculatingSupply: GrpcUnaryServiceInterface<QueryCirculatingSupplyRequest, QueryCirculatingSupplyResponse>;
+        InflationRate: GrpcUnaryServiceInterface<QueryInflationRateRequest, QueryInflationRateResponse>;
+        Params: GrpcUnaryServiceInterface<QueryParamsRequest, QueryParamsResponse>;
+    }
+    export {};
 }

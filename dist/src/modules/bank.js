@@ -9,17 +9,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Bank = void 0;
 
-var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
-
-var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
-
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
-
-var _crypto = require("../utils/crypto");
 
 var types = _interopRequireWildcard(require("../types"));
 
@@ -36,7 +30,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
  * [More Details](https://www.kynno.io/docs/features/bank.html)
  *
  * @category Modules
- * @since v0.17
+ * @since v0.1
  */
 var Bank = /*#__PURE__*/function () {
   /** @hidden */
@@ -48,121 +42,13 @@ var Bank = /*#__PURE__*/function () {
     this.client = client;
   }
   /**
-   * Send coins
-   * @param to Recipient bech32 address
-   * @param amount Coins to be sent
-   * @param baseTx { types.BaseTx }
-   * @returns
-   * @since v0.17
+   * Balance queries the balance of a single coin for a single account.
+   * @param address is the address to query balances for.
+   * @param denom is the coin denom to query balances for.
    */
 
 
   (0, _createClass2["default"])(Bank, [{
-    key: "send",
-    value: function () {
-      var _send = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(to, amount, baseTx) {
-        var from, msgs;
-        return _regenerator["default"].wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                if (_crypto.Crypto.checkAddress(to, this.client.config.bech32Prefix.AccAddr)) {
-                  _context.next = 2;
-                  break;
-                }
-
-                throw new _errors.SdkError('Invalid bech32 address');
-
-              case 2:
-                from = this.client.keys.show(baseTx.from);
-                msgs = [{
-                  type: types.TxType.MsgSend,
-                  value: {
-                    from_address: from,
-                    to_address: to,
-                    amount: amount
-                  }
-                }];
-                return _context.abrupt("return", this.client.tx.buildAndSend(msgs, baseTx));
-
-              case 5:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function send(_x, _x2, _x3) {
-        return _send.apply(this, arguments);
-      }
-
-      return send;
-    }()
-    /**
-     * multiSend coins
-     * @param to Recipient bech32 address
-     * @param amount Coins to be sent
-     * @param baseTx { types.BaseTx }
-     * @returns
-     * @since v0.17
-     */
-
-  }, {
-    key: "multiSend",
-    value: function () {
-      var _multiSend = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(to, amount, baseTx) {
-        var from, coins, msgs;
-        return _regenerator["default"].wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                if (_crypto.Crypto.checkAddress(to, this.client.config.bech32Prefix.AccAddr)) {
-                  _context2.next = 2;
-                  break;
-                }
-
-                throw new _errors.SdkError('Invalid bech32 address');
-
-              case 2:
-                from = this.client.keys.show(baseTx.from);
-                coins = amount;
-                msgs = [{
-                  type: types.TxType.MsgMultiSend,
-                  value: {
-                    inputs: [{
-                      address: from,
-                      coins: coins
-                    }],
-                    outputs: [{
-                      address: to,
-                      coins: coins
-                    }]
-                  }
-                }];
-                return _context2.abrupt("return", this.client.tx.buildAndSend(msgs, baseTx));
-
-              case 6:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
-      }));
-
-      function multiSend(_x4, _x5, _x6) {
-        return _multiSend.apply(this, arguments);
-      }
-
-      return multiSend;
-    }()
-    /**
-     * Balance queries the balance of a single coin for a single account.
-     * @param address is the address to query balances for.
-     * @param denom is the coin denom to query balances for.
-     */
-
-  }, {
     key: "queryBalance",
     value: function queryBalance(address, denom) {
       if (!address) {

@@ -531,15 +531,15 @@ exports.kynno = kynno;
 
       _v.RegisterERC20Proposal = RegisterERC20Proposal;
 
-      var ToggleTokenRelayProposal = /*#__PURE__*/function (_pb_1$Message4) {
-        (0, _inherits2["default"])(ToggleTokenRelayProposal, _pb_1$Message4);
+      var ToggleTokenConversionProposal = /*#__PURE__*/function (_pb_1$Message4) {
+        (0, _inherits2["default"])(ToggleTokenConversionProposal, _pb_1$Message4);
 
-        var _super4 = _createSuper(ToggleTokenRelayProposal);
+        var _super4 = _createSuper(ToggleTokenConversionProposal);
 
-        function ToggleTokenRelayProposal(data) {
+        function ToggleTokenConversionProposal(data) {
           var _this5;
 
-          (0, _classCallCheck2["default"])(this, ToggleTokenRelayProposal);
+          (0, _classCallCheck2["default"])(this, ToggleTokenConversionProposal);
           _this5 = _super4.call(this);
           pb_1.Message.initialize((0, _assertThisInitialized2["default"])(_this5), Array.isArray(data) ? data : [], 0, -1, [], []);
 
@@ -560,7 +560,7 @@ exports.kynno = kynno;
           return _this5;
         }
 
-        (0, _createClass2["default"])(ToggleTokenRelayProposal, [{
+        (0, _createClass2["default"])(ToggleTokenConversionProposal, [{
           key: "title",
           get: function get() {
             return pb_1.Message.getField(this, 1);
@@ -620,7 +620,7 @@ exports.kynno = kynno;
         }], [{
           key: "fromObject",
           value: function fromObject(data) {
-            var message = new ToggleTokenRelayProposal({});
+            var message = new ToggleTokenConversionProposal({});
 
             if (data.title != null) {
               message.title = data.title;
@@ -640,7 +640,7 @@ exports.kynno = kynno;
           key: "deserialize",
           value: function deserialize(bytes) {
             var reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new ToggleTokenRelayProposal();
+                message = new ToggleTokenConversionProposal();
 
             while (reader.nextField()) {
               if (reader.isEndGroup()) break;
@@ -668,183 +668,13 @@ exports.kynno = kynno;
         }, {
           key: "deserializeBinary",
           value: function deserializeBinary(bytes) {
-            return ToggleTokenRelayProposal.deserialize(bytes);
+            return ToggleTokenConversionProposal.deserialize(bytes);
           }
         }]);
-        return ToggleTokenRelayProposal;
+        return ToggleTokenConversionProposal;
       }(pb_1.Message);
 
-      _v.ToggleTokenRelayProposal = ToggleTokenRelayProposal;
-
-      var UpdateTokenPairERC20Proposal = /*#__PURE__*/function (_pb_1$Message5) {
-        (0, _inherits2["default"])(UpdateTokenPairERC20Proposal, _pb_1$Message5);
-
-        var _super5 = _createSuper(UpdateTokenPairERC20Proposal);
-
-        function UpdateTokenPairERC20Proposal(data) {
-          var _this6;
-
-          (0, _classCallCheck2["default"])(this, UpdateTokenPairERC20Proposal);
-          _this6 = _super5.call(this);
-          pb_1.Message.initialize((0, _assertThisInitialized2["default"])(_this6), Array.isArray(data) ? data : [], 0, -1, [], []);
-
-          if (!Array.isArray(data) && (0, _typeof2["default"])(data) == "object") {
-            if ("title" in data && data.title != undefined) {
-              _this6.title = data.title;
-            }
-
-            if ("description" in data && data.description != undefined) {
-              _this6.description = data.description;
-            }
-
-            if ("erc20_address" in data && data.erc20_address != undefined) {
-              _this6.erc20_address = data.erc20_address;
-            }
-
-            if ("new_erc20_address" in data && data.new_erc20_address != undefined) {
-              _this6.new_erc20_address = data.new_erc20_address;
-            }
-          }
-
-          return _this6;
-        }
-
-        (0, _createClass2["default"])(UpdateTokenPairERC20Proposal, [{
-          key: "title",
-          get: function get() {
-            return pb_1.Message.getField(this, 1);
-          },
-          set: function set(value) {
-            pb_1.Message.setField(this, 1, value);
-          }
-        }, {
-          key: "description",
-          get: function get() {
-            return pb_1.Message.getField(this, 2);
-          },
-          set: function set(value) {
-            pb_1.Message.setField(this, 2, value);
-          }
-        }, {
-          key: "erc20_address",
-          get: function get() {
-            return pb_1.Message.getField(this, 3);
-          },
-          set: function set(value) {
-            pb_1.Message.setField(this, 3, value);
-          }
-        }, {
-          key: "new_erc20_address",
-          get: function get() {
-            return pb_1.Message.getField(this, 4);
-          },
-          set: function set(value) {
-            pb_1.Message.setField(this, 4, value);
-          }
-        }, {
-          key: "toObject",
-          value: function toObject() {
-            var data = {};
-
-            if (this.title != null) {
-              data.title = this.title;
-            }
-
-            if (this.description != null) {
-              data.description = this.description;
-            }
-
-            if (this.erc20_address != null) {
-              data.erc20_address = this.erc20_address;
-            }
-
-            if (this.new_erc20_address != null) {
-              data.new_erc20_address = this.new_erc20_address;
-            }
-
-            return data;
-          }
-        }, {
-          key: "serialize",
-          value: function serialize(w) {
-            var writer = w || new pb_1.BinaryWriter();
-            if (typeof this.title === "string" && this.title.length) writer.writeString(1, this.title);
-            if (typeof this.description === "string" && this.description.length) writer.writeString(2, this.description);
-            if (typeof this.erc20_address === "string" && this.erc20_address.length) writer.writeString(3, this.erc20_address);
-            if (typeof this.new_erc20_address === "string" && this.new_erc20_address.length) writer.writeString(4, this.new_erc20_address);
-            if (!w) return writer.getResultBuffer();
-          }
-        }, {
-          key: "serializeBinary",
-          value: function serializeBinary() {
-            return this.serialize();
-          }
-        }], [{
-          key: "fromObject",
-          value: function fromObject(data) {
-            var message = new UpdateTokenPairERC20Proposal({});
-
-            if (data.title != null) {
-              message.title = data.title;
-            }
-
-            if (data.description != null) {
-              message.description = data.description;
-            }
-
-            if (data.erc20_address != null) {
-              message.erc20_address = data.erc20_address;
-            }
-
-            if (data.new_erc20_address != null) {
-              message.new_erc20_address = data.new_erc20_address;
-            }
-
-            return message;
-          }
-        }, {
-          key: "deserialize",
-          value: function deserialize(bytes) {
-            var reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes),
-                message = new UpdateTokenPairERC20Proposal();
-
-            while (reader.nextField()) {
-              if (reader.isEndGroup()) break;
-
-              switch (reader.getFieldNumber()) {
-                case 1:
-                  message.title = reader.readString();
-                  break;
-
-                case 2:
-                  message.description = reader.readString();
-                  break;
-
-                case 3:
-                  message.erc20_address = reader.readString();
-                  break;
-
-                case 4:
-                  message.new_erc20_address = reader.readString();
-                  break;
-
-                default:
-                  reader.skipField();
-              }
-            }
-
-            return message;
-          }
-        }, {
-          key: "deserializeBinary",
-          value: function deserializeBinary(bytes) {
-            return UpdateTokenPairERC20Proposal.deserialize(bytes);
-          }
-        }]);
-        return UpdateTokenPairERC20Proposal;
-      }(pb_1.Message);
-
-      _v.UpdateTokenPairERC20Proposal = UpdateTokenPairERC20Proposal;
+      _v.ToggleTokenConversionProposal = ToggleTokenConversionProposal;
     })(v1 || (v1 = _erc.v1 || (_erc.v1 = {})));
   })(erc20 || (erc20 = _kynno.erc20 || (_kynno.erc20 = {})));
 })(kynno || (exports.kynno = kynno = {}));
